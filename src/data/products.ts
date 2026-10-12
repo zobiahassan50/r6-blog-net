@@ -143,47 +143,45 @@ const siegeSystemRequirements: SystemRequirement[] = [
 
 type GalleryKey = keyof typeof galleryRaw;
 
-const gameplay = '/images/gameplay';
-
 const galleryRaw = {
   gpMapHack: {
-    src: `${gameplay}/dota-2-map-hack.png`,
+    src: '/images/playerproduct.jpg',
     alt: 'Rainbow Six Siege operator ESP showing enemy positions and gadgets',
     caption: 'Operator ESP awareness',
     captionDesc: 'Enemy position tracking, gadget ESP and plant timers during a ranked execute.',
   },
   gpScripts: {
-    src: `${gameplay}/dota-2-scripts-combo.png`,
+    src: '/images/misc.jpeg',
     alt: 'Rainbow Six Siege recoil profile on an entry fragger',
     caption: 'Recoil control',
     captionDesc: 'Per-operator recoil preset with aim assist held on an entry.',
   },
   gpZoomHack: {
-    src: `${gameplay}/dota-2-zoom-hack.png`,
+    src: '/images/producthome.jpg',
     alt: 'Rainbow Six Siege radar covering the site',
     caption: 'Site radar',
     captionDesc: 'Radar showing operator positions for safer holds and rotates.',
   },
   gpSkinChanger: {
-    src: `${gameplay}/dota-2-skin-changer.png`,
+    src: '/images/producthome.jpg',
     alt: 'Rainbow Six Siege skin preview on an operator uniform',
     caption: 'Skin Changer preview',
     captionDesc: 'Local elite uniform and weapon skin preview via Unlock All—client-side only.',
   },
   gpAutoKill: {
-    src: `${gameplay}/dota-2-auto-kill-steal.png`,
+    src: '/images/aimbotproduct.jpeg',
     alt: 'Rainbow Six Siege aimbot target line on an operator',
     caption: 'Aimbot',
     captionDesc: 'Hitbox selection for head, chest, stomach, or pelvis, with a colored target line.',
   },
   gpFarmBot: {
-    src: `${gameplay}/dota-2-farm-bot.png`,
+    src: '/images/gadegtespproduct.jpeg',
     alt: 'Rainbow Six Siege player ESP with skeleton and box options',
     caption: 'Player ESP',
     captionDesc: 'Skeleton, box, snapline, name, health, armor, distance, and team check, out to 300m.',
   },
   gpHeroEsp: {
-    src: `${gameplay}/dota-2-hero-esp.png`,
+    src: '/images/gadegtespproduct.jpeg',
     alt: 'Rainbow Six Siege operator ESP with name tags and distance readouts',
     caption: 'Operator ESP overlay',
     captionDesc: 'Operator name, team check, and distance markers.',

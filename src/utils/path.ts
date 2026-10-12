@@ -46,22 +46,6 @@ export const LEGACY_PATH_MAP: Record<string, string> = {
   '/products/r6-cheats/account-recovery/': `${PRODUCT_BASE}ugc/`,
   '/contact': '/support/',
   '/contact/': '/support/',
-  '/products/dota-2-cheats': PRODUCT_BASE,
-  '/products/dota-2-cheats/': PRODUCT_BASE,
-  '/products/dota-2-cheats/utilities': `${PRODUCT_BASE}utilities/`,
-  '/products/dota-2-cheats/utilities/': `${PRODUCT_BASE}utilities/`,
-  '/products/dota-2-cheats/lite': `${PRODUCT_BASE}elite/`,
-  '/products/dota-2-cheats/lite/': `${PRODUCT_BASE}elite/`,
-  '/products/dota-2-cheats/pro': `${PRODUCT_BASE}elite/`,
-  '/products/dota-2-cheats/pro/': `${PRODUCT_BASE}elite/`,
-  '/products/dota-2-cheats/elite': `${PRODUCT_BASE}elite/`,
-  '/products/dota-2-cheats/elite/': `${PRODUCT_BASE}elite/`,
-  '/products/dota-2-cheats/ugc': `${PRODUCT_BASE}ugc/`,
-  '/products/dota-2-cheats/ugc/': `${PRODUCT_BASE}ugc/`,
-  '/products/dota-2-cheats/unlock-all': `${PRODUCT_BASE}unlock-all/`,
-  '/products/dota-2-cheats/unlock-all/': `${PRODUCT_BASE}unlock-all/`,
-  '/products/dota-2-cheats/skin-changer': `${PRODUCT_BASE}unlock-all/`,
-  '/products/dota-2-cheats/skin-changer/': `${PRODUCT_BASE}unlock-all/`,
 };
 
 export function normalizeInternalPath(href: string): string {

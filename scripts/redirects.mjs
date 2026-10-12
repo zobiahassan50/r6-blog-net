@@ -43,22 +43,6 @@ export const PATH_REDIRECTS = new Map([
   ['/products/r6-cheats/hwid-spoofer/', '/products/r6-cheats/'],
   ['/products/r6-cheats/account-recovery', '/products/r6-cheats/ugc/'],
   ['/products/r6-cheats/account-recovery/', '/products/r6-cheats/ugc/'],
-  ['/products/dota-2-cheats', '/products/r6-cheats/'],
-  ['/products/dota-2-cheats/', '/products/r6-cheats/'],
-  ['/products/dota-2-cheats/utilities', '/products/r6-cheats/utilities/'],
-  ['/products/dota-2-cheats/utilities/', '/products/r6-cheats/utilities/'],
-  ['/products/dota-2-cheats/lite', '/products/r6-cheats/elite/'],
-  ['/products/dota-2-cheats/lite/', '/products/r6-cheats/elite/'],
-  ['/products/dota-2-cheats/pro', '/products/r6-cheats/elite/'],
-  ['/products/dota-2-cheats/pro/', '/products/r6-cheats/elite/'],
-  ['/products/dota-2-cheats/elite', '/products/r6-cheats/elite/'],
-  ['/products/dota-2-cheats/elite/', '/products/r6-cheats/elite/'],
-  ['/products/dota-2-cheats/ugc', '/products/r6-cheats/ugc/'],
-  ['/products/dota-2-cheats/ugc/', '/products/r6-cheats/ugc/'],
-  ['/products/dota-2-cheats/unlock-all', '/products/r6-cheats/unlock-all/'],
-  ['/products/dota-2-cheats/unlock-all/', '/products/r6-cheats/unlock-all/'],
-  ['/products/dota-2-cheats/skin-changer', '/products/r6-cheats/unlock-all/'],
-  ['/products/dota-2-cheats/skin-changer/', '/products/r6-cheats/unlock-all/'],
 ]);
 
 /** Paths that should not receive a forced trailing slash. */

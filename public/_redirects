@@ -39,24 +39,6 @@
 /contact               /support/ 301
 /contact/              /support/ 301
 
-# Old dota product URLs → R6 hub
-/products/dota-2-cheats            /products/r6-cheats/ 301
-/products/dota-2-cheats/           /products/r6-cheats/ 301
-/products/dota-2-cheats/utilities  /products/r6-cheats/utilities/ 301
-/products/dota-2-cheats/utilities/ /products/r6-cheats/utilities/ 301
-/products/dota-2-cheats/lite       /products/r6-cheats/elite/ 301
-/products/dota-2-cheats/lite/      /products/r6-cheats/elite/ 301
-/products/dota-2-cheats/pro        /products/r6-cheats/elite/ 301
-/products/dota-2-cheats/pro/       /products/r6-cheats/elite/ 301
-/products/dota-2-cheats/elite      /products/r6-cheats/elite/ 301
-/products/dota-2-cheats/elite/     /products/r6-cheats/elite/ 301
-/products/dota-2-cheats/ugc        /products/r6-cheats/ugc/ 301
-/products/dota-2-cheats/ugc/       /products/r6-cheats/ugc/ 301
-/products/dota-2-cheats/unlock-all /products/r6-cheats/unlock-all/ 301
-/products/dota-2-cheats/unlock-all/ /products/r6-cheats/unlock-all/ 301
-/products/dota-2-cheats/skin-changer  /products/r6-cheats/unlock-all/ 301
-/products/dota-2-cheats/skin-changer/ /products/r6-cheats/unlock-all/ 301
-
 # Renamed blog posts
 /blog/r6-siege-cheats-features-overview   /blog/r6-cheats-features/ 301
 /blog/r6-siege-cheats-features-overview/  /blog/r6-cheats-features/ 301
