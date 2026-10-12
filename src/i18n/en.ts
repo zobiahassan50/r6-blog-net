@@ -24,7 +24,7 @@ export const en: Translations = {
     status: 'Rainbow Six Siege · PC',
     eyebrow: 'Rainbow Six Siege · PC',
     titleLine1: 'R6 Siege',
-    titleLine2: 'R6 Cheats & Hacks',
+    titleLine2: 'R6 Cheats — Aimbot, ESP & Hacks',
     subtitle:
       'Premium R6 Siege cheats for Windows PC, featuring customizable aimbot, ESP, and wallhacks. Check the product page for live module status and pricing before checking out, or explore our blogs for detailed setup guides.',
     ctaPrimary: 'View Product',
