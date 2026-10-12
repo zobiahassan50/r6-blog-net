@@ -1,5 +1,5 @@
 /* R6Cheats — offline fallback + static asset cache (Cloudflare Pages) */
-const CACHE = 'r6cheat-static-v1';
+const CACHE = 'r6cheat-static-v2';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE = ['/', '/offline.html', '/favicon.svg', '/site.webmanifest'];
 
@@ -24,10 +24,23 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
+  // Never cache large media (videos / original rasters) — hurts Lighthouse payload.
+  if (/\.(mp4|webm|mov|png|jpe?g)$/i.test(url.pathname) || url.pathname.startsWith('/videos/')) {
+    return;
+  }
+
   event.respondWith(
     fetch(request)
       .then((response) => {
-        if (response.ok && (request.destination === 'style' || request.destination === 'script' || request.destination === 'image' || request.destination === 'font' || url.pathname.startsWith('/_astro/'))) {
+        const cacheable =
+          response.ok &&
+          (request.destination === 'style' ||
+            request.destination === 'script' ||
+            request.destination === 'font' ||
+            url.pathname.startsWith('/_astro/') ||
+            /\.(webp|avif|svg)$/i.test(url.pathname));
+
+        if (cacheable) {
           const copy = response.clone();
           caches.open(CACHE).then((cache) => cache.put(request, copy));
         }

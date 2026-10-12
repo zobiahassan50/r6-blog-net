@@ -12,6 +12,7 @@ import { blogTagIcons } from '../../data/sectionIcons';
 import type { IconName } from '../../components/icons/types';
 import { Button } from '@/components/starwind/button';
 import { ROUTES } from '../../utils/path';
+import { defaultWebpSrc, responsiveSrcSet, CARD_IMAGE_WIDTHS } from '../../utils/responsiveImage';
 
 const seo = resolvePageSeo('/blog/');
 const breadcrumbs = [
@@ -21,6 +22,11 @@ const breadcrumbs = [
 
 const tags = getBlogTags();
 const tagIcon = (tag: string): IconName => blogTagIcons[tag] ?? 'tag';
+const firstPost = blogPosts[0];
+const firstImagePreload = firstPost ? defaultWebpSrc(firstPost.image, CARD_IMAGE_WIDTHS) : null;
+const firstImageSrcSet = firstPost
+  ? responsiveSrcSet(firstPost.image, CARD_IMAGE_WIDTHS, 'webp')
+  : null;
 ---
 
 <BaseLayout
@@ -35,7 +41,21 @@ const tagIcon = (tag: string): IconName => blogTagIcons[tag] ?? 'tag';
     breadcrumbSchema(breadcrumbs),
   ]}
 >
-  <link slot="head" rel="preload" as="video" href="/videos/blog-hero.mp4" type="video/mp4" />
+  <link slot="head" rel="preload" as="video" href="/videos/blog-hero.mp4" type="video/mp4" fetchpriority="high" />
+  {
+    firstImagePreload && (
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        type="image/webp"
+        href={firstImagePreload}
+        imagesrcset={firstImageSrcSet ?? undefined}
+        imagesizes="(min-width: 1024px) 352px, (min-width: 640px) 50vw, 100vw"
+        fetchpriority="high"
+      />
+    )
+  }
   <section class="relative isolate overflow-hidden border-b border-border" aria-labelledby="blog-hero-title">
     <video
       class="pointer-events-none absolute inset-0 h-full w-full object-cover"
@@ -44,6 +64,7 @@ const tagIcon = (tag: string): IconName => blogTagIcons[tag] ?? 'tag';
       muted
       playsinline
       preload="auto"
+      fetchpriority="high"
       aria-hidden="true"
     >
       <source src="/videos/blog-hero.mp4" type="video/mp4" />

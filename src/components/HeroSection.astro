@@ -3,11 +3,21 @@ import { t } from '../i18n';
 import { R6_BUY_URL } from '../config/checkout';
 import { ROUTES } from '../utils/path';
 import { compatibilityIcons, heroStatIcons, heroStatusPills } from '../data/sectionIcons';
+import {
+  HERO_BG_SIZES,
+  HERO_BG_WIDTHS,
+  responsiveSrcSet,
+} from '../utils/responsiveImage';
 import Icon from './icons/Icon.astro';
 import { Button } from '@/components/starwind/button';
 import { Badge } from '@/components/starwind/badge';
 
 const h = t.hero;
+/** Absolute public path — case-sensitive on Cloudflare; keep PNG as reliable fallback. */
+const heroBgSrc = '/images/herobackground.png';
+const heroBgWebpSrcSet = responsiveSrcSet(heroBgSrc, HERO_BG_WIDTHS, 'webp');
+const heroBgAvifSrcSet = responsiveSrcSet(heroBgSrc, HERO_BG_WIDTHS, 'avif');
+
 
 const heroMarqueePills = [
   ...heroStatusPills,
@@ -20,20 +30,25 @@ const heroMarqueePills = [
 
 <section
   id="hero"
-  class="relative overflow-hidden border-b border-border"
+  class="relative overflow-hidden border-b border-border bg-[url('/images/herobackground.png')] bg-cover bg-center"
   aria-labelledby="hero-title"
 >
-  <img
-    src="/images/herobackground.png"
-    alt=""
-    class="pointer-events-none absolute inset-0 h-full w-full object-cover brightness-[0.45]"
-    width="1920"
-    height="1080"
-    decoding="async"
-    fetchpriority="high"
-    loading="eager"
-    aria-hidden="true"
-  />
+  <picture class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <source type="image/avif" srcset={heroBgAvifSrcSet} sizes={HERO_BG_SIZES} />
+    <source type="image/webp" srcset={heroBgWebpSrcSet} sizes={HERO_BG_SIZES} />
+    <img
+      src="/images/herobackground.png"
+      srcset={heroBgWebpSrcSet}
+      sizes={HERO_BG_SIZES}
+      alt=""
+      class="h-full w-full object-cover brightness-[0.45]"
+      width="1920"
+      height="1080"
+      decoding="async"
+      fetchpriority="high"
+      loading="eager"
+    />
+  </picture>
   <div class="pointer-events-none absolute inset-0 bg-black/55" aria-hidden="true" />
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--primary)_0%,transparent_55%)] opacity-20" aria-hidden="true" />
 
@@ -83,15 +98,13 @@ const heroMarqueePills = [
         >
           <video
             class="aspect-[16/10] w-full rounded-lg bg-muted/30 object-cover"
-            autoplay
             muted
             loop
             playsinline
-            preload="auto"
+            preload="none"
+            data-hero-video
             aria-label="Rainbow Six Siege product preview"
-          >
-            <source src="/videos/hero.mp4" type="video/mp4" />
-          </video>
+          ></video>
         </div>
         <div class="grid w-full grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:grid-cols-2">
           {h.metrics.map((m, i) => (
@@ -116,7 +129,7 @@ const heroMarqueePills = [
       <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-black/80 to-transparent" aria-hidden="true" />
       <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-black/80 to-transparent" aria-hidden="true" />
       <div class="hero-status-marquee-track flex w-max gap-2">
-        {[...heroMarqueePills, ...heroMarqueePills].map((pill, i) => (
+        {[...heroMarqueePills, ...heroMarqueePills].map((pill) => (
           <Badge variant="outline" class="group/badge shrink-0 gap-1 border-white/35 bg-black/35 py-0.5 pl-1.5 pr-2.5 text-xs text-white whitespace-nowrap">
             <Icon name={pill.icon} size={13} class="text-white" />
             {pill.label}
@@ -126,3 +139,23 @@ const heroMarqueePills = [
     </div>
   </div>
 </section>
+
+<script>
+  const loadHeroVideo = () => {
+    const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+    if (!video || video.dataset.loaded === '1') return;
+    if (!window.matchMedia('(min-width: 1024px)').matches) return;
+
+    const source = document.createElement('source');
+    source.src = '/videos/hero.mp4';
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    video.dataset.loaded = '1';
+    video.autoplay = true;
+    void video.play().catch(() => {});
+  };
+
+  loadHeroVideo();
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', loadHeroVideo);
+  window.addEventListener('load', loadHeroVideo, { once: true });
+</script>

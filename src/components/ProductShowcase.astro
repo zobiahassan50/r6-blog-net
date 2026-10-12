@@ -2,6 +2,8 @@
 import { t } from '../i18n';
 import { siegeCatalogCards } from '../data/products';
 import Icon from './icons/Icon.astro';
+import ResponsiveImage from './ResponsiveImage.astro';
+import { CARD_IMAGE_SIZES, CARD_IMAGE_WIDTHS } from '../utils/responsiveImage';
 import { Button } from '@/components/starwind/button';
 
 interface Props {
@@ -128,11 +130,14 @@ const featureImages: Record<string, string> = {
                   </ul>
                 </div>
                 <div class="flex items-center justify-center px-6 pb-6 md:absolute md:inset-y-0 md:right-0 md:w-[22rem] md:justify-end md:px-6 md:pb-0">
-                  <img
+                  <ResponsiveImage
                     src={featureImages[feature.title] ?? '/images/aimbotproduct.jpeg'}
                     alt={feature.title}
-                    width="640"
-                    height="360"
+                    width={640}
+                    height={360}
+                    widths={CARD_IMAGE_WIDTHS}
+                    sizes={CARD_IMAGE_SIZES}
+                    loading="lazy"
                     class="aspect-video w-full max-w-[22rem] rounded-2xl border border-border/70 object-cover shadow-sm"
                   />
                 </div>

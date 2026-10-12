@@ -31,8 +31,9 @@ const {
   desktopOnly = false,
 } = Astro.props;
 
-const isRaster = /\.(png|jpe?g|webp)$/i.test(src);
-const srcSet = responsiveSrcSet(src, widths);
+const isRaster = /\.(png|jpe?g|webp|avif)$/i.test(src);
+const webpSrcSet = responsiveSrcSet(src, widths, 'webp');
+const avifSrcSet = responsiveSrcSet(src, widths, 'avif');
 const imgSrc = desktopOnly
   ? 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
   : defaultWebpSrc(src, widths);
@@ -43,10 +44,11 @@ const pictureMedia = desktopOnly ? '(min-width: 1024px)' : undefined;
 {
   isRaster ? (
     <picture>
-      <source type="image/webp" srcset={srcSet} sizes={pictureSizes} media={pictureMedia} />
+      <source type="image/avif" srcset={avifSrcSet} sizes={pictureSizes} media={pictureMedia} />
+      <source type="image/webp" srcset={webpSrcSet} sizes={pictureSizes} media={pictureMedia} />
       <img
         src={imgSrc}
-        srcset={desktopOnly ? undefined : srcSet}
+        srcset={desktopOnly ? undefined : webpSrcSet}
         alt={alt}
         width={width}
         height={height}

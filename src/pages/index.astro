@@ -5,12 +5,21 @@ import FeaturesSection from '../components/FeaturesSection.astro';
 import WhySetupSection from '../components/WhySetupSection.astro';
 import ProductsSection from '../components/ProductsSection.astro';
 import ContentSections from '../components/ContentSections.astro';
-import { t } from '../i18n';
 import { resolvePageSeo } from '../config/seo';
 import { faqPageSchema, organizationSchema, websiteSchema } from '../utils/schema';
 import { getLandingFaqs } from '../data/faq';
+import {
+  HERO_BG_SIZES,
+  HERO_BG_WIDTHS,
+  heroBgPreloadHref,
+  responsiveSrcSet,
+} from '../utils/responsiveImage';
+
 const seo = resolvePageSeo('/');
 const homeFaqs = getLandingFaqs();
+const heroBg = '/images/herobackground.png';
+const heroPreloadHref = heroBgPreloadHref(heroBg);
+const heroPreloadSrcSet = responsiveSrcSet(heroBg, HERO_BG_WIDTHS, 'webp');
 ---
 
 <BaseLayout
@@ -28,10 +37,11 @@ const homeFaqs = getLandingFaqs();
   <link
     slot="head"
     rel="preload"
-    as="video"
-    href="/videos/hero.mp4"
-    type="video/mp4"
-    media="(min-width: 1024px)"
+    as="image"
+    type="image/webp"
+    href={heroPreloadHref}
+    imagesrcset={heroPreloadSrcSet}
+    imagesizes={HERO_BG_SIZES}
   />
   <HeroSection />
   <FeaturesSection />

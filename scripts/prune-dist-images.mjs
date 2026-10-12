@@ -1,10 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-/** Drop source PNGs from dist — pages serve WebP variants only. */
+/**
+ * Drop heavy source JPEG/PNG from dist when responsive WebP/AVIF variants exist.
+ * Keeps small brand assets; never deletes the sized *-N.webp / *-N.avif files.
+ */
 const distImages = path.resolve('dist/images');
 let removed = 0;
 let bytes = 0;
+
+function hasSizedVariants(dir, base) {
+  return (
+    fs.existsSync(path.join(dir, `${base}-640.webp`)) ||
+    fs.existsSync(path.join(dir, `${base}-960.webp`)) ||
+    fs.existsSync(path.join(dir, `${base}-1280.webp`))
+  );
+}
 
 function walk(dir) {
   if (!fs.existsSync(dir)) return;
@@ -14,10 +25,20 @@ function walk(dir) {
       walk(full);
       continue;
     }
-    if (!/\.png$/i.test(entry.name)) continue;
-    // Keep brand/favicon-sized assets if any land under images; gameplay/blog sources go.
+
+    if (!/\.(png|jpe?g)$/i.test(entry.name)) continue;
+    if (/-\d+\.(png|jpe?g)$/i.test(entry.name)) continue;
+
+    // Always keep hero originals — production fallback for Cloudflare case-sensitive paths.
+    if (/^herobackground\.(png|jpe?g)$/i.test(entry.name)) continue;
+
+    const base = entry.name.replace(/\.(png|jpe?g)$/i, '');
+    if (!hasSizedVariants(dir, base)) continue;
+
     const stat = fs.statSync(full);
-    if (stat.size < 80_000) continue;
+    // Keep tiny icons if any; prune everything that has webp siblings.
+    if (stat.size < 12_000) continue;
+
     bytes += stat.size;
     fs.unlinkSync(full);
     removed += 1;
@@ -26,5 +47,5 @@ function walk(dir) {
 
 walk(distImages);
 console.log(
-  `Pruned ${removed} source PNG(s) from dist/images (${(bytes / 1024 / 1024).toFixed(1)} MB).`,
+  `Pruned ${removed} source raster(s) from dist/images (${(bytes / 1024 / 1024).toFixed(1)} MB).`,
 );

@@ -1,5 +1,14 @@
 ---
 import type { ProductSlide } from '../data/products';
+import ResponsiveImage from './ResponsiveImage.astro';
+import {
+  GALLERY_IMAGE_SIZES,
+  GALLERY_IMAGE_WIDTHS,
+  THUMB_IMAGE_SIZES,
+  THUMB_IMAGE_WIDTHS,
+  defaultWebpSrc,
+  responsiveSrcSet,
+} from '../utils/responsiveImage';
 import { Badge } from '@/components/starwind/badge';
 
 interface Props {
@@ -21,14 +30,14 @@ const first = images[0];
     <div class="product-gallery__main">
       {
         first && (
-          <img
+          <ResponsiveImage
             src={first.src}
             alt={first.alt}
             width={1280}
             height={720}
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
+            widths={GALLERY_IMAGE_WIDTHS}
+            sizes={GALLERY_IMAGE_SIZES}
+            loading="lazy"
             class="product-gallery__image"
           />
         )
@@ -56,16 +65,18 @@ const first = images[0];
             aria-label={`Image ${i + 1}`}
             data-product-gallery-thumb
             data-index={i}
-            data-src={img.src}
+            data-src={defaultWebpSrc(img.src, GALLERY_IMAGE_WIDTHS)}
+            data-srcset={responsiveSrcSet(img.src, GALLERY_IMAGE_WIDTHS, 'webp')}
             data-alt={img.alt}
           >
-            <img
+            <ResponsiveImage
               src={img.src}
               alt=""
               width={320}
               height={180}
+              widths={THUMB_IMAGE_WIDTHS}
+              sizes={THUMB_IMAGE_SIZES}
               loading="lazy"
-              decoding="async"
             />
           </button>
         ))}
@@ -87,11 +98,10 @@ const first = images[0];
       thumbs.forEach((thumb) => {
         thumb.addEventListener('click', () => {
           const src = thumb.getAttribute('data-src');
+          const srcset = thumb.getAttribute('data-srcset');
           const alt = thumb.getAttribute('data-alt');
-          if (src) {
-            main.removeAttribute('srcset');
-            main.src = src;
-          }
+          if (src) main.src = src;
+          if (srcset) main.setAttribute('srcset', srcset);
           if (alt) main.alt = alt;
           thumbs.forEach((t) => {
             const active = t === thumb;

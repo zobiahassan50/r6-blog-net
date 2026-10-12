@@ -65,7 +65,7 @@ const tagIcon: IconName = blogTagIcons[post.tag] ?? 'tag';
       widths={isFeatured ? undefined : CARD_IMAGE_WIDTHS}
       sizes={isFeatured ? '(min-width: 1024px) 560px, 100vw' : CARD_IMAGE_SIZES}
       loading={eager ? 'eager' : 'lazy'}
-      fetchPriority={eager ? 'high' : undefined}
+      fetchPriority={eager ? 'high' : 'low'}
       class:list={[
         'size-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-[1.03]',
         isFeatured && 'lg:absolute lg:inset-0 lg:h-full lg:w-full lg:max-w-none',

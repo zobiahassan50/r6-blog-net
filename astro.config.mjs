@@ -61,11 +61,20 @@ export default defineConfig({
     build: {
       cssMinify: true,
       minify: 'esbuild',
+      cssCodeSplit: true,
       target: 'es2022',
       modulePreload: { polyfill: false },
+      rollupOptions: {
+        output: {
+          entryFileNames: '_astro/[name].[hash].js',
+          chunkFileNames: '_astro/[name].[hash].js',
+          assetFileNames: '_astro/[name].[hash][extname]',
+        },
+      },
     },
   },
   build: {
-    inlineStylesheets: 'always',
+    inlineStylesheets: 'auto',
+    assetsInlineLimit: 1024,
   },
 });
