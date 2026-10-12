@@ -21,9 +21,9 @@ const faqs = getAllFaqs();
   description={seo.description}
   jsonLd={[
     webPageSchema({
-      name: 'FAQ — Dota 2 Cheats & Products',
+      name: 'Rainbow Six Siege FAQ',
       description:
-        'Answers about Dota 2 cheat tiers, map hack, scripts, HWID tools, blog guides and checkout at dotacheats.com.',
+        'What this independent publication covers, how we source facts, and how fair-play topics are handled.',
       url: '/faq/',
     }),
     faqPageSchema(faqs.map((f, i) => ({ num: String(i + 1).padStart(2, '0'), q: f.q, a: f.a.replace(/<[^>]+>/g, '') }))),
@@ -35,9 +35,10 @@ const faqs = getAllFaqs();
       <Breadcrumbs items={breadcrumbs} />
       <div class="mt-6">
         <SectionHeader
-          eyebrow="Help center"
-          title="FAQ for cheats, products & guides"
-          desc="Everything about Lite, Pro, Elite tiers, utilities, safety and blog topics—in one place."
+          headingLevel="h1"
+          eyebrow="FAQ"
+          title="Rainbow Six Siege FAQ"
+          desc="What this independent publication covers, how we source facts, and how fair-play topics are handled."
           titleId="faq-page-title"
         />
       </div>

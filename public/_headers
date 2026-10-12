@@ -25,5 +25,11 @@
 /site.webmanifest
   Cache-Control: public, max-age=86400
 
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/offline.html
+  Cache-Control: public, max-age=86400
+
 /sitemap.xml
   Cache-Control: public, max-age=86400

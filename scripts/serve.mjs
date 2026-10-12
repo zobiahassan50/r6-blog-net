@@ -4,8 +4,10 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { resolvePathRedirect } from './redirects.mjs';
 import { resolveCheckoutPathRedirect } from '../src/config/checkout-redirects.mjs';
+import { DEFAULT_SITE_DOMAIN, getSiteHost } from './site-url.mjs';
 
-const CANONICAL_HOST = 'dotacheats.com';
+/** Only upgrade www/http for the production apex — never touch *.pages.dev / localhost / temp hosts. */
+const CANONICAL_HOST = getSiteHost() || DEFAULT_SITE_DOMAIN;
 const distDir = path.resolve('dist');
 const port = Number(process.env.PORT) || 3000;
 
@@ -51,11 +53,18 @@ function getRequestHost(req) {
 
 function getCanonicalRedirect(req) {
   const host = getRequestHost(req);
+
+  // Preview / temp hosts must keep working until r6cheat.net DNS is attached.
+  if (host.endsWith('.pages.dev') || host === 'localhost' || host === '127.0.0.1') {
+    return null;
+  }
+
   if (host !== CANONICAL_HOST && host !== `www.${CANONICAL_HOST}`) {
     return null;
   }
 
   const forwardedProto = (req.headers['x-forwarded-proto'] ?? '').split(',')[0].trim().toLowerCase();
+  // Only redirect when the proxy explicitly says http (avoids loops behind Cloudflare TLS).
   const needsHttps = forwardedProto === 'http';
   const needsWwwStrip = host === `www.${CANONICAL_HOST}`;
 

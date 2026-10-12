@@ -1,9 +1,8 @@
 ---
 import { t } from '../i18n';
+import { R6_BUY_URL } from '../config/checkout';
 import { ROUTES } from '../utils/path';
-import { heroSlides } from '../data/products';
 import { compatibilityIcons, heroStatIcons, heroStatusPills } from '../data/sectionIcons';
-import ImageSlider from './ImageSlider.astro';
 import Icon from './icons/Icon.astro';
 import { Button } from '@/components/starwind/button';
 import { Badge } from '@/components/starwind/badge';
@@ -24,6 +23,18 @@ const heroMarqueePills = [
   class="relative overflow-hidden border-b border-border"
   aria-labelledby="hero-title"
 >
+  <img
+    src="/images/herobackground.png"
+    alt=""
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover brightness-[0.45]"
+    width="1920"
+    height="1080"
+    decoding="async"
+    fetchpriority="high"
+    loading="eager"
+    aria-hidden="true"
+  />
+  <div class="pointer-events-none absolute inset-0 bg-black/55" aria-hidden="true" />
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--primary)_0%,transparent_55%)] opacity-20" aria-hidden="true" />
 
   <div class="relative mx-auto flex max-w-6xl flex-col justify-center px-5">
@@ -35,7 +46,7 @@ const heroMarqueePills = [
           <span class="block text-primary">{h.titleLine2}</span>
         </h1>
 
-        <p class="max-w-xl text-sm leading-relaxed text-neutral-500 dark:text-neutral-400 md:text-base">
+        <p class="max-w-xl text-sm leading-relaxed text-white/90 md:text-base">
           {h.subtitle}
         </p>
 
@@ -53,10 +64,11 @@ const heroMarqueePills = [
           </Button>
           <Button
             as="a"
-            href={t.site.discord}
+            href={R6_BUY_URL}
             variant="secondary"
             size="lg"
             class="rounded-xl"
+            target="_self"
           >
             <Icon name="messageCircle" size={18} />
             {h.ctaDiscord}
@@ -65,7 +77,22 @@ const heroMarqueePills = [
       </div>
 
       <div class="mx-auto flex w-full max-w-xl flex-col items-center gap-5 lg:mx-0 lg:max-w-none lg:items-end">
-        <ImageSlider images={heroSlides} id="hero-slider" variant="hero" desktopOnly />
+        <div
+          id="hero-slider"
+          class="relative hidden w-full rounded-xl border border-border bg-card p-2 shadow-sm lg:block"
+        >
+          <video
+            class="aspect-[16/10] w-full rounded-lg bg-muted/30 object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-label="Rainbow Six Siege product preview"
+          >
+            <source src="/videos/hero.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div class="grid w-full grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:grid-cols-2">
           {h.metrics.map((m, i) => (
             <div class="flex min-w-0 items-center gap-3 rounded-xl border border-border/80 bg-card/70 px-3 py-3 shadow-sm shadow-black/10 transition-colors hover:border-primary/40">
@@ -86,12 +113,12 @@ const heroMarqueePills = [
     </div>
 
     <div class="hero-status-marquee relative mt-10 md:mt-12 lg:mt-14" aria-label="Features and platform support">
-      <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background to-transparent" aria-hidden="true" />
-      <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-background to-transparent" aria-hidden="true" />
+      <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-black/80 to-transparent" aria-hidden="true" />
+      <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-black/80 to-transparent" aria-hidden="true" />
       <div class="hero-status-marquee-track flex w-max gap-2">
         {[...heroMarqueePills, ...heroMarqueePills].map((pill, i) => (
-          <Badge variant="outline" class="group/badge shrink-0 gap-1 py-0.5 pl-1.5 pr-2.5 text-xs whitespace-nowrap">
-            <Icon name={pill.icon} size={13} />
+          <Badge variant="outline" class="group/badge shrink-0 gap-1 border-white/35 bg-black/35 py-0.5 pl-1.5 pr-2.5 text-xs text-white whitespace-nowrap">
+            <Icon name={pill.icon} size={13} class="text-white" />
             {pill.label}
           </Badge>
         ))}

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { productHub, siegeCatalogCards } from '../../../data/products';
+import { resolvePageSeo } from '../../../config/seo';
+import { breadcrumbSchema, collectionPageSchema, itemListSchema } from '../../../utils/schema';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ProductShowcase from '../../../components/ProductShowcase.astro';
+
+const seo = resolvePageSeo('/products/r6-cheats/');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Products', path: productHub.path },
+];
+
+const listedProducts = siegeCatalogCards.filter((card) => card.label !== 'Included with Siege');
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    collectionPageSchema({
+      name: productHub.title,
+      description: productHub.description,
+      url: productHub.path,
+    }),
+    breadcrumbSchema(breadcrumbs),
+    itemListSchema(
+      listedProducts.map((product) => ({
+        name: product.title,
+        url: product.href,
+      })),
+    ),
+  ]}
+>
+  <section class="py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-6">
+        <ProductShowcase heading="h1" titleId="products-page-title" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,11 +1,19 @@
-# Search Console workflow (dotacheats.com)
+# Search Console workflow (r6cheat.net)
+
+## Cloudflare Pages: temp domain → custom domain
+
+1. Deploy as usual. The `*.pages.dev` preview URL works with **relative** links — do not add host redirects in `_redirects`.
+2. When ready, add `r6cheat.net` (and optionally `www`) in **Pages → Custom domains**. Let Cloudflare manage TLS.
+3. Prefer apex `r6cheat.net`. If you use `www`, set a single redirect **www → apex** (or the reverse) in Cloudflare — never both directions.
+4. Leave build env unset for production so canonicals/sitemap use `https://r6cheat.net`. Optional: set `PUBLIC_SITE_URL` only on preview builds if you want preview-specific tags.
+5. After DNS is live, submit `https://r6cheat.net/sitemap.xml` in Search Console.
 
 You verify the domain at your DNS provider—no HTML meta tags in the repo.
 
 ## Setup (once)
 
-1. Open [Google Search Console](https://search.google.com/search-console) and add the **domain** property for `dotacheats.com` if it is not already there.
-2. Under **Sitemaps**, submit: `https://dotacheats.com/sitemap.xml`
+1. Open [Google Search Console](https://search.google.com/search-console) and add the **domain** property for `r6cheat.net` if it is not already there.
+2. Under **Sitemaps**, submit: `https://r6cheat.net/sitemap.xml`
 3. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) if you use Bing.
 
 ## Monthly tune (15 minutes)
@@ -20,10 +28,10 @@ You verify the domain at your DNS provider—no HTML meta tags in the repo.
 
 | Common query intent | Edit path in `pageSeo.ts` |
 | ------------------- | ------------------------- |
-| dota 2 cheats (broad) | `/` |
-| lite / pro / elite | `/cheats/compare/`, `/cheats/lite/`, etc. |
-| map hack, scripts | `/cheats/pro/`, blog posts (titles set per article) |
-| hwid, skin changer | `/products/dota-2-cheats/utilities/` |
+| rainbow six siege cheats (broad) | `/` |
+| product, price, modules | `/products/r6-cheats/` |
+| esp, wallhack, aimbot | `/blog/`, product page |
+| utilities | `/products/r6-cheats/utilities/` |
 | purchase / refund | `/terms/`, `/contact/` |
 
 Product and blog article pages still use their own titles from content; add entries to `PAGE_SEO` only when you want a fixed override for a specific pathname.

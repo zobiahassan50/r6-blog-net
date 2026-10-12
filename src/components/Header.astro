@@ -1,8 +1,7 @@
 ---
 import { t } from '../i18n';
-import { checkoutPath } from '../config/checkout';
+import { R6_BUY_URL } from '../config/checkout';
 import { Button } from '@/components/starwind/button';
-import AnimatedThemeSwitch from './AnimatedThemeSwitch.astro';
 import {
   Sheet,
   SheetContent,
@@ -23,7 +22,7 @@ const navIcons: Record<string, IconName> = {
   Support: 'navSupport',
 };
 
-const purchaseUrl = checkoutPath('dota2');
+const purchaseUrl = R6_BUY_URL;
 ---
 
 <header class="pointer-events-none fixed inset-x-0 top-0 z-50">
@@ -32,7 +31,7 @@ const purchaseUrl = checkoutPath('dota2');
       class="pointer-events-auto relative flex h-14 w-full max-w-6xl items-center justify-between gap-3 rounded-2xl border border-border/40 bg-background/35 px-4 text-foreground shadow-md shadow-black/5 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/25 dark:border-white/10 dark:bg-background/20 dark:shadow-black/25 sm:px-5 lg:h-[3.75rem]"
     >
     <a href="/" class="inline-flex min-w-0 items-center font-[family-name:var(--font-heading)] text-lg font-bold tracking-wide" aria-label={t.ui.homeAria}>
-      <span class="truncate" aria-hidden="true">Dota<span class="text-primary">Cheats</span></span>
+      <span class="truncate" aria-hidden="true">R6<span class="text-primary">Cheats</span></span>
     </a>
 
     <nav class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex" aria-label="Primary">
@@ -54,10 +53,6 @@ const purchaseUrl = checkoutPath('dota2');
         <SlideRevealButton href={purchaseUrl} class="hidden lg:inline-flex" ariaLabel={t.ui.checkoutAria}>
           {t.ui.browseCheats}
         </SlideRevealButton>
-        <div class="nav-action-divider hidden items-center px-3 lg:flex" aria-hidden="true">
-          <span class="block h-9 w-px bg-border"></span>
-        </div>
-        <AnimatedThemeSwitch size="md" ariaLabel={t.ui.themeLight} class="inline-flex" />
       </div>
 
       <Sheet class="lg:hidden">
@@ -84,12 +79,9 @@ const purchaseUrl = checkoutPath('dota2');
               </a>
             ))}
           </nav>
-          <Button as="a" href={purchaseUrl} variant="primary" class="w-full justify-center" aria-label={t.ui.checkoutAria}>
+          <Button as="a" href={purchaseUrl} variant="primary" class="w-full justify-center" aria-label={t.ui.checkoutAria} target="_self">
             {t.ui.browseCheatsMobile}
           </Button>
-          <div class="flex justify-center pt-1">
-            <AnimatedThemeSwitch size="sm" ariaLabel={t.ui.themeLight} />
-          </div>
         </SheetContent>
       </Sheet>
     </div>

@@ -2,7 +2,7 @@
 import '../styles/blog-sidebar.css';
 import Icon from './icons/Icon.astro';
 import { blogPostPath, productPath, ROUTES } from '../utils/path';
-import { checkoutPath } from '../config/checkout';
+import { R6_BUY_URL } from '../config/checkout';
 import { t } from '../i18n';
 import type { BlogPostFull } from '../data/blog';
 import type { IconName } from './icons/types';
@@ -35,10 +35,9 @@ const toc = post.body
   }));
 
 const productLinks: { label: string; href: string; icon: IconName }[] = [
-  { label: 'Dota 2 products', href: ROUTES.products, icon: 'sidebarHub' },
+  { label: 'Rainbow Six Siege products', href: ROUTES.products, icon: 'sidebarHub' },
   { label: 'Elite cheats', href: ROUTES.productsElite, icon: 'sidebarElite' },
   { label: 'Skin Changer', href: productPath('unlock-all'), icon: 'sidebarSkin' },
-  { label: 'HWID Spoofer', href: productPath('hwid-spoofer'), icon: 'sidebarHwid' },
   { label: 'UGC', href: productPath('ugc'), icon: 'sidebarUgc' },
 ];
 ---
@@ -120,13 +119,14 @@ const productLinks: { label: string; href: string; icon: IconName }[] = [
     </ul>
     <Button
       as="a"
-      href={checkoutPath('dota2')}
+      href={R6_BUY_URL}
       variant="primary"
       size="sm"
       class="blog-sidebar__cta mt-2.5 w-full min-w-0 justify-start"
       aria-label={t.ui.checkoutAria}
+      target="_self"
     >
-      <span class="truncate">Buy Dota 2 Cheats</span>
+      <span class="truncate">Buy Rainbow Six Siege Cheats</span>
       <Icon name="arrowRight" size={16} class="shrink-0" />
     </Button>
   </section>

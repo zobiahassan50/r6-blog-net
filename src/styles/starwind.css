@@ -89,7 +89,7 @@
   --secondary-foreground: var(--color-neutral-950);
   --secondary-accent: var(--color-neutral-950);
   --muted: var(--color-neutral-100);
-  --muted-foreground: var(--color-neutral-600);
+  --muted-foreground: var(--color-neutral-700);
   --accent: var(--color-neutral-100);
   --accent-foreground: var(--color-neutral-900);
   --info: var(--color-sky-300);
@@ -161,7 +161,7 @@
     @apply border-border outline-outline/50;
   }
   body {
-    @apply bg-background text-foreground scheme-light dark:scheme-dark font-sans antialiased;
+    @apply bg-background text-foreground scheme-dark font-sans antialiased;
   }
   h1,
   h2,

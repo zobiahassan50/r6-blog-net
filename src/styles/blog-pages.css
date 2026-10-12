@@ -1,4 +1,8 @@
 /* Blog index cards — clip media only; keep footer outside overflow so bottoms stay clean */
+.blog-card[hidden] {
+  display: none !important;
+}
+
 .blog-card {
   isolation: isolate;
   overflow: visible;

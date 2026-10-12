@@ -1,10 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { getSiteHost, getSiteUrl, isPreviewDeploy } from './site-url.mjs';
 
 const root = process.cwd();
 const dist = path.join(root, 'dist');
 const key = process.env.INDEXNOW_KEY?.trim();
-const host = process.env.INDEXNOW_HOST?.trim() || 'dotacheats.com';
+const host = process.env.INDEXNOW_HOST?.trim() || getSiteHost();
+const siteUrl = getSiteUrl();
+
+if (isPreviewDeploy()) {
+  console.log('IndexNow: skipped (Cloudflare Pages preview branch).');
+  process.exit(0);
+}
 
 if (!key) {
   console.log('IndexNow: skipped (INDEXNOW_KEY not set).');
@@ -31,7 +38,7 @@ fs.writeFileSync(keyFile, key, 'utf8');
 const payload = {
   host,
   key,
-  keyLocation: `https://${host}/${key}.txt`,
+  keyLocation: `${siteUrl}/${key}.txt`,
   urlList,
 };
 

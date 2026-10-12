@@ -6,6 +6,7 @@ export function initBlogIndexFilters(emptyMessage: string) {
   if (!grid) return;
 
   const filters = document.querySelectorAll<HTMLButtonElement>('[data-blog-filter]');
+  const searchInput = document.getElementById('blog-search') as HTMLInputElement | null;
 
   const cards = () => [...grid.querySelectorAll<HTMLElement>('[data-blog-card]')];
 
@@ -41,9 +42,12 @@ export function initBlogIndexFilters(emptyMessage: string) {
     return tsB - tsA;
   };
 
+  const query = () => searchInput?.value.trim().toLocaleLowerCase() ?? '';
+
   const apply = () => {
     const tag = activeTag();
     const sort = getSort();
+    const q = query();
     const items = cards();
 
     const sorted = [...items].sort((a, b) => compareCards(a, b, sort));
@@ -51,8 +55,10 @@ export function initBlogIndexFilters(emptyMessage: string) {
 
     let visibleCount = 0;
     items.forEach((el) => {
-      const match = tag === 'all' || el.getAttribute('data-tag') === tag;
-      el.classList.toggle('hidden', !match);
+      const tagMatch = tag === 'all' || el.getAttribute('data-tag') === tag;
+      const text = el.getAttribute('data-search') ?? '';
+      const match = tagMatch && (q.length === 0 || text.includes(q));
+      el.hidden = !match;
       if (match) visibleCount += 1;
     });
 
@@ -74,6 +80,9 @@ export function initBlogIndexFilters(emptyMessage: string) {
     if (!isBlogSortEvent(event)) return;
     apply();
   };
+
+  searchInput?.addEventListener('input', apply);
+  searchInput?.addEventListener('search', apply);
 
   document.addEventListener('starwind:value-change', onSortChange);
 

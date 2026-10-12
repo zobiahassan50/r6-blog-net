@@ -46,6 +46,7 @@ const tagIcon: IconName = blogTagIcons[post.tag] ?? 'tag';
   data-tag={post.tag}
   data-ts={timestamp}
   data-read-minutes={readMinutes}
+  data-search={`${post.title} ${post.desc} ${post.tag}`.toLowerCase()}
 >
   <a
     href={href}

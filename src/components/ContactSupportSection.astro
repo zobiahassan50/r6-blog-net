@@ -16,10 +16,17 @@ interface Props {
   titleId?: string;
   showTicketTips?: boolean;
   class?: string;
+  headingLevel?: 'h1' | 'h2';
 }
 
-const { titleId = 'support-title', showTicketTips = false, class: className } = Astro.props;
+const {
+  titleId = 'support-title',
+  showTicketTips = false,
+  class: className,
+  headingLevel = 'h1',
+} = Astro.props;
 const c = t.support;
+const TitleTag = headingLevel;
 ---
 
 <section
@@ -30,7 +37,7 @@ const c = t.support;
   <div class="support-section__inner mx-auto max-w-6xl px-5">
     <header class="section-header section-header--wide support-section__header">
       <p class="section-header__eyebrow">{c.eyebrow}</p>
-      <h1 id={titleId} class="section-header__title">{c.title}</h1>
+      <TitleTag id={titleId} class="section-header__title">{c.title}</TitleTag>
       <p class="section-header__subtitle">{c.subtitle}</p>
     </header>
 
@@ -55,6 +62,7 @@ const c = t.support;
                   variant="outline"
                   size="sm"
                   class="w-full"
+                  target={channel.href.startsWith('http') ? '_self' : undefined}
                 >
                   {channel.linkLabel}
                   <Icon name="arrowRight" size={17} />

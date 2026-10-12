@@ -1,6 +1,7 @@
 ---
 import Icon from './icons/Icon.astro';
 import { Button } from '@/components/starwind/button';
+import { R6_BUY_URL } from '../config/checkout';
 
 interface Props {
   title: string;
@@ -8,7 +9,7 @@ interface Props {
   href: string;
 }
 
-const { title, html, href } = Astro.props;
+const { title, html } = Astro.props;
 ---
 
 <aside class="blog-post-cta not-prose my-8" aria-label={title}>
@@ -18,7 +19,7 @@ const { title, html, href } = Astro.props;
   <div class="blog-post-cta__body">
     <h3 class="blog-post-cta__title">{title}</h3>
     <div class="blog-post-cta__text" set:html={html} />
-    <Button as="a" href={href} variant="primary" size="sm" class="blog-post-cta__btn justify-start">
+    <Button as="a" href={R6_BUY_URL} variant="primary" size="sm" class="blog-post-cta__btn justify-start" target="_self">
       Buy now
       <Icon name="arrowRight" size={16} />
     </Button>

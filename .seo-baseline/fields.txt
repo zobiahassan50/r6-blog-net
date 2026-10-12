@@ -1,56 +1,56 @@
 === index.html ===
-Dota 2 Cheats &amp; Hacks | Scripts, Map Hack &amp; ESP
-Dota 2 cheats for PC ranked: scripts, map hack, zoom hack, and skin changer tiers updated every patch at dotacheats.com.
-https://dotacheats.com/
+R6 Siege Cheats | Rainbow Six Siege PC
+R6 Siege Cheats for Windows PC. ESP, wallhack, radar, and aim helpers, with product notes to read before you buy.
+https://r6cheat.net/
 index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
 1
 1
-=== cheats/index.html ===
-Dota 2 Cheat Tiers | Lite, Pro &amp; Elite
-Compare Lite, Pro, and Elite dota cheats—ESP, scripts, map hack, and automation modules for Steam ranked on Windows.
-https://dotacheats.com/cheats/
+=== products/r6-cheats/index.html ===
+RAINBOW SIX SIEGE | ESP, Aimbot & Recoil
+Player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150.
+https://r6cheat.net/products/r6-cheats/
 index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
 1
 1
-=== cheats/lite/index.html ===
-Lite Dota 2 Cheats | DotaCheats
-Entry tier for dota cheats with player ESP, ward locator, jungle awareness and minimap overlay.
-https://dotacheats.com/cheats/lite/
+=== products/r6-cheats/elite/index.html ===
+RAINBOW SIX SIEGE | Player ESP & Aimbot
+Player ESP, aimbot, gadget ESP, and config save/load. Monthly $35 for 31 days, or lifetime access for $150.
+https://r6cheat.net/products/r6-cheats/elite/
 index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
 1
 1
 === blog/index.html ===
-Dota 2 Cheats Guides &amp; Patch Notes
-Setup guides, Lite vs Pro comparisons, VAC patch checklists, and ranked config tips for dota cheats.
-https://dotacheats.com/blog/
+Rainbow Six Siege Cheats Guides & Patch Notes
+Long-form articles on features, terminology, and fair play for Rainbow Six Siege on Windows PC.
+https://r6cheat.net/blog/
 index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
 1
 1
-=== blog/dota-2-cheat-codes-guide/index.html ===
-Dota 2 cheat codes guide: console commands for | DotaCheats
-Full list of Dota 2 cheat codes for custom lobbies—gold, levels, vision, hero spawn and item commands.
-https://dotacheats.com/blog/dota-2-cheat-codes-guide/
+=== blog/r6-cheats-features/index.html ===
+Complete R6 Siege PC Modules & Features Breakdown
+A plain walkthrough of the module categories on the listing, and why build-specific details belong on the product page.
+https://r6cheat.net/blog/r6-cheats-features/
 index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
 1
 1
 === faq/index.html ===
-FAQ | Dota 2 Cheats, Products &amp; Setup
-Answers on cheat tiers, map hack, scripts, HWID tools, checkout, and blog guides at dotacheats.com.
-https://dotacheats.com/faq/
+Rainbow Six Siege FAQ
+What this independent publication covers, how we source facts, and how fair-play topics are handled.
+https://r6cheat.net/faq/
 index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
 1
 1
-=== contact/index.html ===
-Contact &amp; Support | DotaCheats
-Get help with loader setup, HWID, and checkout for Dota 2 cheat tiers and utilities.
-https://dotacheats.com/contact/
+=== support/index.html ===
+Support | R6Cheats
+Questions about articles or this site. Checkout and payment issues are handled on the external checkout side.
+https://r6cheat.net/support/
 index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
 1
 1
 === 404.html ===
-Page not found | DotaCheats
-The page you requested could not be found on dotacheats.com.
-https://dotacheats.com/404/
+Page not found | R6Cheats
+The page you requested could not be found on r6cheat.net.
+https://r6cheat.net/404/
 noindex, nofollow
 0
 1

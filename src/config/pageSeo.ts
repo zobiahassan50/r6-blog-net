@@ -10,59 +10,59 @@ export interface PageSeoEntry {
 
 export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/': {
-    // gscNote: Keep primary keyword "dota 2 cheats" near front; trim if title truncates in SERP.
-    title: 'Dota 2 Cheats & Hacks | Scripts, Map Hack & ESP',
+    // gscNote: Keep primary keyword "Rainbow Six Siege cheats" near front; trim if title truncates in SERP.
+    title: 'R6 Siege Cheats | Rainbow Six Siege PC',
     description:
-      'Dota 2 cheats for PC ranked: scripts, map hack, zoom hack, and skin changer tiers updated every patch at dotacheats.com.',
+      'R6 Siege Cheats for Windows PC. ESP, wallhack, radar, and aim helpers, with product notes to read before you buy.',
   },
-  '/products/dota-2-cheats/': {
-    title: 'Dota 2 Elite Cheats & Utility Products',
+  '/products/r6-cheats/': {
+    title: 'RAINBOW SIX SIEGE | ESP, Aimbot & Recoil',
     description:
-      'Elite dota 2 cheats plus HWID spoofer, UGC tools, and Skin Changer utilities for Steam ranked on dotacheats.com.',
+      'Player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150.',
   },
-  '/products/dota-2-cheats/elite/': {
-    title: 'Dota 2 Elite Cheats | Bots & Full Map Hack',
+  '/products/r6-cheats/elite/': {
+    title: 'RAINBOW SIX SIEGE | Player ESP & Aimbot',
     description:
-      'Elite tier: auto farm bot, kill steal, skin changer, full map hack suite, and priority patch delivery.',
+      'Player ESP, aimbot, gadget ESP, and config save/load. Monthly $35 for 31 days, or lifetime access for $150.',
   },
-  '/products/dota-2-cheats/utilities/': {
-    title: 'Dota 2 Utilities | HWID, UGC & Skin Changer',
+  '/products/r6-cheats/utilities/': {
+    title: 'Rainbow Six Siege Utilities | UGC & Skin Changer',
     description:
-      'Choose HWID Spoofer, UGC, or Skin Changer—when each utility fits and links to full product pages.',
+      'Choose UGC or Skin Changer—when each utility fits and links to full product pages.',
   },
   '/blog/': {
-    title: 'Dota 2 Cheats Guides & Patch Notes',
+    title: 'Rainbow Six Siege Cheats Guides & Patch Notes',
     description:
-      'Setup guides, Lite vs Pro comparisons, VAC patch checklists, and ranked config tips for dota cheats.',
+      'Setup guides, Lite vs Pro comparisons, BattlEye patch checklists, and ranked config tips for R6 cheats.',
   },
   '/forum/': {
-    title: 'Dota 2 Community Forum | DotaCheats',
-    description: 'Join Dota players to discuss heroes, builds, patch changes, guides, and community moments.',
+    title: 'Rainbow Six Siege Community Forum | R6Cheats',
+    description: 'Join R6 players to discuss operators, setups, patch changes, guides, and community moments.',
   },
   '/faq/': {
-    title: 'FAQ | Dota 2 Cheats, Products & Setup',
+    title: 'Rainbow Six Siege FAQ',
     description:
-      'Answers on cheat tiers, map hack, scripts, HWID tools, checkout, and blog guides at dotacheats.com.',
+      'What this independent publication covers, how we source facts, and how fair-play topics are handled.',
   },
   '/terms/': {
-    title: 'Terms & Conditions | DotaCheats',
+    title: 'Terms & Conditions | R6Cheats',
     description:
-      'Purchase terms, license use, and refund policy for DotaCheats products sold through dotacheats.com.',
+      'Purchase terms, license use, and refund policy for R6Cheats products sold through r6cheat.net.',
   },
   '/privacy/': {
-    title: 'Privacy Policy | DotaCheats',
+    title: 'Privacy Policy | R6Cheats',
     description:
-      'How dotacheats.com uses analytics, cookies, and contact data when you browse or request support.',
+      'How r6cheat.net uses analytics, cookies, and contact data when you browse or request support.',
   },
   '/about/': {
-    title: 'About DotaCheats',
+    title: 'About R6Cheats',
     description:
-      'What DotaCheats publishes: Dota 2 cheat tiers, utilities, guides, and status notes at dotacheats.com.',
+      'What R6Cheats publishes: Rainbow Six Siege cheat tiers, utilities, guides, and status notes at r6cheat.net.',
   },
   '/support/': {
-    title: 'Support | DotaCheats',
+    title: 'Support | R6Cheats',
     description:
-      'Get help with loader setup, HWID, and checkout for Dota 2 cheat tiers and utilities.',
+      'Get help with loader setup and checkout for Rainbow Six Siege cheat tiers and utilities.',
   },
 };
 

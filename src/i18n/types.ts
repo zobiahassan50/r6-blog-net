@@ -161,7 +161,9 @@ export interface Translations {
   blog: {
     eyebrow: string;
     title: string;
+    heroTitle: string;
     subtitle: string;
+    searchPlaceholder: string;
     latestTitle: string;
     latestSubtitle: string;
     filterAll: string;
@@ -259,7 +261,5 @@ export interface Translations {
     discordAria: string;
     menuOpen: string;
     menuClose: string;
-    themeLight: string;
-    themeDark: string;
   };
 }

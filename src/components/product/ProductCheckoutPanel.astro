@@ -1,10 +1,6 @@
 ---
 import type { ProductPage } from '../../data/products';
-import {
-  checkoutUrlWithPlan,
-  formatPlanPrice,
-  getProductPlans,
-} from '../../data/productPricing';
+import { formatPlanPrice, getProductPlans } from '../../data/productPricing';
 import Icon from '../icons/Icon.astro';
 import ProductIconWell from './ProductIconWell.astro';
 import { Button } from '@/components/starwind/button';
@@ -72,11 +68,12 @@ const isSinglePlan = plans.length === 1;
 
       <Button
         as="a"
-        href={checkoutUrlWithPlan(product.buyUrl, defaultPlan.id)}
+        href={product.buyUrl}
         variant="primary"
         size="lg"
         class="w-full rounded-xl"
         data-checkout-buy
+        target="_self"
       >
         Buy now
         <Icon name="arrowRight" size={17} />
@@ -116,8 +113,8 @@ const isSinglePlan = plans.length === 1;
 
         totalEl.textContent = `$${plan.priceUsd}`;
         noteEl.textContent = plan.priceNote;
-        const separator = buyUrl.includes('?') ? '&' : '?';
-        buyBtn.href = `${buyUrl}${separator}plan=${plan.id}`;
+        buyBtn.href = buyUrl;
+        buyBtn.target = '_self';
       };
 
       group.addEventListener('click', () => window.setTimeout(sync, 0));

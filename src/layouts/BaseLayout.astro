@@ -53,10 +53,10 @@ const robotsContent = noindex
     <meta charset="UTF-8" />
     <script is:inline>
       (function () {
+        document.documentElement.classList.add('dark');
         try {
-          var stored = localStorage.getItem('colorTheme') || localStorage.getItem('starwind-theme');
-          if (stored === 'light') document.documentElement.classList.remove('dark');
-          else if (stored === 'dark') document.documentElement.classList.add('dark');
+          localStorage.setItem('colorTheme', 'dark');
+          localStorage.setItem('starwind-theme', 'dark');
         } catch (e) {}
         document.documentElement.classList.add('fonts-pending');
       })();
@@ -121,6 +121,11 @@ const robotsContent = noindex
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;600&display=optional"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;600&display=optional"
       rel="stylesheet"
       media="print"
@@ -146,6 +151,13 @@ const robotsContent = noindex
     <Footer />
     <script>
       import '../scripts/site.ts';
+    </script>
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
     </script>
     {
       GA_MEASUREMENT_ID && (

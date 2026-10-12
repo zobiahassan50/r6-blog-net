@@ -1,0 +1,70 @@
+# Cloudflare Pages redirects — path rules only (trailingSlash: always).
+# Do NOT add HTTP→HTTPS, www↔apex, or host-based rules here.
+# Cloudflare handles TLS; attach r6cheat.net in the Pages dashboard when ready.
+# Path redirects work on both *.pages.dev and the custom domain.
+
+# Checkout (external)
+/go/r6                 https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
+/go/r6/                https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
+/go/skin-changer       https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
+/go/skin-changer/      https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
+/go/ugc                https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
+/go/ugc/               https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
+
+# Product hub shortcuts + retired tiers
+/products              /products/r6-cheats/ 301
+/products/             /products/r6-cheats/ 301
+/products/r6-cheats/lite           /products/r6-cheats/elite/ 301
+/products/r6-cheats/lite/          /products/r6-cheats/elite/ 301
+/products/r6-cheats/pro            /products/r6-cheats/elite/ 301
+/products/r6-cheats/pro/           /products/r6-cheats/elite/ 301
+/products/r6-cheats/skin-changer   /products/r6-cheats/unlock-all/ 301
+/products/r6-cheats/skin-changer/  /products/r6-cheats/unlock-all/ 301
+/products/r6-cheats/hwid-spoofer   /products/r6-cheats/ 301
+/products/r6-cheats/hwid-spoofer/  /products/r6-cheats/ 301
+/products/r6-cheats/account-recovery   /products/r6-cheats/ugc/ 301
+/products/r6-cheats/account-recovery/  /products/r6-cheats/ugc/ 301
+
+# Legacy /cheats paths
+/cheats                /products/r6-cheats/ 301
+/cheats/               /products/r6-cheats/ 301
+/cheats/lite           /products/r6-cheats/elite/ 301
+/cheats/lite/          /products/r6-cheats/elite/ 301
+/cheats/pro            /products/r6-cheats/elite/ 301
+/cheats/pro/           /products/r6-cheats/elite/ 301
+/cheats/elite          /products/r6-cheats/elite/ 301
+/cheats/elite/         /products/r6-cheats/elite/ 301
+/cheats/compare        /blog/r6-cheats-features/ 301
+/cheats/compare/       /blog/r6-cheats-features/ 301
+/contact               /support/ 301
+/contact/              /support/ 301
+
+# Old dota product URLs → R6 hub
+/products/dota-2-cheats            /products/r6-cheats/ 301
+/products/dota-2-cheats/           /products/r6-cheats/ 301
+/products/dota-2-cheats/utilities  /products/r6-cheats/utilities/ 301
+/products/dota-2-cheats/utilities/ /products/r6-cheats/utilities/ 301
+/products/dota-2-cheats/lite       /products/r6-cheats/elite/ 301
+/products/dota-2-cheats/lite/      /products/r6-cheats/elite/ 301
+/products/dota-2-cheats/pro        /products/r6-cheats/elite/ 301
+/products/dota-2-cheats/pro/       /products/r6-cheats/elite/ 301
+/products/dota-2-cheats/elite      /products/r6-cheats/elite/ 301
+/products/dota-2-cheats/elite/     /products/r6-cheats/elite/ 301
+/products/dota-2-cheats/ugc        /products/r6-cheats/ugc/ 301
+/products/dota-2-cheats/ugc/       /products/r6-cheats/ugc/ 301
+/products/dota-2-cheats/unlock-all /products/r6-cheats/unlock-all/ 301
+/products/dota-2-cheats/unlock-all/ /products/r6-cheats/unlock-all/ 301
+/products/dota-2-cheats/skin-changer  /products/r6-cheats/unlock-all/ 301
+/products/dota-2-cheats/skin-changer/ /products/r6-cheats/unlock-all/ 301
+
+# Renamed blog posts
+/blog/r6-siege-cheats-features-overview   /blog/r6-cheats-features/ 301
+/blog/r6-siege-cheats-features-overview/  /blog/r6-cheats-features/ 301
+/blog/r6-esp-wallhack-anti-cheat          /blog/r6-battleye-safety/ 301
+/blog/r6-esp-wallhack-anti-cheat/         /blog/r6-battleye-safety/ 301
+/blog/r6-esp-wallhack-aimbot              /blog/r6-esp-aimbot/ 301
+/blog/r6-esp-wallhack-aimbot/             /blog/r6-esp-aimbot/ 301
+/blog/r6-siege-settings-2026              /blog/r6-cheat-settings/ 301
+/blog/r6-siege-settings-2026/             /blog/r6-cheat-settings/ 301
+/blog/r6-hacks-and-esp                    /blog/r6-esp-guide/ 301
+/blog/r6-hacks-and-esp/                   /blog/r6-esp-guide/ 301

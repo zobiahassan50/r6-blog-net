@@ -4,12 +4,11 @@ import { t } from '../i18n';
 import Icon from '../components/icons/Icon.astro';
 import { Button } from '@/components/starwind/button';
 import { ROUTES } from '../utils/path';
-
 ---
 
 <BaseLayout
   title={`Page not found | ${t.site.name}`}
-  description="The page you requested could not be found on dotacheats.com."
+  description="That URL is not on r6cheat.net. Use the links below to continue."
   noindex={true}
 >
   <section class="py-16 md:py-24">
@@ -17,15 +16,18 @@ import { ROUTES } from '../utils/path';
       <p class="text-sm font-semibold uppercase tracking-wider text-primary">404</p>
       <h1 class="mt-3 text-3xl font-bold uppercase md:text-4xl">Page not found</h1>
       <p class="mt-4 text-muted-foreground">
-        That URL does not exist or may have moved. Head back to the homepage or browse cheat tiers and products.
+        That URL does not exist or may have moved. Use a working page below.
       </p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
         <Button as="a" href={ROUTES.home} variant="primary">
-          Back to home
+          Home
           <Icon name="arrowRight" size={17} />
         </Button>
-        <Button as="a" href={ROUTES.products} variant="outline">View products</Button>
-        <Button as="a" href={ROUTES.productsElite} variant="outline">View Elite cheats</Button>
+        <Button as="a" href={ROUTES.products} variant="outline">Products</Button>
+        <Button as="a" href={ROUTES.productsElite} variant="outline">Elite product</Button>
+        <Button as="a" href={ROUTES.blog} variant="outline">Blog</Button>
+        <Button as="a" href={ROUTES.faq} variant="outline">FAQ</Button>
+        <Button as="a" href={ROUTES.support} variant="outline">Support</Button>
       </div>
     </div>
   </section>

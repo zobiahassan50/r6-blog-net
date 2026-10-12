@@ -1,0 +1,224 @@
+---
+import { t } from '../i18n';
+import { siegeCatalogCards } from '../data/products';
+import Icon from './icons/Icon.astro';
+import { Button } from '@/components/starwind/button';
+
+interface Props {
+  heading?: 'h1' | 'h2';
+  titleId?: string;
+}
+
+const { heading = 'h2', titleId } = Astro.props;
+const s = t.products;
+
+const main = siegeCatalogCards.find((card) => card.title === 'RAINBOW SIX SIEGE') ?? siegeCatalogCards[0];
+const features = siegeCatalogCards.filter((card) => card.label === 'Included with Siege');
+const companions = siegeCatalogCards.filter(
+  (card) => card !== main && card.label !== 'Included with Siege',
+);
+
+const featureId = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+const featureImages: Record<string, string> = {
+  Aimbot: '/images/aimbotproduct.jpeg',
+  'Player ESP': '/images/playerproduct.jpg',
+  'Gadget ESP': '/images/gadegtespproduct.jpeg',
+  Misc: '/images/misc.jpeg',
+};
+---
+
+<div class="space-y-4" data-product-showcase>
+  <div class="overflow-hidden rounded-3xl border border-border/70 bg-card/45 shadow-sm backdrop-blur-xl">
+    <div class="flex flex-col gap-6 border-b border-border/60 p-6 md:flex-row md:items-end md:justify-between md:p-8">
+      <div class="max-w-2xl">
+        <p class="text-sm font-medium uppercase tracking-wider text-primary">{s.eyebrow}</p>
+        {
+          heading === 'h1' ? (
+            <h1 id={titleId} class="mt-2 text-3xl font-bold uppercase leading-tight md:text-4xl">
+              {main?.title}
+            </h1>
+          ) : (
+            <h2 id={titleId} class="mt-2 text-3xl font-bold uppercase leading-tight md:text-4xl">
+              {main?.title}
+            </h2>
+          )
+        }
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">{s.subtitle}</p>
+        <p class="mt-4 inline-flex items-center gap-2 text-sm font-medium">
+          <span class="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-xs uppercase tracking-wide text-primary">
+            {main?.badge}
+          </span>
+          {main?.label}
+        </p>
+      </div>
+      {
+        main && (
+          <div class="flex shrink-0 flex-wrap gap-3">
+            <Button as="a" href={main.buyUrl} variant="primary" class="rounded-xl" target="_self">
+              Buy now
+            </Button>
+            <Button as="a" href={main.href} variant="outline" class="rounded-xl">
+              View details
+            </Button>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="grid lg:grid-cols-[16.5rem_minmax(0,1fr)] lg:items-stretch">
+      <div
+        class="flex gap-2 overflow-x-auto border-b border-border/60 p-3 lg:flex-col lg:overflow-visible lg:border-r lg:border-b-0"
+        role="tablist"
+        aria-label="Rainbow Six Siege features"
+      >
+        {
+          features.map((feature, index) => {
+            const id = featureId(feature.title);
+            return (
+              <button
+                type="button"
+                class:list={[
+                  'product-feature-tab flex min-w-[11rem] items-center gap-3 rounded-2xl border border-border/70 bg-background/35 px-3.5 py-3 text-left backdrop-blur-md transition duration-300 ease-in-out hover:scale-[1.02] hover:border-primary/45 hover:shadow-[0_0_28px_-12px_var(--primary)] motion-reduce:transform-none lg:min-w-0 lg:w-full',
+                  index === 0 && 'is-selected',
+                ]}
+                role="tab"
+                id={`product-tab-${id}`}
+                aria-controls={`product-panel-${id}`}
+                aria-selected={index === 0}
+                tabindex={index === 0 ? 0 : -1}
+                data-feature-tab={id}
+              >
+                <span class="flex size-9 shrink-0 items-center justify-center rounded-xl bg-muted text-primary">
+                  <Icon name={feature.icon} size={16} />
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-sm font-semibold">{feature.title}</span>
+                  <span class="block text-xs text-muted-foreground">Included</span>
+                </span>
+              </button>
+            );
+          })
+        }
+      </div>
+
+      <div class="relative h-full min-h-[22rem]">
+        {
+          features.map((feature, index) => {
+            const id = featureId(feature.title);
+            return (
+              <div
+                class="product-panel relative h-full min-h-[22rem]"
+                role="tabpanel"
+                id={`product-panel-${id}`}
+                aria-labelledby={`product-tab-${id}`}
+                data-feature-panel={id}
+                hidden={index !== 0}
+              >
+                <div class="p-6 md:py-8 md:pr-[24rem] md:pl-8">
+                  <p class="text-xs font-medium uppercase tracking-wider text-primary">Included with Siege</p>
+                  <h3 class="mt-2 text-2xl font-semibold tracking-tight">{feature.title}</h3>
+                  <ul class="mt-5 grid gap-2.5 sm:grid-cols-2">
+                    {feature.features.map((item) => (
+                      <li class="flex items-start gap-2 text-sm leading-snug text-muted-foreground">
+                        <Icon name="circleCheck" size={15} class="mt-0.5 text-primary" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="flex items-center justify-center px-6 pb-6 md:absolute md:inset-y-0 md:right-0 md:w-[22rem] md:justify-end md:px-6 md:pb-0">
+                  <img
+                    src={featureImages[feature.title] ?? '/images/aimbotproduct.jpeg'}
+                    alt={feature.title}
+                    width="640"
+                    height="360"
+                    class="aspect-video w-full max-w-[22rem] rounded-2xl border border-border/70 object-cover shadow-sm"
+                  />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+
+  {
+    companions.map((item) => (
+      <div class="product-companion flex flex-col gap-4 rounded-3xl border border-border/70 bg-card/45 p-5 backdrop-blur-xl transition duration-300 ease-in-out hover:scale-[1.02] hover:border-primary/40 hover:shadow-[0_0_28px_-14px_var(--primary)] motion-reduce:transform-none sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex items-start gap-3">
+          <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-muted text-primary">
+            <Icon name={item.icon} size={18} />
+          </span>
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-muted-foreground">{item.label}</p>
+            <p class="mt-0.5 font-semibold">{item.title}</p>
+            <p class="mt-1 text-sm text-muted-foreground">{item.features[0]}</p>
+          </div>
+        </div>
+        <Button as="a" href={item.buyUrl} variant="outline" class="rounded-xl" target="_self">
+          Buy now
+        </Button>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .product-panel[hidden] {
+    display: none !important;
+  }
+
+  .product-feature-tab.is-selected {
+    border-color: color-mix(in oklch, var(--primary) 55%, transparent);
+    background: color-mix(in oklch, var(--primary) 12%, transparent);
+    box-shadow: 0 0 28px -12px var(--primary);
+  }
+
+  .product-panel {
+    animation: product-panel-in 300ms ease-in-out;
+  }
+
+  @keyframes product-panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-panel {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  function initProductShowcase(root: HTMLElement) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-feature-tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-feature-panel]')];
+
+    const show = (id: string) => {
+      for (const tab of tabs) {
+        const selected = tab.dataset.featureTab === id;
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+        tab.classList.toggle('is-selected', selected);
+        tab.tabIndex = selected ? 0 : -1;
+      }
+      for (const panel of panels) {
+        panel.hidden = panel.dataset.featurePanel !== id;
+      }
+    };
+
+    for (const tab of tabs) {
+      tab.addEventListener('click', () => show(tab.dataset.featureTab ?? ''));
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-product-showcase]').forEach(initProductShowcase);
+</script>

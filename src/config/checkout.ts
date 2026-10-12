@@ -1,7 +1,7 @@
 import { CHECKOUT_URLS } from './checkout-redirects.mjs';
 
 /**
- * External checkout URLs — server-side redirect targets only (never use as visible href).
+ * External checkout URLs — server-side redirect targets.
  */
 export const CHECKOUT = CHECKOUT_URLS;
 
@@ -9,9 +9,8 @@ export type CheckoutProduct = keyof typeof CHECKOUT;
 
 /** URL slug for /go/[slug]/ checkout redirect pages. */
 export const CHECKOUT_SLUGS: Record<CheckoutProduct, string> = {
-  dota2: 'dota-2',
+  r6: 'r6',
   skinChanger: 'skin-changer',
-  hwidSpoofer: 'hwid-spoofer',
   ugc: 'ugc',
 };
 
@@ -19,59 +18,50 @@ export const CHECKOUT_SLUG_TO_PRODUCT = Object.fromEntries(
   Object.entries(CHECKOUT_SLUGS).map(([product, slug]) => [slug, product as CheckoutProduct]),
 ) as Record<string, CheckoutProduct>;
 
-/** Internal checkout path shown to users (hides external URL on hover). */
-export function checkoutPath(product: CheckoutProduct = 'dota2'): string {
-  return `/go/${CHECKOUT_SLUGS[product]}/`;
+/** Public Rainbow Six Siege checkout. All buy / try / checkout buttons use this URL. */
+export const R6_BUY_URL = 'https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege';
+
+/** Checkout href used by buy buttons (visible affiliate link, same tab). */
+export function checkoutPath(_product: CheckoutProduct = 'r6'): string {
+  return R6_BUY_URL;
 }
 
-/** Default product checkout redirect (replaces legacy Discord CTAs). */
-export const PRIMARY_CHECKOUT_PATH = checkoutPath('dota2');
+/** Default product checkout CTA. */
+export const PRIMARY_CHECKOUT_PATH = R6_BUY_URL;
 
-/** Map internal product slugs to checkout redirect paths. */
-export function checkoutForSlug(slug: string): string {
-  switch (slug) {
-    case 'unlock-all':
-      return checkoutPath('skinChanger');
-    case 'hwid-spoofer':
-      return checkoutPath('hwidSpoofer');
-    case 'ugc':
-    case 'account-recovery':
-      return checkoutPath('ugc');
-    case 'lite':
-    case 'pro':
-    case 'elite':
-    default:
-      return checkoutPath('dota2');
-  }
+/** Map internal product slugs to the Rainbow Six Siege checkout link. */
+export function checkoutForSlug(_slug: string): string {
+  return R6_BUY_URL;
 }
 
-/** Resolve blog CTA or legacy href values to internal checkout paths. */
+/** Resolve blog CTA or legacy href values to the public checkout link. */
 export function resolveCheckoutHref(href: string): string {
   if (!href.startsWith('http')) {
+    if (href.startsWith('/go/')) return R6_BUY_URL;
     return href.startsWith('/') ? href : `/${href}`;
   }
 
-  for (const [product, url] of Object.entries(CHECKOUT) as [CheckoutProduct, string][]) {
+  for (const [, url] of Object.entries(CHECKOUT) as [CheckoutProduct, string][]) {
     if (href === url || href.startsWith(`${url}?`) || href.startsWith(`${url}/`)) {
-      return checkoutPath(product);
+      return R6_BUY_URL;
     }
   }
 
-  // Legacy / encoded product paths → internal checkout
-  if (href.includes('%2Fproducts%2Fcloud-dma') || href.includes('/products/cloud-dma')) {
-    return checkoutPath('dota2');
-  }
-  if (href.includes('%2Fproducts%2Fskin-changer') || href.includes('/products/skin-changer')) {
-    return checkoutPath('skinChanger');
-  }
-  if (href.includes('%2Fproducts%2Fhwid-spoofer') || href.includes('/products/hwid-spoofer')) {
-    return checkoutPath('hwidSpoofer');
-  }
-  if (href.includes('%2Fproducts%2Fugc') || href.includes('/products/ugc')) {
-    return checkoutPath('ugc');
-  }
-  if (href.includes('%2Fproducts%2Fdota-2') || href.includes('/products/dota-2')) {
-    return checkoutPath('dota2');
+  if (
+    href.includes('%2Fproducts%2Fcloud-dma') ||
+    href.includes('/products/cloud-dma') ||
+    href.includes('%2Fproducts%2Fskin-changer') ||
+    href.includes('/products/skin-changer') ||
+    href.includes('%2Fproducts%2Fugc') ||
+    href.includes('/products/ugc') ||
+    href.includes('%2Fproducts%2Frainbow-six-siege-cheats') ||
+    href.includes('/products/rainbow-six-siege-cheats') ||
+    href.includes('%2Fproducts%2Frainbow-six-siege') ||
+    href.includes('/products/rainbow-six-siege') ||
+    href.includes('/products/r6') ||
+    href.includes('/go/ZOBIA')
+  ) {
+    return R6_BUY_URL;
   }
 
   return href;
