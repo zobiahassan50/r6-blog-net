@@ -1,3 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 const RASTER_EXT = /\.(png|jpe?g|webp|avif)$/i;
 
 /** Product feature cards ~352px CSS → 400w / 640w for 2x. */
@@ -35,6 +38,10 @@ export function avifSrc(src: string, width: number): string {
   return `${stripRasterExt(src)}-${width}.avif`;
 }
 
+export function placeholderSrc(src: string): string {
+  return `${stripRasterExt(src)}-placeholder.webp`;
+}
+
 export function responsiveSrcSet(
   src: string,
   widths: readonly number[] = DEFAULT_IMAGE_WIDTHS,
@@ -44,12 +51,40 @@ export function responsiveSrcSet(
   return widths.map((width) => `${toSrc(src, width)} ${width}w`).join(', ');
 }
 
+/** AVIF srcset only for widths that were kept (smaller than WebP). */
+export function responsiveAvifSrcSet(
+  src: string,
+  widths: readonly number[] = DEFAULT_IMAGE_WIDTHS,
+): string | undefined {
+  const entries = widths
+    .filter((width) => publicAssetExists(avifSrc(src, width)))
+    .map((width) => `${avifSrc(src, width)} ${width}w`);
+  return entries.length > 0 ? entries.join(', ') : undefined;
+}
+
+export function publicAssetExists(publicPath: string): boolean {
+  const relative = publicPath.replace(/^\//, '');
+  return fs.existsSync(path.join(process.cwd(), 'public', relative));
+}
+
 /** Smallest variant — used as img src so Lighthouse and no-srcset clients get the right size. */
 export function defaultWebpSrc(src: string, widths: readonly number[]): string {
   return webpSrc(src, widths[0] ?? 640);
 }
 
-/** Preferred LCP preload candidate for full-bleed backgrounds. */
+/** Preferred LCP preload candidate for full-bleed backgrounds (AVIF when available). */
 export function heroBgPreloadHref(src = '/images/herobackground.png'): string {
+  const avif = avifSrc(src, 1280);
+  if (publicAssetExists(avif)) return avif;
   return webpSrc(src, 1280);
+}
+
+export function heroBgPreloadType(src = '/images/herobackground.png'): 'image/avif' | 'image/webp' {
+  return publicAssetExists(avifSrc(src, 1280)) ? 'image/avif' : 'image/webp';
+}
+
+export function heroBgPreloadSrcSet(src = '/images/herobackground.png'): string {
+  const avifSet = responsiveAvifSrcSet(src, HERO_BG_WIDTHS);
+  if (avifSet) return avifSet;
+  return responsiveSrcSet(src, HERO_BG_WIDTHS, 'webp');
 }

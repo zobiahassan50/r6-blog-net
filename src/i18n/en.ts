@@ -14,6 +14,7 @@ export const en: Translations = {
     discord: R6_BUY_URL,
   },
   nav: [
+    { href: '/', label: 'Home' },
     { href: `${productBase}`, label: 'Products' },
     { href: '/blog/', label: 'Blog' },
     { href: '/forum/', label: 'Forum' },
@@ -528,10 +529,11 @@ export const en: Translations = {
     tagline: 'Rainbow Six Siege cheats — scripts, operator ESP and tools for PC. r6cheat.net',
     explore: 'Explore',
     exploreLinks: [
-      { href: '/', label: 'Feature overview', ariaLabel: 'Features', scrollTarget: 'features' },
+      { href: '/#features', label: 'Feature overview', ariaLabel: 'Features', scrollTarget: 'features' },
       { href: '/products/r6-cheats/elite/', label: 'Elite R6 cheats', ariaLabel: 'Elite cheats' },
       { href: '/products/r6-cheats/', label: 'All products & utilities', ariaLabel: 'Products' },
       { href: '/blog/', label: 'Read patch guides', ariaLabel: 'Blog' },
+      { href: '/forum/', label: 'Community forum', ariaLabel: 'Forum' },
       { href: '/faq/', label: 'Pre-purchase FAQ', ariaLabel: 'FAQ' },
     ],
     support: 'Support',

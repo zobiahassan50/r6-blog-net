@@ -37,16 +37,17 @@ export function initBlogIndexFilters(emptyMessage: string) {
     const readA = Number(a.getAttribute('data-read-minutes') ?? 0);
     const readB = Number(b.getAttribute('data-read-minutes') ?? 0);
     if (sort === 'oldest') return tsA - tsB;
-    if (sort === 'short') return readA - readB;
-    if (sort === 'long') return readB - readA;
+    if (sort === 'short') return readA - readB || tsB - tsA;
+    if (sort === 'long') return readB - readA || tsB - tsA;
     return tsB - tsA;
   };
 
   const query = () => searchInput?.value.trim().toLocaleLowerCase() ?? '';
 
-  const apply = () => {
+  /** @param sortOverride — Starwind fires value-change before data-value updates */
+  const apply = (sortOverride?: string) => {
     const tag = activeTag();
-    const sort = getSort();
+    const sort = sortOverride || getSort();
     const q = query();
     const items = cards();
 
@@ -78,7 +79,8 @@ export function initBlogIndexFilters(emptyMessage: string) {
 
   const onSortChange = (event: Event) => {
     if (!isBlogSortEvent(event)) return;
-    apply();
+    const next = (event as CustomEvent<{ value?: string }>).detail?.value;
+    apply(typeof next === 'string' && next.length > 0 ? next : undefined);
   };
 
   searchInput?.addEventListener('input', apply);
@@ -87,6 +89,6 @@ export function initBlogIndexFilters(emptyMessage: string) {
   document.addEventListener('starwind:value-change', onSortChange);
 
   // Starwind select hydrates after first paint — re-apply once ready.
-  requestAnimationFrame(apply);
-  window.setTimeout(apply, 0);
+  requestAnimationFrame(() => apply());
+  window.setTimeout(() => apply(), 0);
 }

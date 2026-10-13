@@ -10,16 +10,17 @@ import { faqPageSchema, organizationSchema, websiteSchema } from '../utils/schem
 import { getLandingFaqs } from '../data/faq';
 import {
   HERO_BG_SIZES,
-  HERO_BG_WIDTHS,
   heroBgPreloadHref,
-  responsiveSrcSet,
+  heroBgPreloadSrcSet,
+  heroBgPreloadType,
 } from '../utils/responsiveImage';
 
 const seo = resolvePageSeo('/');
 const homeFaqs = getLandingFaqs();
 const heroBg = '/images/herobackground.png';
 const heroPreloadHref = heroBgPreloadHref(heroBg);
-const heroPreloadSrcSet = responsiveSrcSet(heroBg, HERO_BG_WIDTHS, 'webp');
+const heroPreloadSrcSet = heroBgPreloadSrcSet(heroBg);
+const heroPreloadMime = heroBgPreloadType(heroBg);
 ---
 
 <BaseLayout
@@ -31,17 +32,11 @@ const heroPreloadSrcSet = responsiveSrcSet(heroBg, HERO_BG_WIDTHS, 'webp');
     slot="head"
     rel="preload"
     as="image"
-    href="/images/herobackground.png"
-    fetchpriority="high"
-  />
-  <link
-    slot="head"
-    rel="preload"
-    as="image"
-    type="image/webp"
+    type={heroPreloadMime}
     href={heroPreloadHref}
     imagesrcset={heroPreloadSrcSet}
     imagesizes={HERO_BG_SIZES}
+    fetchpriority="high"
   />
   <HeroSection />
   <FeaturesSection />

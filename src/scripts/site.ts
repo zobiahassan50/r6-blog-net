@@ -44,12 +44,31 @@ function initInPageScroll() {
       if (!id) return;
 
       const target = document.getElementById(id);
-      if (!target) return;
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
 
-      event.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Off-page (e.g. footer Feature overview on /blog/) → hard-navigate to href.
+      const href = el.getAttribute('href');
+      if (href && href.includes('#')) {
+        event.preventDefault();
+        window.location.assign(href);
+      }
     });
   });
+
+  // Honor hash targets after cross-page navigation (e.g. /#features).
+  const hashId = window.location.hash.replace(/^#/, '');
+  if (hashId) {
+    const hashTarget = document.getElementById(hashId);
+    if (hashTarget) {
+      requestAnimationFrame(() => {
+        hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
 }
 
 function initSkipLink() {
@@ -93,6 +112,16 @@ function initThemeMetaColor() {
   if (metaTheme) metaTheme.content = '#7F3DEE';
 }
 
+function initBlurUpImages() {
+  document.querySelectorAll<HTMLImageElement>('[data-ri-full]').forEach((img) => {
+    const root = img.closest('[data-ri]');
+    if (!root) return;
+    const mark = () => root.classList.add('is-loaded');
+    if (img.complete && img.naturalWidth > 0) mark();
+    else img.addEventListener('load', mark, { once: true });
+  });
+}
+
 function bootSite() {
   initFonts();
   initFaqFilters();
@@ -100,6 +129,7 @@ function bootSite() {
   initInPageScroll();
   initSkipLink();
   initThemeMetaColor();
+  initBlurUpImages();
 }
 
 if (document.readyState === 'loading') {

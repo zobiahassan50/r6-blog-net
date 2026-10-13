@@ -6,6 +6,8 @@ import { compatibilityIcons, heroStatIcons, heroStatusPills } from '../data/sect
 import {
   HERO_BG_SIZES,
   HERO_BG_WIDTHS,
+  defaultWebpSrc,
+  responsiveAvifSrcSet,
   responsiveSrcSet,
 } from '../utils/responsiveImage';
 import Icon from './icons/Icon.astro';
@@ -13,10 +15,11 @@ import { Button } from '@/components/starwind/button';
 import { Badge } from '@/components/starwind/badge';
 
 const h = t.hero;
-/** Absolute public path — case-sensitive on Cloudflare; keep PNG as reliable fallback. */
+/** Absolute public path — case-sensitive on Cloudflare. */
 const heroBgSrc = '/images/herobackground.png';
 const heroBgWebpSrcSet = responsiveSrcSet(heroBgSrc, HERO_BG_WIDTHS, 'webp');
-const heroBgAvifSrcSet = responsiveSrcSet(heroBgSrc, HERO_BG_WIDTHS, 'avif');
+const heroBgAvifSrcSet = responsiveAvifSrcSet(heroBgSrc, HERO_BG_WIDTHS);
+const heroBgDefault = defaultWebpSrc(heroBgSrc, HERO_BG_WIDTHS);
 
 
 const heroMarqueePills = [
@@ -30,21 +33,23 @@ const heroMarqueePills = [
 
 <section
   id="hero"
-  class="relative overflow-hidden border-b border-border bg-[url('/images/herobackground.png')] bg-cover bg-center"
+  class="relative overflow-hidden border-b border-border bg-neutral-950"
   aria-labelledby="hero-title"
 >
   <picture class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <source type="image/avif" srcset={heroBgAvifSrcSet} sizes={HERO_BG_SIZES} />
+    {heroBgAvifSrcSet && (
+      <source type="image/avif" srcset={heroBgAvifSrcSet} sizes={HERO_BG_SIZES} />
+    )}
     <source type="image/webp" srcset={heroBgWebpSrcSet} sizes={HERO_BG_SIZES} />
     <img
-      src="/images/herobackground.png"
+      src={heroBgDefault}
       srcset={heroBgWebpSrcSet}
       sizes={HERO_BG_SIZES}
       alt=""
       class="h-full w-full object-cover brightness-[0.45]"
       width="1920"
       height="1080"
-      decoding="async"
+      decoding="sync"
       fetchpriority="high"
       loading="eager"
     />
@@ -102,7 +107,9 @@ const heroMarqueePills = [
             loop
             playsinline
             preload="none"
-            data-hero-video
+            poster="/images/posters/hero-poster.webp"
+            data-deferred-video="/videos/hero.mp4"
+            data-deferred-min-width="1024"
             aria-label="Rainbow Six Siege product preview"
           ></video>
         </div>
@@ -141,21 +148,13 @@ const heroMarqueePills = [
 </section>
 
 <script>
-  const loadHeroVideo = () => {
-    const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
-    if (!video || video.dataset.loaded === '1') return;
-    if (!window.matchMedia('(min-width: 1024px)').matches) return;
+  import { initDeferredVideos } from '../scripts/deferred-media.ts';
 
-    const source = document.createElement('source');
-    source.src = '/videos/hero.mp4';
-    source.type = 'video/mp4';
-    video.appendChild(source);
-    video.dataset.loaded = '1';
-    video.autoplay = true;
-    void video.play().catch(() => {});
-  };
-
-  loadHeroVideo();
-  window.matchMedia('(min-width: 1024px)').addEventListener('change', loadHeroVideo);
-  window.addEventListener('load', loadHeroVideo, { once: true });
+  const boot = () => initDeferredVideos();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+  window.addEventListener('load', boot, { once: true });
 </script>

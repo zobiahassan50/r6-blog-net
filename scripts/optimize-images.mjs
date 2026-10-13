@@ -10,24 +10,54 @@ const widths = [320, 400, 512, 640, 960, 1280, 1920];
 const dirs = ['public/images', 'public/images/gameplay', 'public/images/blog'];
 
 /**
- * Resize to the requested width, then encode at quality 100.
- * Size drops because pixels match the display slot — not because quality is lowered.
+ * Top-tier look + instant loads:
+ * - AVIF (primary): cq 80 ≈ photographic “visually lossless”, typically ~5–10× smaller than q100 WebP
+ * - WebP (fallback): q 92 + max effort — sharp at display sizes, Safari-safe
+ * - Tiny LQIP placeholder for zero-delay first paint while full image streams in
  */
 async function writeVariants(input, baseDir, baseName) {
+  const placeholderOut = path.join(baseDir, `${baseName}-placeholder.webp`);
+  await sharp(input, { failOn: 'none' })
+    .resize({ width: 32, withoutEnlargement: true, kernel: sharp.kernel.lanczos3 })
+    .blur(1)
+    .webp({ quality: 50, effort: 4 })
+    .toFile(placeholderOut);
+  console.log(`Wrote ${path.relative(root, placeholderOut)}`);
+
   for (const width of widths) {
+    const pipeline = () =>
+      sharp(input, { failOn: 'none' }).resize({
+        width,
+        withoutEnlargement: true,
+        kernel: sharp.kernel.lanczos3,
+      });
+
     const webpOut = path.join(baseDir, `${baseName}-${width}.webp`);
-    await sharp(input, { failOn: 'none' })
-      .resize({ width, withoutEnlargement: true, kernel: sharp.kernel.lanczos3 })
-      .webp({ quality: 100, alphaQuality: 100, effort: 6, smartSubsample: true })
+    await pipeline()
+      .webp({
+        quality: 92,
+        alphaQuality: 100,
+        effort: 6,
+        smartSubsample: true,
+      })
       .toFile(webpOut);
     console.log(`Wrote ${path.relative(root, webpOut)}`);
 
     const avifOut = path.join(baseDir, `${baseName}-${width}.avif`);
-    await sharp(input, { failOn: 'none' })
-      .resize({ width, withoutEnlargement: true, kernel: sharp.kernel.lanczos3 })
-      .avif({ quality: 100, effort: 6 })
+    await pipeline()
+      .avif({ quality: 80, effort: 7, chromaSubsampling: '4:2:0' })
       .toFile(avifOut);
-    console.log(`Wrote ${path.relative(root, avifOut)}`);
+
+    const webpBytes = fs.statSync(webpOut).size;
+    const avifBytes = fs.statSync(avifOut).size;
+    if (avifBytes >= webpBytes * 0.95) {
+      fs.unlinkSync(avifOut);
+      console.log(`Skipped AVIF ${path.relative(root, avifOut)} (not smaller than WebP)`);
+    } else {
+      console.log(
+        `Wrote ${path.relative(root, avifOut)} (${Math.round((1 - avifBytes / webpBytes) * 100)}% smaller)`,
+      );
+    }
   }
 }
 
@@ -52,4 +82,4 @@ for (const dir of dirs) {
   await optimizeDir(dir);
 }
 
-console.log('Image optimization complete (quality 100 WebP + AVIF, responsive widths).');
+console.log('Image optimization complete (WebP q92 + smart AVIF + LQIP).');

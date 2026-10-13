@@ -2,6 +2,9 @@
 import {
   DEFAULT_IMAGE_WIDTHS,
   defaultWebpSrc,
+  placeholderSrc,
+  publicAssetExists,
+  responsiveAvifSrcSet,
   responsiveSrcSet,
 } from '../utils/responsiveImage';
 
@@ -16,6 +19,8 @@ interface Props {
   widths?: readonly number[];
   class?: string;
   desktopOnly?: boolean;
+  /** Instant blurred preview for lazy images (skipped for LCP/eager). */
+  blurUp?: boolean;
 }
 
 const {
@@ -29,11 +34,14 @@ const {
   widths = DEFAULT_IMAGE_WIDTHS,
   class: className,
   desktopOnly = false,
+  blurUp = loading === 'lazy',
 } = Astro.props;
 
 const isRaster = /\.(png|jpe?g|webp|avif)$/i.test(src);
 const webpSrcSet = responsiveSrcSet(src, widths, 'webp');
-const avifSrcSet = responsiveSrcSet(src, widths, 'avif');
+const avifSrcSet = responsiveAvifSrcSet(src, widths);
+const lqip = placeholderSrc(src);
+const hasLqip = blurUp && !desktopOnly && publicAssetExists(lqip);
 const imgSrc = desktopOnly
   ? 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
   : defaultWebpSrc(src, widths);
@@ -43,22 +51,40 @@ const pictureMedia = desktopOnly ? '(min-width: 1024px)' : undefined;
 
 {
   isRaster ? (
-    <picture>
-      <source type="image/avif" srcset={avifSrcSet} sizes={pictureSizes} media={pictureMedia} />
-      <source type="image/webp" srcset={webpSrcSet} sizes={pictureSizes} media={pictureMedia} />
-      <img
-        src={imgSrc}
-        srcset={desktopOnly ? undefined : webpSrcSet}
-        alt={alt}
-        width={width}
-        height={height}
-        loading={loading}
-        decoding="async"
-        fetchpriority={fetchPriority}
-        sizes={pictureSizes}
-        class={className}
-      />
-    </picture>
+    <span class:list={['ri', hasLqip && 'ri--blur', hasLqip && className]} data-ri={hasLqip ? '' : undefined}>
+      {
+        hasLqip && (
+          <img
+            src={lqip}
+            alt=""
+            width={width}
+            height={height}
+            decoding="async"
+            aria-hidden="true"
+            class="ri__lqip"
+          />
+        )
+      }
+      <picture class="ri__picture">
+        {avifSrcSet && (
+          <source type="image/avif" srcset={avifSrcSet} sizes={pictureSizes} media={pictureMedia} />
+        )}
+        <source type="image/webp" srcset={webpSrcSet} sizes={pictureSizes} media={pictureMedia} />
+        <img
+          src={imgSrc}
+          srcset={desktopOnly ? undefined : webpSrcSet}
+          alt={alt}
+          width={width}
+          height={height}
+          loading={loading}
+          decoding={loading === 'eager' ? 'sync' : 'async'}
+          fetchpriority={fetchPriority}
+          sizes={pictureSizes}
+          class:list={['ri__img', className]}
+          data-ri-full={hasLqip ? '' : undefined}
+        />
+      </picture>
+    </span>
   ) : (
     <img
       src={src}
@@ -66,9 +92,51 @@ const pictureMedia = desktopOnly ? '(min-width: 1024px)' : undefined;
       width={width}
       height={height}
       loading={loading}
-      decoding="async"
+      decoding={loading === 'eager' ? 'sync' : 'async'}
       fetchpriority={fetchPriority}
       class={className}
     />
   )
 }
+
+<style>
+  .ri:not(.ri--blur) {
+    display: contents;
+  }
+  .ri--blur {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .ri--blur .ri__lqip,
+  .ri--blur .ri__picture,
+  .ri--blur .ri__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .ri--blur .ri__lqip {
+    object-fit: cover;
+    filter: blur(14px);
+    transform: scale(1.1);
+    z-index: 0;
+  }
+  .ri--blur .ri__picture {
+    z-index: 1;
+    display: block;
+  }
+  .ri--blur .ri__img {
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .ri--blur.is-loaded .ri__img {
+    opacity: 1;
+  }
+  .ri--blur.is-loaded .ri__lqip {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+</style>

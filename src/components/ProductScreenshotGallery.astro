@@ -37,7 +37,8 @@ const first = images[0];
             height={720}
             widths={GALLERY_IMAGE_WIDTHS}
             sizes={GALLERY_IMAGE_SIZES}
-            loading="lazy"
+            loading="eager"
+            fetchPriority="high"
             class="product-gallery__image"
           />
         )
