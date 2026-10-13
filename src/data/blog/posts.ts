@@ -10,7 +10,7 @@ export const blogPosts: BlogPostFull[] = [
     slug: 'r6-cheats-features',
     image: '/images/blog/r6-cheats-features.jpeg',
     desc: 'A plain walkthrough of the module categories on the listing, and why build-specific details belong on the product page instead of here.',
-    date: 'Aug 20, 2026',
+    date: 'Nov 18, 2026',
     readTime: '8 min read',
     author: 'R6 Siege Cheats',
     body: [
@@ -60,7 +60,7 @@ export const blogPosts: BlogPostFull[] = [
     slug: 'r6-battleye-safety',
     image: '/images/blog/r6-battleye-safety.jpeg',
     desc: 'What BattlEye and Ubisoft’s anti-cheat work mean for players who see overlay and helper tools discussed around Siege — without treating “safe” as a permanent promise.',
-    date: 'Aug 18, 2026',
+    date: 'Oct 22, 2026',
     readTime: '7 min read',
     author: 'R6 Siege Cheats',
     body: [
@@ -105,7 +105,7 @@ export const blogPosts: BlogPostFull[] = [
     slug: 'r6-esp-aimbot',
     image: '/images/blog/r6-esp-aimbot.jpeg',
     desc: 'How players talk about overlays, aiming helpers, and Windows PC scope — and why console is out of the picture for this kind of software.',
-    date: 'Aug 16, 2026',
+    date: 'Oct 5, 2026',
     readTime: '7 min read',
     author: 'R6 Siege Cheats',
     body: [
@@ -151,7 +151,7 @@ export const blogPosts: BlogPostFull[] = [
     slug: 'r6-cheat-settings',
     image: '/images/blog/r6-cheat-settings.jpg',
     desc: 'A plain read on how menus talk about recoil helpers, radar, triggerbots, and related controls so product notes make more sense.',
-    date: 'Aug 14, 2026',
+    date: 'Sep 19, 2026',
     readTime: '6 min read',
     author: 'R6 Siege Cheats',
     body: [
@@ -193,7 +193,7 @@ export const blogPosts: BlogPostFull[] = [
     slug: 'r6-esp-guide',
     image: '/images/blog/r6-esp-guide.jpeg',
     desc: 'How “hacks” and ESP are used in Siege PC conversations, and how that differs from a live feature list.',
-    date: 'Aug 12, 2026',
+    date: 'Sep 3, 2026',
     readTime: '6 min read',
     author: 'R6 Siege Cheats',
     body: [

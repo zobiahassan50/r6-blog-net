@@ -205,12 +205,11 @@ export interface Translations {
     eyebrow: string;
     title: string;
     subtitle: string;
+    /** Informational cards only — no links or contact CTAs. */
     channels: {
       icon: string;
       title: string;
       desc: string;
-      linkLabel: string;
-      href: string;
     }[];
     ticketTitle: string;
     ticketItems: { title: string; desc: string }[];

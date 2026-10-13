@@ -5,7 +5,6 @@ import { resolvePageSeo } from '../config/seo';
 import { breadcrumbSchema, faqPageSchema, webPageSchema } from '../utils/schema';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import SiteFaqSection from '../components/SiteFaqSection.astro';
-import SectionHeader from '../components/SectionHeader.astro';
 
 const seo = resolvePageSeo('/faq/');
 const breadcrumbs = [
@@ -33,17 +32,8 @@ const faqs = getAllFaqs();
   <section class="border-b border-border bg-muted/10 py-8 md:py-12">
     <div class="mx-auto max-w-6xl px-5">
       <Breadcrumbs items={breadcrumbs} />
-      <div class="mt-6">
-        <SectionHeader
-          headingLevel="h1"
-          eyebrow="FAQ"
-          title="Rainbow Six Siege FAQ"
-          desc="What this independent publication covers, how we source facts, and how fair-play topics are handled."
-          titleId="faq-page-title"
-        />
-      </div>
     </div>
   </section>
 
-  <SiteFaqSection items={faqs} variant="full" titleId="faq-page-list" />
+  <SiteFaqSection items={faqs} variant="full" titleId="faq-page-title" />
 </BaseLayout>

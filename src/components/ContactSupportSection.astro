@@ -3,11 +3,9 @@ import '../styles/support-section.css';
 import { t } from '../i18n';
 import Icon from './icons/Icon.astro';
 import type { IconName } from './icons/types';
-import { Button } from '@/components/starwind/button';
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/starwind/card';
@@ -55,19 +53,6 @@ const TitleTag = headingLevel;
               <CardContent class="flex-1">
                 <p class="text-sm leading-relaxed text-muted-foreground">{channel.desc}</p>
               </CardContent>
-              <CardFooter>
-                <Button
-                  as="a"
-                  href={channel.href}
-                  variant="outline"
-                  size="sm"
-                  class="w-full"
-                  target={channel.href.startsWith('http') ? '_self' : undefined}
-                >
-                  {channel.linkLabel}
-                  <Icon name="arrowRight" size={17} />
-                </Button>
-              </CardFooter>
             </Card>
           </li>
         ))

@@ -45,13 +45,6 @@ const supportPage = link('Support page', ROUTES.support);
 
 export const siteFaqs: SiteFaqItem[] = [
   {
-    id: 'what-is',
-    topic: 'products',
-    icon: 'faqWhatIsEsp',
-    q: 'What is R6 Siege Cheats?',
-    a: `R6 Siege Cheats is a third-party Windows PC product listing for Rainbow Six Siege, paired with original articles on features, buying, compatibility, and risk. Current modules and pricing are listed on the ${productPage}.`,
-  },
-  {
     id: 'cost',
     topic: 'products',
     icon: 'faqAfterBuy',
@@ -116,7 +109,7 @@ export const siteFaqs: SiteFaqItem[] = [
   },
 ];
 
-const landingFaqIds = ['what-is', 'cost', 'consoles', 'stream-proof', 'aimbot-settings', 'windows-setups'];
+const landingFaqIds = ['cost', 'consoles', 'stream-proof', 'aimbot-settings', 'windows-setups'];
 
 export function getLandingFaqs(): SiteFaqItem[] {
   return siteFaqs.filter((f) => landingFaqIds.includes(f.id));
