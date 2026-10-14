@@ -33,9 +33,14 @@ async function writeVariants(input, baseDir, baseName) {
       });
 
     const webpOut = path.join(baseDir, `${baseName}-${width}.webp`);
+    // Hero/full-bleed backgrounds can use slightly stronger compression (LCP-critical).
+    const isHeroBg = /herobackground|bloghero/i.test(baseName);
+    const webpQuality = isHeroBg ? 82 : 90;
+    const avifQuality = isHeroBg ? 68 : 76;
+
     await pipeline()
       .webp({
-        quality: 92,
+        quality: webpQuality,
         alphaQuality: 100,
         effort: 6,
         smartSubsample: true,
@@ -45,7 +50,7 @@ async function writeVariants(input, baseDir, baseName) {
 
     const avifOut = path.join(baseDir, `${baseName}-${width}.avif`);
     await pipeline()
-      .avif({ quality: 80, effort: 7, chromaSubsampling: '4:2:0' })
+      .avif({ quality: avifQuality, effort: 7, chromaSubsampling: '4:2:0' })
       .toFile(avifOut);
 
     const webpBytes = fs.statSync(webpOut).size;
@@ -71,7 +76,15 @@ async function optimizeDir(relativeDir) {
     .map((entry) => entry.name)
     .filter((file) => /\.(png|jpe?g)$/i.test(file) && !/-\d+\.(webp|avif)$/i.test(file));
 
+  // Prefer PNG when the same basename exists as JPEG (avoids overwriting variants).
+  const byBase = new Map();
   for (const file of files) {
+    const base = file.replace(/\.(png|jpe?g)$/i, '');
+    const prev = byBase.get(base);
+    if (!prev || /\.png$/i.test(file)) byBase.set(base, file);
+  }
+
+  for (const file of byBase.values()) {
     const input = path.join(dir, file);
     const base = file.replace(/\.(png|jpe?g)$/i, '');
     await writeVariants(input, dir, base);

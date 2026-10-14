@@ -50,11 +50,124 @@
   max-width: 40rem;
   font-size: 0.875rem;
   line-height: 1.6;
-  color: rgb(64 64 64);
+  color: rgb(55 65 81);
 }
 
 html.dark .section-header__subtitle {
   color: rgb(163 163 163);
+}
+
+/* Light mode only — brighter content images; dark mode untouched */
+html:not(.dark) .ri__img,
+html:not(.dark) .product-gallery__image,
+html:not(.dark) .blog-card__media img,
+html:not(.dark) .blog-article__hero img {
+  filter: brightness(1.06) contrast(1.02);
+}
+
+/* Light mode — quiet hero media so copy stays crisp (dark untouched) */
+html:not(.dark) #hero > picture {
+  opacity: 0.28;
+}
+
+html:not(.dark) section[aria-labelledby='blog-hero-title'] > picture {
+  opacity: 0.3;
+}
+
+/* Light mode typography */
+html:not(.dark) h1:not(.text-primary),
+html:not(.dark) h2:not(.text-primary),
+html:not(.dark) h3:not(.text-primary),
+html:not(.dark) .section-header__title {
+  color: rgb(17 24 39);
+}
+
+html:not(.dark) .section-header__subtitle {
+  color: rgb(55 65 81);
+}
+
+html:not(.dark) .text-muted-foreground {
+  color: rgb(55 65 81);
+}
+
+html:not(.dark) .text-foreground {
+  color: rgb(17 24 39);
+}
+
+html:not(.dark) .prose,
+html:not(.dark) .prose p,
+html:not(.dark) .prose li {
+  color: rgb(55 65 81);
+}
+
+html:not(.dark) .prose :is(h1, h2, h3, h4) {
+  color: rgb(17 24 39);
+}
+
+/* Light mode surfaces — cards, footer, filters, dropdowns */
+html:not(.dark) footer {
+  background-color: rgb(249 250 251);
+  border-color: rgb(229 231 235);
+}
+
+html:not(.dark) [data-sw-card],
+html:not(.dark) [data-slot='card'],
+html:not(.dark) .features-bento > article,
+html:not(.dark) .forum-post-card,
+html:not(.dark) .forum-side-card,
+html:not(.dark) .forum-detail-card,
+html:not(.dark) .blog-card,
+html:not(.dark) [data-product-showcase] > div,
+html:not(.dark) [data-product-showcase] .product-companion {
+  border-color: rgb(229 231 235);
+  box-shadow:
+    0 1px 2px rgb(15 23 42 / 0.04),
+    0 1px 3px rgb(15 23 42 / 0.05);
+}
+
+html:not(.dark) [data-product-showcase] > div,
+html:not(.dark) [data-product-showcase] .product-companion {
+  background-color: rgb(255 255 255 / 0.96);
+}
+
+html:not(.dark) .faq-filter-chip:not(.is-active),
+html:not(.dark) .blog-filter {
+  background-color: rgb(255 255 255);
+  border-color: rgb(229 231 235);
+  color: rgb(55 65 81);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+html:not(.dark) .faq-filter-chip:not(.is-active):hover,
+html:not(.dark) .blog-filter:hover {
+  background-color: rgb(249 250 251);
+  border-color: color-mix(in oklch, var(--primary) 35%, rgb(229 231 235));
+  color: rgb(17 24 39);
+}
+
+html:not(.dark) #blog-search-menu {
+  border-color: rgb(229 231 235);
+  background-color: rgb(255 255 255);
+  box-shadow:
+    0 10px 15px -3px rgb(15 23 42 / 0.08),
+    0 4px 6px -4px rgb(15 23 42 / 0.06);
+}
+
+html:not(.dark) .faq-item__summary {
+  color: rgb(17 24 39);
+}
+
+html:not(.dark) .faq-item__content,
+html:not(.dark) .faq-item__content p {
+  color: rgb(55 65 81);
+}
+
+.mobile-nav__summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-nav[open] > .mobile-nav__summary {
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
 }
 
 @media (min-width: 1024px) {
@@ -779,13 +892,35 @@ html:not(.dark) .deployment-cta-secondary:hover {
   border-top: 1px solid var(--border);
 }
 
+html:not(.dark) .card-title-band,
+html:not(.dark) .card-footer-band {
+  background: rgb(249 250 251 / 0.9);
+  border-color: rgb(229 231 235);
+}
+
+
+/* Composited progress (transform) — avoids layout/paint jank from width animation */
+.hero-embla-progress {
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.hero-embla-progress.is-complete {
+  transform: scaleX(1);
+}
+
+.hero-embla-progress.is-running {
+  animation: hero-embla-progress var(--hero-autoplay-ms, 4800ms) linear forwards;
+}
 
 @keyframes hero-embla-progress {
   from {
-    width: 0%;
+    transform: scaleX(0);
   }
   to {
-  width: 100%;
+    transform: scaleX(1);
   }
 }
 

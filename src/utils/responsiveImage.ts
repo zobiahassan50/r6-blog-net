@@ -46,9 +46,12 @@ export function responsiveSrcSet(
   src: string,
   widths: readonly number[] = DEFAULT_IMAGE_WIDTHS,
   format: 'webp' | 'avif' = 'webp',
-): string {
+): string | undefined {
   const toSrc = format === 'avif' ? avifSrc : webpSrc;
-  return widths.map((width) => `${toSrc(src, width)} ${width}w`).join(', ');
+  const entries = widths
+    .filter((width) => publicAssetExists(toSrc(src, width)))
+    .map((width) => `${toSrc(src, width)} ${width}w`);
+  return entries.length > 0 ? entries.join(', ') : undefined;
 }
 
 /** AVIF srcset only for widths that were kept (smaller than WebP). */
@@ -56,10 +59,7 @@ export function responsiveAvifSrcSet(
   src: string,
   widths: readonly number[] = DEFAULT_IMAGE_WIDTHS,
 ): string | undefined {
-  const entries = widths
-    .filter((width) => publicAssetExists(avifSrc(src, width)))
-    .map((width) => `${avifSrc(src, width)} ${width}w`);
-  return entries.length > 0 ? entries.join(', ') : undefined;
+  return responsiveSrcSet(src, widths, 'avif');
 }
 
 export function publicAssetExists(publicPath: string): boolean {
@@ -69,21 +69,29 @@ export function publicAssetExists(publicPath: string): boolean {
 
 /** Smallest variant — used as img src so Lighthouse and no-srcset clients get the right size. */
 export function defaultWebpSrc(src: string, widths: readonly number[]): string {
-  return webpSrc(src, widths[0] ?? 640);
+  const candidate = webpSrc(src, widths[0] ?? 640);
+  return publicAssetExists(candidate) ? candidate : src;
 }
 
 /** Preferred LCP preload candidate for full-bleed backgrounds (AVIF when available). */
 export function heroBgPreloadHref(src = '/images/herobackground.png'): string {
-  const avif = avifSrc(src, 1280);
+  // 960w covers typical mobile 2x + mid desktop without over-fetching 1280/1920.
+  const avif = avifSrc(src, 960);
   if (publicAssetExists(avif)) return avif;
-  return webpSrc(src, 1280);
+  const webp = webpSrc(src, 960);
+  if (publicAssetExists(webp)) return webp;
+  return src;
 }
 
-export function heroBgPreloadType(src = '/images/herobackground.png'): 'image/avif' | 'image/webp' {
-  return publicAssetExists(avifSrc(src, 1280)) ? 'image/avif' : 'image/webp';
+export function heroBgPreloadType(
+  src = '/images/herobackground.png',
+): 'image/avif' | 'image/webp' | 'image/jpeg' | 'image/png' {
+  if (publicAssetExists(avifSrc(src, 960))) return 'image/avif';
+  if (publicAssetExists(webpSrc(src, 960))) return 'image/webp';
+  return /\.png$/i.test(src) ? 'image/png' : 'image/jpeg';
 }
 
-export function heroBgPreloadSrcSet(src = '/images/herobackground.png'): string {
+export function heroBgPreloadSrcSet(src = '/images/herobackground.png'): string | undefined {
   const avifSet = responsiveAvifSrcSet(src, HERO_BG_WIDTHS);
   if (avifSet) return avifSet;
   return responsiveSrcSet(src, HERO_BG_WIDTHS, 'webp');

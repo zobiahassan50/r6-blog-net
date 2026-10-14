@@ -122,9 +122,26 @@ function initBlurUpImages() {
   });
 }
 
+function initMobileNav() {
+  document.querySelectorAll<HTMLDetailsElement>('details.mobile-nav').forEach((nav) => {
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        nav.open = false;
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!nav.open) return;
+      const target = event.target;
+      if (target instanceof Node && !nav.contains(target)) nav.open = false;
+    });
+  });
+}
+
 function bootSite() {
   initFonts();
   initFaqFilters();
+  initMobileNav();
   initNavHighlight();
   initInPageScroll();
   initSkipLink();

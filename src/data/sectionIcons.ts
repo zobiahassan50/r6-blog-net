@@ -40,6 +40,14 @@ export const blogTagIcons: Record<string, IconName> = {
   Features: 'layers',
   Updates: 'refresh',
   Troubleshooting: 'alert',
+  Aimbot: 'boneSelect',
+  'ESP & Wallhack': 'lootEsp',
+  'R6 Cheats': 'liveStatus',
+  Wallhack: 'mapHack',
+  Triggerbot: 'triggerBot',
+  'Hacks & ESP': 'skeletonEsp',
+  'ESP & Aimbot': 'featureEsp',
+  Settings: 'settings',
 };
 
 export const heroStatusPills: { icon: IconName; label: string }[] = [

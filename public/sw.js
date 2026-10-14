@@ -1,7 +1,7 @@
 /* R6Cheats — offline fallback + static asset cache (Cloudflare Pages) */
 const CACHE = 'r6cheat-static-v3';
 const OFFLINE_URL = '/offline.html';
-const PRECACHE = ['/', '/offline.html', '/favicon.svg', '/site.webmanifest'];
+const PRECACHE = ['/', '/offline.html', '/favicon.png', '/site.webmanifest'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

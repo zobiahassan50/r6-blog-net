@@ -1,6 +1,16 @@
 ---
 import type { ProductSlide } from '../data/products';
 import { Badge } from '@/components/starwind/badge';
+import {
+  GALLERY_IMAGE_SIZES,
+  GALLERY_IMAGE_WIDTHS,
+  THUMB_IMAGE_SIZES,
+  THUMB_IMAGE_WIDTHS,
+  defaultWebpSrc,
+  publicAssetExists,
+  responsiveAvifSrcSet,
+  responsiveSrcSet,
+} from '../utils/responsiveImage';
 
 interface Props {
   images: ProductSlide[];
@@ -10,6 +20,11 @@ interface Props {
 const { images, id = 'product-screenshots' } = Astro.props;
 const hasThumbs = images.length > 1;
 const first = images[0];
+
+const mainSrc = (src: string) => {
+  const webp = defaultWebpSrc(src, GALLERY_IMAGE_WIDTHS);
+  return publicAssetExists(webp) ? webp : src;
+};
 ---
 
 <div
@@ -21,16 +36,36 @@ const first = images[0];
     <div class="product-gallery__main">
       {
         first && (
-          <img
-            src={first.src}
-            alt={first.alt}
-            width={1280}
-            height={720}
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            class="product-gallery__image"
-          />
+          <picture>
+            {responsiveAvifSrcSet(first.src, GALLERY_IMAGE_WIDTHS) && (
+              <source
+                type="image/avif"
+                srcset={responsiveAvifSrcSet(first.src, GALLERY_IMAGE_WIDTHS)}
+                sizes={GALLERY_IMAGE_SIZES}
+                data-gallery-avif
+              />
+            )}
+            {responsiveSrcSet(first.src, GALLERY_IMAGE_WIDTHS, 'webp') && (
+              <source
+                type="image/webp"
+                srcset={responsiveSrcSet(first.src, GALLERY_IMAGE_WIDTHS, 'webp')}
+                sizes={GALLERY_IMAGE_SIZES}
+                data-gallery-webp
+              />
+            )}
+            <img
+              src={mainSrc(first.src)}
+              alt={first.alt}
+              width={1280}
+              height={720}
+              loading="eager"
+              fetchpriority="high"
+              decoding="sync"
+              sizes={GALLERY_IMAGE_SIZES}
+              class="product-gallery__image"
+              data-fallback={first.src}
+            />
+          </picture>
         )
       }
     </div>
@@ -58,15 +93,34 @@ const first = images[0];
             data-index={i}
             data-src={img.src}
             data-alt={img.alt}
+            data-webp={responsiveSrcSet(img.src, GALLERY_IMAGE_WIDTHS, 'webp')}
+            data-avif={responsiveAvifSrcSet(img.src, GALLERY_IMAGE_WIDTHS) ?? ''}
+            data-main={mainSrc(img.src)}
           >
-            <img
-              src={img.src}
-              alt=""
-              width={320}
-              height={180}
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
+            <picture>
+              {responsiveAvifSrcSet(img.src, THUMB_IMAGE_WIDTHS) && (
+                <source
+                  type="image/avif"
+                  srcset={responsiveAvifSrcSet(img.src, THUMB_IMAGE_WIDTHS)}
+                  sizes={THUMB_IMAGE_SIZES}
+                />
+              )}
+              {responsiveSrcSet(img.src, THUMB_IMAGE_WIDTHS, 'webp') && (
+                <source
+                  type="image/webp"
+                  srcset={responsiveSrcSet(img.src, THUMB_IMAGE_WIDTHS, 'webp')}
+                  sizes={THUMB_IMAGE_SIZES}
+                />
+              )}
+              <img
+                src={mainSrc(img.src)}
+                alt=""
+                width={320}
+                height={180}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </picture>
           </button>
         ))}
       </div>
@@ -81,18 +135,33 @@ const first = images[0];
       root.setAttribute('data-gallery-bound', '');
 
       const main = root.querySelector<HTMLImageElement>('.product-gallery__image');
+      const webpSource = root.querySelector<HTMLSourceElement>('[data-gallery-webp]');
+      const avifSource = root.querySelector<HTMLSourceElement>('[data-gallery-avif]');
       const thumbs = root.querySelectorAll<HTMLButtonElement>('[data-product-gallery-thumb]');
       if (!main || !thumbs.length) return;
 
       thumbs.forEach((thumb) => {
         thumb.addEventListener('click', () => {
-          const src = thumb.getAttribute('data-src');
+          const mainSrc = thumb.getAttribute('data-main');
+          const fallback = thumb.getAttribute('data-src');
           const alt = thumb.getAttribute('data-alt');
-          if (src) {
-            main.src = src;
-            main.removeAttribute('srcset');
+          const webp = thumb.getAttribute('data-webp');
+          const avif = thumb.getAttribute('data-avif');
+
+          if (webpSource && webp) webpSource.srcset = webp;
+          if (avifSource) {
+            if (avif) {
+              avifSource.srcset = avif;
+              avifSource.removeAttribute('disabled');
+            } else {
+              avifSource.removeAttribute('srcset');
+            }
           }
+          if (mainSrc) main.src = mainSrc;
+          else if (fallback) main.src = fallback;
+          main.removeAttribute('srcset');
           if (alt) main.alt = alt;
+
           thumbs.forEach((t) => {
             const active = t === thumb;
             t.classList.toggle('is-active', active);

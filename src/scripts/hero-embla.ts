@@ -13,9 +13,13 @@ type AutoplayPlugin = {
 };
 
 function restartProgress(progressEl: HTMLElement) {
-  progressEl.style.animation = 'none';
-  void progressEl.offsetWidth;
-  progressEl.style.animation = `hero-embla-progress ${HERO_AUTOPLAY_MS}ms linear forwards`;
+  progressEl.classList.remove('is-running');
+  // Double rAF restarts the composited scaleX animation without forced reflow.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      progressEl.classList.add('is-running');
+    });
+  });
 }
 
 function bindHeroDots(wrapper: HTMLElement, api: EmblaApi, autoplay: AutoplayPlugin) {
@@ -32,8 +36,8 @@ function bindHeroDots(wrapper: HTMLElement, api: EmblaApi, autoplay: AutoplayPlu
       const progress = dot.querySelector<HTMLElement>('[data-hero-embla-progress]');
       if (!progress) return;
 
-      progress.style.animation = 'none';
-      progress.style.width = i === index && reducedMotion ? '100%' : '0%';
+      progress.classList.remove('is-running');
+      progress.classList.toggle('is-complete', i === index && reducedMotion);
 
       if (i === index && !reducedMotion) {
         restartProgress(progress);

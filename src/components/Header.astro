@@ -2,15 +2,9 @@
 import { t } from '../i18n';
 import { R6_BUY_URL } from '../config/checkout';
 import { Button } from '@/components/starwind/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/starwind/sheet';
 import Icon from './icons/Icon.astro';
 import SlideRevealButton from './SlideRevealButton.astro';
+import { ThemeToggle } from '@/components/starwind/theme-toggle';
 
 import type { IconName } from './icons/types';
 
@@ -29,7 +23,7 @@ const purchaseUrl = R6_BUY_URL;
 <header class="pointer-events-none fixed inset-x-0 top-0 z-50">
   <div class="flex justify-center px-3 pt-3 sm:px-4 sm:pt-4" data-floating-nav>
     <div
-      class="pointer-events-auto relative flex h-14 w-full max-w-6xl items-center justify-between gap-3 rounded-2xl border border-border/40 bg-background/35 px-4 text-foreground shadow-md shadow-black/5 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/25 dark:border-white/10 dark:bg-background/20 dark:shadow-black/25 sm:px-5 lg:h-[3.75rem]"
+      class="pointer-events-auto relative flex h-14 w-full max-w-6xl items-center justify-between gap-3 rounded-2xl border border-neutral-200 bg-white/95 px-4 text-neutral-950 shadow-md shadow-black/5 backdrop-blur-2xl supports-[backdrop-filter]:bg-white/90 dark:border-white/10 dark:bg-background/20 dark:text-foreground dark:shadow-black/25 dark:supports-[backdrop-filter]:bg-background/20 sm:px-5 lg:h-[3.75rem]"
     >
     <a href="/" class="inline-flex min-w-0 items-center font-[family-name:var(--font-heading)] text-lg font-bold tracking-wide" aria-label={t.ui.homeAria}>
       <span class="truncate" aria-hidden="true">R6<span class="text-primary">Cheats</span></span>
@@ -39,34 +33,40 @@ const purchaseUrl = R6_BUY_URL;
       {t.nav.map((link) => (
         <a
           href={link.href}
-          class="nav-link inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          class="nav-link inline-flex items-center text-sm font-medium text-neutral-800 transition-colors hover:text-primary dark:text-muted-foreground"
           data-nav-link
           {...(link.scrollTarget ? { 'data-scroll-target': link.scrollTarget } : {})}
         >
-          <Icon name={navIcons[link.label] ?? 'navFeatures'} size={16} />
           {link.label}
         </a>
       ))}
     </nav>
 
     <div class="flex items-center gap-2">
+      <ThemeToggle
+        size="sm"
+        variant="outline"
+        class="size-9 shrink-0 rounded-lg border-neutral-300 bg-white text-neutral-900 dark:border-border/80 dark:bg-background/50 dark:text-foreground"
+        ariaLabel="Toggle light and dark mode"
+        defaultPressed={true}
+      />
       <div class="hidden items-center sm:flex">
         <SlideRevealButton href={purchaseUrl} class="hidden lg:inline-flex" ariaLabel={t.ui.checkoutAria}>
           {t.ui.browseCheats}
         </SlideRevealButton>
       </div>
 
-      <Sheet class="lg:hidden">
-        <SheetTrigger
-          class="inline-flex size-9 items-center justify-center rounded-lg border border-border/80 bg-background/50 text-foreground transition-colors hover:bg-muted lg:hidden"
+      <details class="mobile-nav relative lg:hidden">
+        <summary
+          class="mobile-nav__summary inline-flex size-9 list-none items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-900 transition-colors hover:bg-neutral-50 dark:border-border/80 dark:bg-background/50 dark:text-foreground dark:hover:bg-muted"
           aria-label={t.ui.menuOpen}
         >
           <Icon name="menu" size={20} />
-        </SheetTrigger>
-        <SheetContent side="right" class="flex w-[min(100vw-2rem,20rem)] flex-col gap-4">
-          <SheetHeader>
-            <SheetTitle>{t.site.name}</SheetTitle>
-          </SheetHeader>
+        </summary>
+        <div
+          class="mobile-nav__panel absolute right-0 top-[calc(100%+0.5rem)] z-50 flex w-[min(100vw-2rem,20rem)] flex-col gap-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-lg dark:border-border dark:bg-card"
+        >
+          <p class="font-[family-name:var(--font-heading)] text-base font-semibold text-neutral-950 dark:text-foreground">{t.site.name}</p>
           <nav class="flex flex-col gap-1" aria-label="Mobile">
             {t.nav.map((link) => (
               <a
@@ -83,8 +83,8 @@ const purchaseUrl = R6_BUY_URL;
           <Button as="a" href={purchaseUrl} variant="primary" class="w-full justify-center" aria-label={t.ui.checkoutAria} target="_self">
             {t.ui.browseCheatsMobile}
           </Button>
-        </SheetContent>
-      </Sheet>
+        </div>
+      </details>
     </div>
     </div>
   </div>

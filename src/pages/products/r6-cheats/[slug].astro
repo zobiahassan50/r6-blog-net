@@ -4,6 +4,13 @@ import { getAllProductSlugs, getProductPage, productHub } from '../../../data/pr
 import { pageTitle } from '../../../config/seo';
 import { breadcrumbSchema, productSchema } from '../../../utils/schema';
 import ProductDetail from '../../../components/ProductDetail.astro';
+import {
+  GALLERY_IMAGE_WIDTHS,
+  avifSrc,
+  defaultWebpSrc,
+  publicAssetExists,
+  responsiveAvifSrcSet,
+} from '../../../utils/responsiveImage';
 
 export function getStaticPaths() {
   return getAllProductSlugs().map((slug) => ({ params: { slug } }));
@@ -22,11 +29,21 @@ const breadcrumbs = [
   { name: 'Products', path: productHub.path },
   { name: product.title, path: pagePath },
 ];
+
+const firstImage = product.images[0]?.src;
+const firstAvifSet = firstImage ? responsiveAvifSrcSet(firstImage, GALLERY_IMAGE_WIDTHS) : undefined;
+const galleryPreload = firstImage
+  ? firstAvifSet
+    ? avifSrc(firstImage, GALLERY_IMAGE_WIDTHS[0])
+    : defaultWebpSrc(firstImage, GALLERY_IMAGE_WIDTHS)
+  : null;
+const galleryPreloadType = firstAvifSet ? 'image/avif' : 'image/webp';
 ---
 
 <BaseLayout
   title={pageTitle(product.title)}
   description={product.desc}
+  ogImage={firstImage}
   jsonLd={[
     productSchema({
       name: product.title,
@@ -39,5 +56,17 @@ const breadcrumbs = [
     breadcrumbSchema(breadcrumbs),
   ]}
 >
+  {
+    galleryPreload && publicAssetExists(galleryPreload) && (
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        href={galleryPreload}
+        type={galleryPreloadType}
+        fetchpriority="high"
+      />
+    )
+  }
   <ProductDetail product={product} breadcrumbs={breadcrumbs} />
 </BaseLayout>

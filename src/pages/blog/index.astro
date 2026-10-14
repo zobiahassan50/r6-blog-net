@@ -11,9 +11,11 @@ import Icon from '../../components/icons/Icon.astro';
 import { blogTagIcons } from '../../data/sectionIcons';
 import type { IconName } from '../../components/icons/types';
 import { Button } from '@/components/starwind/button';
-import { ROUTES } from '../../utils/path';
+import { ROUTES, blogPostPath } from '../../utils/path';
 import {
   CARD_IMAGE_WIDTHS,
+  HERO_BG_SIZES,
+  HERO_BG_WIDTHS,
   avifSrc,
   defaultWebpSrc,
   responsiveAvifSrcSet,
@@ -39,6 +41,23 @@ const firstImageSrcSet = firstPost
   ? (firstAvifSet ?? responsiveSrcSet(firstPost.image, CARD_IMAGE_WIDTHS, 'webp'))
   : null;
 const firstImageType = firstAvifSet ? 'image/avif' : 'image/webp';
+
+const blogHeroSrc = '/images/bloghero.jpeg';
+const blogHeroAvif = responsiveAvifSrcSet(blogHeroSrc, HERO_BG_WIDTHS);
+const blogHeroWebp = responsiveSrcSet(blogHeroSrc, HERO_BG_WIDTHS, 'webp');
+const blogHeroDefault = defaultWebpSrc(blogHeroSrc, HERO_BG_WIDTHS);
+const blogHeroPreload = blogHeroAvif
+  ? avifSrc(blogHeroSrc, 1280)
+  : blogHeroDefault;
+const blogHeroPreloadType = blogHeroAvif ? 'image/avif' : 'image/webp';
+
+const searchSuggestions = blogPosts.map((post) => ({
+  title: post.title,
+  tag: post.tag,
+  href: blogPostPath(post.slug),
+  titleSearch: post.title.toLowerCase(),
+  tagSearch: post.tag.toLowerCase(),
+}));
 ---
 
 <BaseLayout
@@ -53,6 +72,16 @@ const firstImageType = firstAvifSet ? 'image/avif' : 'image/webp';
     breadcrumbSchema(breadcrumbs),
   ]}
 >
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    type={blogHeroPreloadType}
+    href={blogHeroPreload}
+    imagesrcset={blogHeroAvif ?? blogHeroWebp ?? undefined}
+    imagesizes={HERO_BG_SIZES}
+    fetchpriority="high"
+  />
   {
     firstImagePreload && (
       <link
@@ -63,45 +92,65 @@ const firstImageType = firstAvifSet ? 'image/avif' : 'image/webp';
         href={firstImagePreload}
         imagesrcset={firstImageSrcSet ?? undefined}
         imagesizes="(min-width: 1024px) 352px, (min-width: 640px) 50vw, 100vw"
-        fetchpriority="high"
       />
     )
   }
-  <section class="relative isolate overflow-hidden border-b border-border bg-neutral-950" aria-labelledby="blog-hero-title">
-    <video
-      class="pointer-events-none absolute inset-0 h-full w-full object-cover"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="none"
-      poster="/images/posters/blog-hero-poster.webp"
-      data-deferred-video="/videos/blog-hero.mp4"
-      aria-hidden="true"
-    ></video>
-    <div class="absolute inset-0 bg-black/70" aria-hidden="true"></div>
+  <section class="relative border-b border-border bg-background dark:bg-neutral-950" aria-labelledby="blog-hero-title">
+    <picture class="pointer-events-none absolute inset-0" aria-hidden="true">
+      {blogHeroAvif && (
+        <source type="image/avif" srcset={blogHeroAvif} sizes={HERO_BG_SIZES} />
+      )}
+      {blogHeroWebp && (
+        <source type="image/webp" srcset={blogHeroWebp} sizes={HERO_BG_SIZES} />
+      )}
+      <img
+        src={blogHeroDefault}
+        srcset={blogHeroWebp}
+        sizes={HERO_BG_SIZES}
+        alt=""
+        class="h-full w-full object-cover brightness-[0.95] dark:brightness-[0.78]"
+        width="1920"
+        height="1080"
+        decoding="sync"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </picture>
+    <div class="absolute inset-0 bg-white/85 dark:bg-black/25" aria-hidden="true"></div>
 
-    <div class="relative mx-auto flex min-h-[28rem] max-w-6xl flex-col justify-center px-5 py-16 md:min-h-[34rem] md:py-20">
-      <div class="text-white/80 [&_[data-slot=breadcrumb-link]]:text-white/80 [&_[data-slot=breadcrumb-link]:hover]:text-white [&_[data-slot=breadcrumb-page]]:text-white">
+    <div class="relative z-10 mx-auto flex min-h-[28rem] max-w-6xl flex-col justify-center px-5 py-16 md:min-h-[34rem] md:py-20">
+      <div class="text-neutral-800 dark:text-white/90 dark:drop-shadow [&_[data-slot=breadcrumb-link]]:text-neutral-700 [&_[data-slot=breadcrumb-link]:hover]:text-neutral-950 dark:[&_[data-slot=breadcrumb-link]]:text-white/90 dark:[&_[data-slot=breadcrumb-link]:hover]:text-white [&_[data-slot=breadcrumb-page]]:text-neutral-950 dark:[&_[data-slot=breadcrumb-page]]:text-white">
         <Breadcrumbs items={breadcrumbs} />
       </div>
 
-      <p class="mt-6 text-sm font-medium uppercase tracking-wider text-white/70">{t.blog.eyebrow}</p>
-      <h1 id="blog-hero-title" class="mt-3 max-w-3xl text-4xl font-bold uppercase leading-tight text-white md:text-5xl">
+      <h1 id="blog-hero-title" class="mt-6 max-w-3xl text-4xl font-bold uppercase leading-tight text-neutral-950 dark:text-white dark:drop-shadow md:text-5xl">
         {t.blog.heroTitle}
       </h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">{t.blog.subtitle}</p>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700 dark:text-white dark:drop-shadow md:text-lg">{t.blog.subtitle}</p>
 
-      <label class="mt-8 flex w-full max-w-xl items-center gap-3 rounded-xl border border-white/25 bg-black/40 px-4 py-3 text-white shadow-sm backdrop-blur-sm">
-        <Icon name="search" size={18} />
-        <input
-          id="blog-search"
-          type="search"
-          placeholder={t.blog.searchPlaceholder}
-          aria-label={t.blog.searchPlaceholder}
-          class="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
-        />
-      </label>
+      <div class="relative z-30 mt-8 w-full max-w-sm" data-blog-search>
+        <label class="flex w-full items-center gap-3 rounded-xl border border-neutral-300 bg-white/90 px-4 py-2.5 text-neutral-900 shadow-sm backdrop-blur-sm dark:border-white/25 dark:bg-black/40 dark:text-white">
+          <Icon name="search" size={16} class="text-neutral-700 dark:text-white" />
+          <input
+            id="blog-search"
+            type="search"
+            placeholder={t.blog.searchPlaceholder}
+            aria-label={t.blog.searchPlaceholder}
+            aria-autocomplete="list"
+            aria-controls="blog-search-menu"
+            aria-expanded="false"
+            autocomplete="off"
+            class="w-full bg-transparent text-sm text-neutral-900 outline-none placeholder:text-neutral-500 dark:text-white dark:placeholder:text-white/60"
+          />
+        </label>
+        <ul
+          id="blog-search-menu"
+          role="listbox"
+          hidden
+          class="absolute left-0 right-0 top-full z-50 mt-2 max-h-72 w-full overflow-y-auto rounded-xl border border-neutral-200 bg-white py-1 shadow-lg dark:border-white/20 dark:bg-neutral-950"
+        ></ul>
+        <script type="application/json" id="blog-search-data" is:inline set:html={JSON.stringify(searchSuggestions)} />
+      </div>
     </div>
   </section>
 
@@ -117,7 +166,7 @@ const firstImageType = firstAvifSet ? 'image/avif' : 'image/webp';
         <div
           class="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           role="toolbar"
-          aria-label="Filter articles by topic"
+          aria-label="Filter blogs by topic"
         >
           <button
             type="button"
@@ -164,9 +213,9 @@ const firstImageType = firstAvifSet ? 'image/avif' : 'image/webp';
       </p>
 
       <div class="mt-12 flex justify-start lg:justify-center">
-        <Button as="a" href={ROUTES.home} variant="outline">
+        <Button as="a" href={ROUTES.blog} variant="outline">
           <Icon name="chevronLeft" size={16} />
-          Back to home
+          Back to blog
         </Button>
       </div>
     </div>
@@ -174,22 +223,16 @@ const firstImageType = firstAvifSet ? 'image/avif' : 'image/webp';
 
   <script>
     import { initBlogIndexFilters } from '../../scripts/blog-index.ts';
-    import { initDeferredVideos } from '../../scripts/deferred-media.ts';
 
     const startBlogFilters = () => {
       const emptyMessage = document.getElementById('blog-empty')?.textContent?.trim() ?? '';
       initBlogIndexFilters(emptyMessage);
     };
 
-    const boot = () => {
-      startBlogFilters();
-      initDeferredVideos();
-    };
-
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', boot);
+      document.addEventListener('DOMContentLoaded', startBlogFilters);
     } else {
-      boot();
+      startBlogFilters();
     }
   </script>
 </BaseLayout>

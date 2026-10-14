@@ -70,12 +70,7 @@ function whenNearViewport(el: Element, cb: () => void) {
 export function setupProductsCarousel() {
   const boot = () => {
     document.querySelectorAll<HTMLElement>('[data-products-carousel]').forEach((wrap) => {
-      whenNearViewport(wrap, () => {
-        const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number })
-          .requestIdleCallback;
-        if (idle) idle(() => initProductsCarousels());
-        else window.setTimeout(() => initProductsCarousels(), 0);
-      });
+      whenNearViewport(wrap, () => initProductsCarousels());
     });
   };
 

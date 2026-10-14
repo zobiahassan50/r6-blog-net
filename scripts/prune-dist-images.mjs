@@ -29,8 +29,14 @@ function walk(dir) {
     if (!/\.(png|jpe?g)$/i.test(entry.name)) continue;
     if (/-\d+\.(png|jpe?g)$/i.test(entry.name)) continue;
 
-    // Always keep hero originals — production fallback for Cloudflare case-sensitive paths.
-    if (/^herobackground\.(png|jpe?g)$/i.test(entry.name)) continue;
+    // Keep hero + product preview originals — pages reference these paths directly.
+    if (
+      /^(herobackground|bloghero|aimbotproduct|playerproduct|gadegtespproduct|misc|producthome)\.(png|jpe?g)$/i.test(
+        entry.name,
+      )
+    ) {
+      continue;
+    }
 
     const base = entry.name.replace(/\.(png|jpe?g)$/i, '');
     if (!hasSizedVariants(dir, base)) continue;

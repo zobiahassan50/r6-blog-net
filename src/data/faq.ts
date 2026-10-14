@@ -128,8 +128,6 @@ export const SITE_FAQ_SECTION_COPY = {
 
 export const SITE_FAQ_FILTER_TOPICS: FaqTopic[] = [
   'all',
-  'plans',
-  'esp',
   'scripts',
   'safety',
   'products',

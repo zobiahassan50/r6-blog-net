@@ -88,20 +88,21 @@ const imageWidths = isHero ? HERO_IMAGE_WIDTHS : undefined;
       role="tablist"
       aria-label="Hero slides"
     >
-      <div class="pointer-events-auto flex items-center gap-1.5 rounded-full border border-white/10 bg-black/45 px-2.5 py-1.5 backdrop-blur-sm">
+      <div class="pointer-events-auto flex items-center gap-1.5 rounded-full border border-neutral-300 bg-white/90 px-2.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/45">
         {images.map((_, i) => (
           <button
             type="button"
             role="tab"
-            class="hero-embla-dot relative h-2 shrink-0 overflow-hidden rounded-full bg-white/30 transition-[width] duration-300 data-[active=false]:w-2 data-[active=true]:w-9"
+            class="hero-embla-dot relative h-2 w-9 shrink-0 overflow-hidden rounded-full bg-neutral-400 transition-transform duration-300 data-[active=false]:scale-x-[0.22] data-[active=true]:scale-x-100 dark:bg-white/30"
             data-hero-embla-dot={i}
             aria-label={`Slide ${i + 1}`}
             aria-selected={i === 0 ? 'true' : 'false'}
             data-active={i === 0 ? 'true' : 'false'}
           >
             <span
-              class="hero-embla-progress pointer-events-none absolute inset-y-0 left-0 w-0 rounded-full bg-primary"
+              class="hero-embla-progress pointer-events-none absolute inset-y-0 left-0 rounded-full bg-primary"
               data-hero-embla-progress
+              style="--hero-autoplay-ms: 4800ms"
               aria-hidden="true"
             />
           </button>

@@ -36,7 +36,7 @@ const tagIcon: IconName = blogTagIcons[post.tag] ?? 'tag';
 <Card
   size="sm"
   class:list={[
-    'blog-card group/card gap-0 overflow-visible border border-border py-0 pt-0 shadow-xs ring-0 ring-transparent hover:shadow-md has-data-[slot=card-footer]:pb-0',
+    'blog-card group/card gap-0 overflow-visible border border-neutral-200 bg-white py-0 pt-0 shadow-sm ring-0 ring-transparent hover:shadow-md has-data-[slot=card-footer]:pb-0 dark:border-border dark:bg-card',
     isFeatured
       ? 'blog-featured mt-8 md:mt-10 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch'
       : 'flex h-full flex-col',
@@ -46,7 +46,8 @@ const tagIcon: IconName = blogTagIcons[post.tag] ?? 'tag';
   data-tag={post.tag}
   data-ts={timestamp}
   data-read-minutes={readMinutes}
-  data-search={`${post.title} ${post.desc} ${post.tag}`.toLowerCase()}
+  data-search-title={post.title.toLowerCase()}
+  data-search-tag={post.tag.toLowerCase()}
 >
   <a
     href={href}

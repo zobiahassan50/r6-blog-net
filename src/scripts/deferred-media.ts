@@ -34,12 +34,8 @@ export function initDeferredVideos() {
   };
 
   const schedule = (video: HTMLVideoElement) => {
-    const start = () => loadVideo(video);
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(start, { timeout: 1800 });
-    } else {
-      window.setTimeout(start, 900);
-    }
+    // Poster already paints — start media on next frame (no multi-second idle wait).
+    requestAnimationFrame(() => loadVideo(video));
   };
 
   if ('IntersectionObserver' in window) {
