@@ -54,18 +54,20 @@ const initialPressed = pressed ?? defaultPressed ?? false;
   data-slot={dataSlot}
 >
   <slot>
-    <span class="size-5" data-theme-icon-wrapper>
+    <span class="theme-toggle-icons relative size-5" data-theme-icon-wrapper>
       <slot name="light-icon">
+        {/* Visible in light mode (state=off). No data-ready gate — always visible without JS. */}
         <Sun
-          class="hidden size-5 group-data-[state=off]:data-ready:block"
+          class="theme-toggle-icon theme-toggle-icon--sun size-5"
           aria-hidden="true"
           data-theme-icon
         />
       </slot>
 
       <slot name="dark-icon">
+        {/* Visible in dark mode (state=on). */}
         <Moon
-          class="hidden size-5 group-data-[state=on]:data-ready:block"
+          class="theme-toggle-icon theme-toggle-icon--moon size-5"
           aria-hidden="true"
           data-theme-icon
         />
@@ -73,6 +75,44 @@ const initialPressed = pressed ?? defaultPressed ?? false;
     </span>
   </slot>
 </button>
+
+<style is:global>
+  .theme-toggle-icons {
+    display: grid;
+    place-items: center;
+  }
+
+  .theme-toggle-icon {
+    grid-area: 1 / 1;
+    display: block;
+  }
+
+  /* Default / light: show sun */
+  .theme-toggle-icon--sun {
+    opacity: 1;
+  }
+  .theme-toggle-icon--moon {
+    opacity: 0;
+  }
+
+  /* Pressed / dark control state */
+  [data-sw-theme-toggle][data-state='on'] .theme-toggle-icon--sun,
+  html.dark [data-sw-theme-toggle] .theme-toggle-icon--sun {
+    opacity: 0;
+  }
+  [data-sw-theme-toggle][data-state='on'] .theme-toggle-icon--moon,
+  html.dark [data-sw-theme-toggle] .theme-toggle-icon--moon {
+    opacity: 1;
+  }
+
+  /* Light document wins when control is explicitly off */
+  html:not(.dark) [data-sw-theme-toggle][data-state='off'] .theme-toggle-icon--sun {
+    opacity: 1;
+  }
+  html:not(.dark) [data-sw-theme-toggle][data-state='off'] .theme-toggle-icon--moon {
+    opacity: 0;
+  }
+</style>
 
 <script>
   import { initThemeController } from "@starwind-ui/astro/theme";
