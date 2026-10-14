@@ -1,6 +1,5 @@
 /*
   Cache-Control: public, max-age=3600, must-revalidate
-  Link: </fonts/manrope-latin.woff2>; rel=preload; as=font; type=font/woff2; crossorigin, </fonts/rajdhani-700-latin.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

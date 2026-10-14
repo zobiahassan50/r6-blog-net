@@ -68,7 +68,8 @@ export default defineConfig({
     },
   },
   build: {
-    inlineStylesheets: 'never',
-    assetsInlineLimit: 512,
+    // Inline small page CSS to cut render-blocking round-trips (Speed Index).
+    inlineStylesheets: 'auto',
+    assetsInlineLimit: 8192,
   },
 });

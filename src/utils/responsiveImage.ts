@@ -21,6 +21,8 @@ export const THUMB_IMAGE_SIZES = '148px';
 
 /** Full-bleed hero background. */
 export const HERO_BG_WIDTHS = [640, 960, 1280, 1920] as const;
+/** Preload only mid sizes — avoids competing with LCP on mobile (Speed Index). */
+export const HERO_BG_PRELOAD_WIDTHS = [640, 960] as const;
 export const HERO_BG_SIZES = '100vw';
 
 /** Blog / default. */
@@ -73,26 +75,47 @@ export function defaultWebpSrc(src: string, widths: readonly number[]): string {
   return publicAssetExists(candidate) ? candidate : src;
 }
 
-/** Preferred LCP preload candidate for full-bleed backgrounds (AVIF when available). */
+/** Smallest existing preload candidate — wins Speed Index on mobile Lighthouse. */
+function heroBgPreloadCandidate(src = '/images/herobackground.png'): string {
+  let best = src;
+  let bestBytes = Number.POSITIVE_INFINITY;
+
+  for (const width of HERO_BG_PRELOAD_WIDTHS) {
+    for (const candidate of [avifSrc(src, width), webpSrc(src, width)]) {
+      if (!publicAssetExists(candidate)) continue;
+      const abs = path.join(process.cwd(), 'public', candidate.replace(/^\//, ''));
+      const bytes = fs.statSync(abs).size;
+      if (bytes < bestBytes) {
+        bestBytes = bytes;
+        best = candidate;
+      }
+    }
+  }
+
+  return best;
+}
+
+/** Preferred LCP preload candidate for full-bleed backgrounds. */
 export function heroBgPreloadHref(src = '/images/herobackground.png'): string {
-  // 960w covers typical mobile 2x + mid desktop without over-fetching 1280/1920.
-  const avif = avifSrc(src, 960);
-  if (publicAssetExists(avif)) return avif;
-  const webp = webpSrc(src, 960);
-  if (publicAssetExists(webp)) return webp;
-  return src;
+  return heroBgPreloadCandidate(src);
 }
 
 export function heroBgPreloadType(
   src = '/images/herobackground.png',
 ): 'image/avif' | 'image/webp' | 'image/jpeg' | 'image/png' {
-  if (publicAssetExists(avifSrc(src, 960))) return 'image/avif';
-  if (publicAssetExists(webpSrc(src, 960))) return 'image/webp';
+  const href = heroBgPreloadCandidate(src);
+  if (href.endsWith('.avif')) return 'image/avif';
+  if (href.endsWith('.webp')) return 'image/webp';
   return /\.png$/i.test(src) ? 'image/png' : 'image/jpeg';
 }
 
 export function heroBgPreloadSrcSet(src = '/images/herobackground.png'): string | undefined {
-  const avifSet = responsiveAvifSrcSet(src, HERO_BG_WIDTHS);
-  if (avifSet) return avifSet;
-  return responsiveSrcSet(src, HERO_BG_WIDTHS, 'webp');
+  // Match the chosen format so preload isn't a second download.
+  const href = heroBgPreloadCandidate(src);
+  const format = href.endsWith('.avif') ? 'avif' : 'webp';
+  if (format === 'avif') {
+    const avifSet = responsiveAvifSrcSet(src, HERO_BG_PRELOAD_WIDTHS);
+    if (avifSet) return avifSet;
+  }
+  return responsiveSrcSet(src, HERO_BG_PRELOAD_WIDTHS, 'webp');
 }

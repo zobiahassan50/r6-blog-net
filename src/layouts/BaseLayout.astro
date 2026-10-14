@@ -122,10 +122,6 @@ const robotsContent = noindex
     {TWITTER_SITE && <meta name="twitter:site" content={TWITTER_SITE} />}
     {TWITTER_CREATOR && <meta name="twitter:creator" content={TWITTER_CREATOR} />}
 
-    <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/rajdhani-700-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/fonts/fonts.css" />
-
     {jsonLd && <JsonLd data={jsonLd} />}
     <slot name="head" />
 
