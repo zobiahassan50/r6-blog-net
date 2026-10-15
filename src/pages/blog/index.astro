@@ -15,10 +15,11 @@ import { Button } from '@/components/starwind/button';
 import { ROUTES, blogPostPath } from '../../utils/path';
 import {
   CARD_IMAGE_WIDTHS,
+  HERO_BG_PRELOAD_WIDTHS,
   HERO_BG_SIZES,
   HERO_BG_WIDTHS,
 } from '../../utils/responsiveImage';
-import { IMAGE_QUALITY } from '../../utils/optimizedImage';
+import { HERO_BG_QUALITY } from '../../utils/optimizedImage';
 import { buildImagePreload } from '../../utils/preloadImage';
 import blogHero from '../../assets/images/bloghero.jpeg';
 
@@ -42,9 +43,9 @@ const firstImagePreload = firstPost
 
 const blogHeroPreload = await buildImagePreload(
   '/images/bloghero.jpeg',
-  HERO_BG_WIDTHS,
+  HERO_BG_PRELOAD_WIDTHS,
   HERO_BG_SIZES,
-  1280,
+  640,
 );
 
 const searchSuggestions = blogPosts.map((post) => ({
@@ -103,16 +104,17 @@ const searchSuggestions = blogPosts.map((post) => ({
       <Picture
         src={blogHero}
         formats={['avif', 'webp']}
+        fallbackFormat="webp"
         widths={[...HERO_BG_WIDTHS]}
         sizes={HERO_BG_SIZES}
-        width={1920}
-        height={1080}
+        width={1280}
+        height={720}
         alt="R6Cheats blog guides and patch notes background"
         class="h-full w-full object-cover brightness-[0.95] dark:brightness-[0.78]"
         loading="eager"
         decoding="async"
         fetchpriority="high"
-        quality={IMAGE_QUALITY}
+        quality={HERO_BG_QUALITY}
       />
     </div>
     <div class="absolute inset-0 bg-white/85 dark:bg-black/25" aria-hidden="true"></div>
@@ -126,6 +128,8 @@ const searchSuggestions = blogPosts.map((post) => ({
         {t.blog.heroTitle}
       </h1>
       <p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700 dark:text-white dark:drop-shadow md:text-lg">{t.blog.subtitle}</p>
+      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 dark:text-white/90 dark:drop-shadow md:text-base">{t.blog.heroLead}</p>
+      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 dark:text-white/90 dark:drop-shadow md:text-base">{t.blog.heroExtra}</p>
 
       <div class="relative z-30 mt-8 w-full max-w-sm" data-blog-search>
         <label class="flex w-full items-center gap-3 rounded-xl border border-neutral-300 bg-white/90 px-4 py-2.5 text-neutral-900 shadow-sm backdrop-blur-sm dark:border-white/25 dark:bg-black/40 dark:text-white">

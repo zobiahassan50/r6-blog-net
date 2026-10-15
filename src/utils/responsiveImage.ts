@@ -3,9 +3,10 @@ import path from 'node:path';
 
 const RASTER_EXT = /\.(png|jpe?g|webp|avif)$/i;
 
-/** Product feature cards ~352px CSS → 400w / 640w for 2x. */
-export const CARD_IMAGE_WIDTHS = [400, 640] as const;
-export const CARD_IMAGE_SIZES = '(min-width: 1024px) 352px, (min-width: 640px) 50vw, 100vw';
+/** Product feature cards ~352px CSS → 320/400 for 1x–1.5x, 640 for 2x. */
+export const CARD_IMAGE_WIDTHS = [320, 400, 640] as const;
+export const CARD_IMAGE_SIZES =
+  '(min-width: 1024px) 352px, (min-width: 640px) 40vw, 85vw';
 
 /** Hero slider / product main ~490–720px. */
 export const HERO_IMAGE_WIDTHS = [512, 640, 960] as const;
@@ -19,10 +20,10 @@ export const GALLERY_IMAGE_SIZES = '(min-width: 1024px) 720px, 100vw';
 export const THUMB_IMAGE_WIDTHS = [320, 400] as const;
 export const THUMB_IMAGE_SIZES = '148px';
 
-/** Full-bleed hero background. */
-export const HERO_BG_WIDTHS = [640, 960, 1280, 1920] as const;
+/** Full-bleed hero background — skip oversized 1920 on most viewports. */
+export const HERO_BG_WIDTHS = [480, 640, 960, 1280] as const;
 /** Preload only mid sizes — avoids competing with LCP on mobile (Speed Index). */
-export const HERO_BG_PRELOAD_WIDTHS = [640, 960] as const;
+export const HERO_BG_PRELOAD_WIDTHS = [480, 640] as const;
 export const HERO_BG_SIZES = '100vw';
 
 /** Blog / default. */

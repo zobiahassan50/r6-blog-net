@@ -39,6 +39,16 @@ const TitleTag = headingLevel;
       <p class="section-header__subtitle">{c.subtitle}</p>
     </header>
 
+    {
+      c.intro?.length ? (
+        <div class="mx-auto mt-8 max-w-3xl space-y-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+          {c.intro.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      ) : null
+    }
+
     <ul class="support-section__cards">
       {
         c.channels.map((channel) => (

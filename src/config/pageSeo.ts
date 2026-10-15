@@ -52,7 +52,7 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/faq/': {
     title: 'Rainbow Six Siege FAQ | R6Cheats Answers',
     description:
-      'What this independent publication covers, how we source facts, and how fair-play topics are handled.',
+      'R6Cheats Answers for Rainbow Six Siege on Windows PC: how we source facts, what listings cover, and how fair-play topics are handled.',
   },
   '/terms/': {
     title: 'Terms & Conditions | R6Cheats',

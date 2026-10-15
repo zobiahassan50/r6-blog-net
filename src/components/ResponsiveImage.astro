@@ -59,6 +59,7 @@ const decoding = loading === 'eager' ? 'sync' : 'async';
     <Picture
       src={asset}
       formats={['avif', 'webp']}
+      fallbackFormat="webp"
       widths={[...widths]}
       sizes={pictureSizes}
       width={width}

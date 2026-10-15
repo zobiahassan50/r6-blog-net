@@ -276,7 +276,7 @@ export const en: Translations = {
     eyebrow: 'Products',
     title: 'RAINBOW SIX SIEGE',
     subtitle:
-      'Player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150. Windows 10/11 on Intel or AMD, with HVCI, Core Isolation, TPM, and Secure Boot on. Cloud DMA is required for full functionality.',
+      'R6 Siege Products Hub for player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150. Windows 10/11 on Intel or AMD, with HVCI, Core Isolation, TPM, and Secure Boot on. Cloud DMA is required for full functionality.',
     viewAll: 'View all products',
     get: 'Get',
     explore: 'Explore',
@@ -307,7 +307,11 @@ export const en: Translations = {
     eyebrow: 'Blog',
     title: 'Latest Releases',
     heroTitle: 'R6 Siege Cheats Blogs',
-    subtitle: 'R6 cheats Updates',
+    subtitle: 'Rainbow Six Siege cheats guides and patch notes for Windows PC.',
+    heroLead:
+      'This archive collects Rainbow Six Siege cheats guides and patch notes—ESP, wallhack wording, aimbot settings, BattlEye checklists, and fair-play context. Articles explain terminology; the product page remains the live feature list.',
+    heroExtra:
+      'Filter by topic or sort by read time to find ESP, wallhack, aimbot, and status deep-dives. Re-check the listing after every Siege or BattlEye update before you treat a guide as current.',
     searchPlaceholder: 'Search blogs',
     latestTitle: 'Latest releases',
     latestSubtitle: 'Filter by topic or sort to find ESP, wallhack, aimbot, and cheat deep-dives.',
@@ -430,32 +434,38 @@ export const en: Translations = {
   support: {
     eyebrow: 'Support',
     title: 'R6Cheats support',
-    subtitle: 'Let us know how we can help.',
+    subtitle:
+      'Loader and checkout help for Rainbow Six Siege cheat tiers and utilities on Windows PC. Tell us what broke and we will route you.',
+    intro: [
+      'R6Cheats Support covers loader setup, portal access, and checkout questions for Elite modules, UGC Account Recovery, and the Skin Changer Utility. This page is the right place when a guide is not enough.',
+      'Payment card issues stay with the external checkout provider. For everything else—install errors, status confusion after a BattlEye patch, or missing order email—start here with the details listed below.',
+      'Operators answer from Discord and email. Include Windows version, Ubisoft Connect build, and the exact loader text so loader and checkout help can move faster without back-and-forth screenshots.',
+    ],
     channels: [
       {
         icon: 'users',
         title: 'Chat before checkout',
-        desc: 'Speak to our team about tiers and access.',
+        desc: 'Ask about Elite, UGC, or Skin Changer access before you pay—especially after a patch-day status flip.',
       },
       {
         icon: 'headphones',
         title: 'Chat to support',
-        desc: "We're here for loader and account issues.",
+        desc: 'Loader crashes, portal login problems, and HWID questions for Rainbow Six Siege on Windows PC.',
       },
       {
         icon: 'navFaq',
         title: 'Read the FAQ',
-        desc: 'Compatibility, bans and setup—before you buy.',
+        desc: 'Compatibility, fair-play risk, and setup vocabulary before you open a ticket.',
       },
       {
         icon: 'clock',
         title: 'Live operators',
-        desc: 'Discord engineers on shift 24/7.',
+        desc: 'Discord engineers on shift around the clock for urgent loader and checkout help.',
       },
     ],
     ticketTitle: 'Include in your ticket',
     ticketItems: [
-      { title: 'Order email', desc: 'The address used at checkout on r6cheat.net or via our secure checkout.' },
+      { title: 'Order email', desc: 'The address used at checkout on r6cheat.net or via our secure checkout confirmation.' },
       { title: 'Platform', desc: 'Ubisoft Connect on Windows 10 or 11—and your Rainbow Six Siege client version.' },
       { title: 'Error detail', desc: 'Screenshot or exact message from the loader or Ubisoft Connect.' },
     ],
@@ -463,7 +473,8 @@ export const en: Translations = {
   faq: {
     eyebrow: 'FAQ',
     title: 'Rainbow Six Siege FAQ',
-    subtitle: 'What this independent publication covers, how we source facts, and how fair-play topics are handled.',
+    subtitle:
+      'R6Cheats Answers for Rainbow Six Siege on Windows PC—how we source facts, what listings cover, and how fair-play risk is framed.',
     items: [
       {
         num: '01',
@@ -533,26 +544,32 @@ export const en: Translations = {
     about: {
       title: 'About R6Cheats',
       description:
-        'R6Cheats provides Rainbow Six Siege cheat tiers, utility tools and PC support resources at r6cheat.net.',
+        'About R6Cheats and Rainbow Six Siege guides: cheat tiers, utilities, and PC support resources at r6cheat.net.',
       sections: [
         {
           heading: 'Who we are',
           paragraphs: [
-            'R6Cheats is a PC-focused resource for Rainbow Six Siege players exploring scripts, operator ESP, radar and Skin Changer workflows. We publish tier comparisons, setup guides, and live status notes so you can evaluate R6 cheats before checkout.',
-            'All product names are used for identification only.',
+            'About R6Cheats: we are a PC-focused resource for Rainbow Six Siege players exploring scripts, operator ESP, radar, and Skin Changer workflows. We publish tier comparisons, setup guides, and live status notes so you can evaluate R6 cheats before checkout.',
+            'Product names appear for identification only. This About R6Cheats page explains editorial scope—it is not a substitute for the live listing or the Terms & Conditions.',
           ],
         },
         {
           heading: 'What we publish',
           paragraphs: [
-            'Our site covers Lite, Pro, and Elite cheat tiers, Skin Changer, and account recovery workflows. Blog articles explain ranked-safe configs, patch-day checks, and BattlEye update behavior.',
-            'Content is updated when patches land or when loader modules shift. Check the homepage status banner and Discord #status before every session.',
+            'Our Rainbow Six Siege guides cover Lite, Pro, and Elite cheat tiers, Skin Changer Utility, and UGC Account Recovery workflows. Blog articles explain ranked-safe configs, patch-day checks, and BattlEye update behavior in plain language.',
+            'Content is updated when patches land or when loader modules shift. Check the homepage status banner and Discord #status before every session, then confirm modules on the product page you intend to buy.',
+          ],
+        },
+        {
+          heading: 'How we source notes',
+          paragraphs: [
+            'Status language comes from the operator portal and Discord #status. Feature lists come from the product pages that ship with each build. Guides paraphrase those sources so newcomers can follow vocabulary without treating blogs as inventory.',
           ],
         },
         {
           heading: 'Support',
           paragraphs: [
-            'Questions about compatibility, loader errors, or checkout are handled through Discord and email support. Include your order email, Ubisoft Connect account, and Windows version when opening a ticket.',
+            'Questions about compatibility, loader errors, or checkout are handled through Discord and email support. Include your order email, Ubisoft Connect account, and Windows version when opening a ticket on the Support page.',
           ],
         },
       ],
@@ -566,24 +583,27 @@ export const en: Translations = {
           heading: 'Information we collect',
           paragraphs: [
             'We may collect standard web analytics such as page views, device type, browser, and approximate region through Google Analytics when enabled. Checkout and license delivery happen on external checkout pages—we do not store payment card data on r6cheat.net.',
+            'If you contact Support, we may retain the email address and message content you send until the issue is closed. Forum preview pages do not collect account passwords.',
           ],
         },
         {
           heading: 'How we use data',
           paragraphs: [
-            'Analytics help us understand which guides and product pages are useful so we can improve content and fix broken links. Support tickets may retain the email address and message content you provide until the issue is resolved.',
+            'Analytics help us understand which Rainbow Six Siege guides and product pages are useful so we can improve content and fix broken links. We do not sell personal contact details to third-party advertisers.',
+            'Support tickets may retain the email address and message content you provide until the issue is resolved, then we delete or anonymize records according to operational needs.',
           ],
         },
         {
           heading: 'Cookies',
           paragraphs: [
-            'We use minimal cookies required for analytics. You can block cookies in your browser settings; core site content remains accessible without them.',
+            'We use minimal cookies required for analytics and theme preference. You can block cookies in your browser settings; core site content remains accessible without them.',
+            'External checkout pages may set their own cookies under their privacy policies. Review those providers separately before paying.',
           ],
         },
         {
           heading: 'Support',
           paragraphs: [
-            'For privacy questions, use the options on the Support page. Purchase and refund rules are in our Terms & Conditions.',
+            'For privacy questions about r6cheat.net, use the options on the Support page. Purchase and refund rules are in our Terms & Conditions, which are separate from this Privacy Policy.',
           ],
         },
       ],

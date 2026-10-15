@@ -163,6 +163,8 @@ export interface Translations {
     title: string;
     heroTitle: string;
     subtitle: string;
+    heroLead: string;
+    heroExtra: string;
     searchPlaceholder: string;
     latestTitle: string;
     latestSubtitle: string;
@@ -205,6 +207,7 @@ export interface Translations {
     eyebrow: string;
     title: string;
     subtitle: string;
+    intro: string[];
     /** Informational cards only — no links or contact CTAs. */
     channels: {
       icon: string;

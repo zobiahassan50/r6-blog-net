@@ -224,6 +224,8 @@ const published = parseBlogDate(post.date);
   <SiteFaqSection
     items={getBlogFaqs(post.tag, post.slug)}
     titleId={`blog-faq-${post.slug}`}
+    title={`FAQ for ${post.title}`}
+    subtitle={`Follow-up questions tied to this ${post.tag} guide—not a reprint of the global Rainbow Six Siege FAQ.`}
     class="border-t border-border bg-muted/20"
   />
 </BaseLayout>

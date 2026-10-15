@@ -86,42 +86,51 @@ export const productRelatedBlogSlugs: Record<string, string[]> = {
 
 const productBase = '/products/r6-cheats/';
 
-const defaultAcquisitionSteps: AcquisitionStep[] = [
-  {
-    num: '01',
-    title: 'Review current status',
-    desc: 'Check the live banner on r6cheat.net and Discord #status before purchase—especially after a Rainbow Six Siege or BattlEye update.',
-  },
-  {
-    num: '02',
-    title: 'Choose your access tier',
-    desc: 'Select Elite R6 cheats or the utility that matches your goal. Review the feature list before checkout via our secure checkout.',
-  },
-  {
-    num: '03',
-    title: 'Contact the team',
-    desc: 'Open Discord and confirm availability, Ubisoft Connect platform, and payment details with your order email ready.',
-  },
-  {
-    num: '04',
-    title: 'Follow guided setup',
-    desc: 'Use only the operator portal, patch loader, and setup guide. Test in a lobby, load presets, then queue ranked or Quick Match.',
-  },
-];
-
 function acquisitionFor(productName: string): ProductAcquisition {
   return {
     title: `How to get ${productName}`,
-    steps: defaultAcquisitionSteps,
+    steps: [
+      {
+        num: '01',
+        title: 'Review current status',
+        desc: `Before buying ${productName}, check the live banner on r6cheat.net and Discord #status—especially after a Rainbow Six Siege or BattlEye update.`,
+      },
+      {
+        num: '02',
+        title: 'Confirm this listing',
+        desc: `Read the ${productName} feature list and price on this page. Utilities and combat modules solve different jobs—do not assume another product’s notes apply.`,
+      },
+      {
+        num: '03',
+        title: 'Complete checkout',
+        desc: `Pay through the secure checkout linked from ${productName}. Keep the order email ready for portal access and Support follow-ups.`,
+      },
+      {
+        num: '04',
+        title: 'Follow guided setup',
+        desc: `Use only the operator portal, patch loader, and setup guide matched to ${productName}. Test in a lobby before ranked or Quick Match.`,
+      },
+    ],
   };
 }
 
-const sharedGoodToKnow =
-  'Rainbow Six Siege and BattlEye receive frequent updates. Confirm module availability on the live status panel at r6cheat.net before you purchase or launch. Overlay behavior may differ in lobbies, replays and spectator mode after patches.';
+const eliteGoodToKnow =
+  'Elite R6 Siege Cheats tracks Siege and BattlEye patches closely. Confirm Elite module availability on the live status panel before purchase or launch. Overlay behavior can differ in lobbies, replays, and spectator mode after updates.';
 
-const sharedLimitations =
-  'Third-party software in Rainbow Six Siege can violate Ubisoft Terms of Use and lead to BattlEye bans or account action. You use this software at your own risk. Compatibility and availability can change after game, BattlEye, or Windows updates without notice.';
+const liteGoodToKnow =
+  'Lite awareness modules still need a green status note after every Siege patch. Re-check operator ESP and radar on the Lite panel before you queue—do not reuse an Elite or Pro checklist blindly.';
 
+const proGoodToKnow =
+  'Pro scripts plus ESP shift when BattlEye updates land. Confirm recoil and aim helpers on the Pro status note before purchase; Pro is not the same build path as Elite slot queues.';
+
+const sharedLimitationsElite =
+  'Elite R6 Siege Cheats is third-party software. Misuse can violate Ubisoft Terms of Use and lead to BattlEye bans. You accept that risk. Elite availability can change after game, BattlEye, or Windows updates without notice.';
+
+const sharedLimitationsLite =
+  'Lite overlays are still third-party tooling. Account action remains possible. Lite compatibility can change after Siege or Windows updates even when Elite notes look fine.';
+
+const sharedLimitationsPro =
+  'Pro scripts and ESP can conflict with Ubisoft Terms of Use. You use Pro at your own risk. Recoil and aim modules may go offline after patches independently from other tiers.';
 const siegePcRequirements: SystemRequirement[] = [
   { icon: 'reqWindows', text: 'Supported 64-bit edition of Windows 10 or Windows 11.' },
   { icon: 'reqSteam', text: 'Current Rainbow Six Siege client via Ubisoft Connect with latest patches applied.' },
@@ -270,12 +279,12 @@ const tierBodies: Record<string, ProductPage['body']> = {
     { type: 'h2', text: 'Full bot and finish suite' },
     {
       type: 'p',
-      text: 'Player ESP, aimbot, separate recoil layers, and gadget ESP for Claymore, Drone, Thermite, Mute Jammer, Frost Trap, and Ela Mine. Monthly access is 31 days for $35. Lifetime access is $150.',
+      text: 'Elite R6 Siege Cheats includes player ESP, aimbot, separate recoil layers, and gadget ESP for Claymore, Drone, Thermite, Mute Jammer, Frost Trap, and Ela Mine. Monthly Elite access is 31 days for $35. Lifetime Elite access is $150.',
     },
     { type: 'h2', text: 'Availability' },
     {
       type: 'p',
-      text: 'Elite shows as limited slots on the status banner. Open a Discord ticket if checkout is gated—staff confirm slot availability before purchase.',
+      text: 'Elite R6 Siege Cheats may show limited slots on the status banner. Open a Discord ticket if checkout is gated—staff confirm Elite slot availability before purchase.',
     },
   ],
 };
@@ -313,8 +322,8 @@ const productContent: Record<
 > = {
   lite: {
     images: slide('gpHeroEsp', 'gpMapHack', 'gpZoomHack'),
-    goodToKnow: sharedGoodToKnow,
-    limitations: sharedLimitations,
+    goodToKnow: liteGoodToKnow,
+    limitations: sharedLimitationsLite,
     systemRequirements: siegePcRequirements,
     fullFeatures: [
       'Player ESP and boxes',
@@ -342,8 +351,8 @@ const productContent: Record<
   },
   pro: {
     images: slide('gpScripts', 'gpMapHack', 'gpHeroEsp'),
-    goodToKnow: sharedGoodToKnow,
-    limitations: sharedLimitations,
+    goodToKnow: proGoodToKnow,
+    limitations: sharedLimitationsPro,
     systemRequirements: siegePcRequirements,
     fullFeatures: [
       'All Lite ESP & operator ESP modules',
@@ -398,8 +407,8 @@ const productContent: Record<
         captionDesc: 'Damage notifications, plus save and load config.',
       },
     ],
-    goodToKnow: sharedGoodToKnow,
-    limitations: sharedLimitations,
+    goodToKnow: eliteGoodToKnow,
+    limitations: sharedLimitationsElite,
     systemRequirements: siegeSystemRequirements,
     fullFeatures: [
       'Enable aimbot',
@@ -431,10 +440,10 @@ const productContent: Record<
       'Load config',
     ],
     overview: {
-      title: 'Player ESP, aimbot, and separate recoil layers',
+      title: 'Elite R6 Siege Cheats — player ESP, aimbot & recoil',
       paragraphs: [
-        'RAINBOW SIX SIEGE lists player ESP, aimbot, and separate recoil layers. Aimbot options cover an enable toggle, customizable FOV, draw FOV, smoothness, hitbox selection for head, chest, stomach, or pelvis, a target line, and target-line color. ESP options cover skeleton styles (normal, outline, glow, RGB), player name, head circle, China hat, view line, box styles (normal, cornered, 3D), snapline position, feet circle, health, armor, distance, team check, and a 300m max distance.',
-        'Gadget ESP lists attacker gadgets (Claymore, Drone, Thermite, and more) and defender gadgets (Mute Jammer, Frost Trap, Ela Mine). Misc options are damage notifications plus save and load config. The menu groups these under Visuals, Aimbot, and Misc. Monthly access is 31 days for $35. Lifetime access is $150. The listing status is Active (4.9/5). Windows 10/11 on Intel or AMD is required, with HVCI, Core Isolation, TPM, and Secure Boot on. Cloud DMA is required for full functionality.',
+        'Elite R6 Siege Cheats lists player ESP, aimbot, and separate recoil layers for Rainbow Six Siege on Windows PC. Aimbot options cover an enable toggle, customizable FOV, draw FOV, smoothness, hitbox selection for head, chest, stomach, or pelvis, a target line, and target-line color. ESP options cover skeleton styles (normal, outline, glow, RGB), player name, head circle, China hat, view line, box styles (normal, cornered, 3D), snapline position, feet circle, health, armor, distance, team check, and a 300m max distance.',
+        'On this Elite page, gadget ESP lists attacker gadgets (Claymore, Drone, Thermite, and more) and defender gadgets (Mute Jammer, Frost Trap, Ela Mine). Misc options are damage notifications plus save and load config under Visuals, Aimbot, and Misc. Monthly Elite access is 31 days for $35. Lifetime Elite access is $150. Status is Active (4.9/5). Windows 10/11 on Intel or AMD is required, with HVCI, Core Isolation, TPM, and Secure Boot on. Cloud DMA is required for full Elite functionality.',
       ],
     },
   },
@@ -445,7 +454,7 @@ const productContent: Record<
     limitations:
       'UGC does not guarantee account restoration. Results vary by case type. Permanent BattlEye bans may require a new account path instead of appeal.',
     systemRequirements: [
-      { icon: 'reqMailOrder', text: 'Order email used at checkout on r6cheat.net or at checkout on r6cheat.net.' },
+      { icon: 'reqMailOrder', text: 'Order email used at checkout on r6cheat.net or via the secure checkout confirmation.' },
       { icon: 'reqShieldAccount', text: 'Account details and ban or restriction notification if available.' },
       { icon: 'reqWifiPortal', text: 'Internet access for Discord support and case dashboard.' },
     ],
@@ -461,10 +470,10 @@ const productContent: Record<
       'Multi-platform support',
     ],
     overview: {
-      title: 'Built around account recovery and appeal workflows',
+      title: 'UGC Account Recovery for Rainbow Six Siege holds',
       paragraphs: [
-        'UGC (Unban & Governance Control) helps you recover restricted gaming, social and marketplace accounts with structured appeal workflows and automation—not instant unban guarantees.',
-        'Build custom dispute paths, track case status and rebuild your presence with smart restriction-management tools. Support walks you through each step via Discord when you need hands-on help.',
+        'UGC Account Recovery (Unban & Governance Control) helps you document Ubisoft Connect restrictions and BattlEye holds with structured appeal workflows—not instant unban guarantees.',
+        'Build custom dispute paths, track case status, and rebuild access notes with restriction-management tools aimed at Rainbow Six Siege account recovery. Support walks you through each step via Discord when you need hands-on help.',
       ],
     },
   },
@@ -486,10 +495,10 @@ const productContent: Record<
       'Loadout export',
     ],
     overview: {
-      title: 'Built around a local cosmetic preview workflow',
+      title: 'Skin Changer Utility — local cosmetic preview',
       paragraphs: [
-        'Unlock All lets you browse operator uniforms, weapon skins, and sets locally in Rainbow Six Siege—searchable catalog, favorites, and loadout export without modifying live Ubisoft Connect purchases.',
-        'Cosmetics display on your client for testing and content creation. Other players see your actual inventory, not preview skins. Included free with Elite; available standalone for cosmetic preview without combat modules.',
+        'The Skin Changer Utility (Unlock All) lets you browse operator uniforms, weapon skins, and sets locally in Rainbow Six Siege—searchable catalog, favorites, and loadout export without modifying live Ubisoft Connect purchases.',
+        'Skin Changer Utility previews stay on your client for testing and content creation. Other players see your actual inventory, not preview skins. Often included with Elite; also sold standalone when you only need cosmetics without combat modules.',
       ],
     },
   },
@@ -595,7 +604,7 @@ export const productHub = {
   title: t.products.title,
   subtitle: t.products.subtitle,
   description:
-    'RAINBOW SIX SIEGE: player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150.',
+    'R6 Siege Products Hub for ESP, aimbot, and recoil on Windows PC. Monthly is 31 days for $35. Lifetime is unlimited access for $150.',
   buyUrl: R6_BUY_URL,
 };
 

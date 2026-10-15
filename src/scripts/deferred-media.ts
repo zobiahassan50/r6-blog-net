@@ -11,21 +11,34 @@ export function initDeferredVideos() {
 
   const loadVideo = (video: HTMLVideoElement) => {
     if (video.dataset.loaded === '1' || !canLoad(video)) return;
-    const src = video.getAttribute('data-deferred-video');
-    if (!src) return;
+    const primary = video.getAttribute('data-deferred-video');
+    const fallback = video.getAttribute('data-deferred-fallback');
+    if (!primary) return;
 
-    // Prefer VP9/WebM when present (smaller, same visual quality), then MP4.
-    if (/\.mp4$/i.test(src)) {
-      const webm = src.replace(/\.mp4$/i, '.webm');
-      const webmSource = document.createElement('source');
-      webmSource.src = webm;
-      webmSource.type = 'video/webm';
-      video.appendChild(webmSource);
+    // Prefer a single source — never attach WebM + MP4 together (avoids dual download).
+    const canWebm = Boolean(video.canPlayType('video/webm'));
+    let chosen = primary;
+    let type = 'video/mp4';
+
+    if (/\.webm$/i.test(primary)) {
+      if (canWebm) {
+        chosen = primary;
+        type = 'video/webm';
+      } else if (fallback) {
+        chosen = fallback;
+        type = 'video/mp4';
+      }
+    } else if (fallback && /\.webm$/i.test(fallback) && canWebm) {
+      chosen = fallback;
+      type = 'video/webm';
+    } else {
+      chosen = primary;
+      type = 'video/mp4';
     }
 
     const source = document.createElement('source');
-    source.src = src;
-    source.type = 'video/mp4';
+    source.src = chosen;
+    source.type = type;
     video.appendChild(source);
     video.dataset.loaded = '1';
     video.autoplay = true;
@@ -34,8 +47,13 @@ export function initDeferredVideos() {
   };
 
   const schedule = (video: HTMLVideoElement) => {
-    // Poster already paints — start media on next frame (no multi-second idle wait).
-    requestAnimationFrame(() => loadVideo(video));
+    const run = () => loadVideo(video);
+    // Poster paints first — wait for idle so LCP/CSS/fonts win the network.
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(run, { timeout: 3500 });
+    } else {
+      window.setTimeout(run, 1800);
+    }
   };
 
   if ('IntersectionObserver' in window) {
@@ -48,17 +66,19 @@ export function initDeferredVideos() {
           schedule(video);
         }
       },
-      { rootMargin: '200px 0px' },
+      { rootMargin: '80px 0px' },
     );
     nodes.forEach((video) => {
       if (!canLoad(video)) {
-        window.matchMedia(`(min-width: ${video.getAttribute('data-deferred-min-width')}px)`).addEventListener(
-          'change',
-          (event) => {
-            if (event.matches) schedule(video);
-          },
-          { once: true },
-        );
+        window
+          .matchMedia(`(min-width: ${video.getAttribute('data-deferred-min-width')}px)`)
+          .addEventListener(
+            'change',
+            (event) => {
+              if (event.matches) schedule(video);
+            },
+            { once: true },
+          );
         return;
       }
       io.observe(video);

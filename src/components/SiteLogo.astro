@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/logo.png';
-import { IMAGE_QUALITY } from '../utils/optimizedImage';
+import { LOGO_QUALITY } from '../utils/optimizedImage';
 
 interface Props {
   width?: number;
@@ -27,7 +27,7 @@ const {
   height={height}
   densities={[1, 2]}
   format="webp"
-  quality={IMAGE_QUALITY}
+  quality={LOGO_QUALITY}
   loading={loading}
   decoding="async"
   class={className}

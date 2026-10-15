@@ -178,7 +178,11 @@ export const forumPosts: ForumPost[] = [
     excerpt: 'Ask about modules, price, and Windows PC scope. Confirm the notes on the product page before checkout.',
     author: 'guide_team', age: '2 hours ago', commentsCount: 3, upvotes: 128, flair: 'Guide Q&A',
     sourceTitle: 'Rainbow Six Siege feature overview', sourcePath: '/blog/r6-cheats-features/',
-    body: ['Product questions belong here: modules, pricing, and what the product page covers for Windows PC. Confirm the notes there before you buy.', 'Licenses start at $35. Longer access can cost more. Checkout is external, and this site does not store card details.'],
+    body: [
+      'Product questions belong here: modules, pricing, and what the product page covers for Windows PC. Confirm the notes there before you buy.',
+      'Licenses often start near $35. Longer access can cost more. Checkout is external, and this forum preview does not store card details.',
+      'If you are choosing between Elite combat modules and utilities such as UGC or Skin Changer, say which goal you have—awareness, scripts, recovery, or cosmetics—so answers stay on topic.',
+    ],
     comments: [
       { author: 'site_reader', age: '1 hour ago', score: 24, body: 'I check the product page for the live price before I use Buy Now.' },
       { author: 'pc_only', age: '48 min. ago', score: 11, body: 'Console is not supported. This listing is the Siege PC client.' },
@@ -238,7 +242,11 @@ export const forumPosts: ForumPost[] = [
     excerpt: 'Menus talk about recoil helpers, radar, and triggerbots. The product page says which of those are in the current build.',
     author: 'guide_team', age: '1 day ago', commentsCount: 2, upvotes: 27, flair: 'Guide Q&A',
     sourceTitle: 'Rainbow Six Siege feature overview', sourcePath: '/blog/r6-cheats-features/',
-    body: ['The settings article is a plain read on how menus talk about recoil helpers, radar, triggerbots, and related controls so the product notes make more sense.', 'It does not replace the product page. Price, modules, and status stay there. Licenses start at $35.'],
+    body: [
+      'The settings article is a plain read on how menus talk about recoil helpers, radar, triggerbots, and related controls so the product notes make more sense.',
+      'It does not replace the product page. Price, modules, and status stay there—confirm those live fields before you pay.',
+      'After you learn the vocabulary, open the Elite or utilities listing that matches your goal and re-check the status banner if Siege just patched.',
+    ],
     comments: [
       { author: 'settings_reader', age: '20 hours ago', score: 10, body: 'I read the settings article first, then the product page, before Buy Now.' },
       { author: 'pc_only', age: '18 hours ago', score: 5, body: 'Windows PC only. Console versions are not supported.' },

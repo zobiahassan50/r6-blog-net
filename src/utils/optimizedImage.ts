@@ -9,8 +9,12 @@ import {
   webpSrc,
 } from './responsiveImage';
 
-/** High visual fidelity — matches “do not compromise quality”. */
-export const IMAGE_QUALITY = 90;
+/** Default stills (cards, gallery). */
+export const IMAGE_QUALITY = 72;
+/** Full-bleed LCP backgrounds — stronger compression for Speed Index. */
+export const HERO_BG_QUALITY = 55;
+/** Small UI logos. */
+export const LOGO_QUALITY = 80;
 
 export interface OptimizedSources {
   avifSrcSet?: string;

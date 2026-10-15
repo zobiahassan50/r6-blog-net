@@ -17,6 +17,10 @@ interface Props {
   variant?: 'full' | 'contextual';
   filterTopics?: FaqTopic[];
   headingLevel?: 'h1' | 'h2';
+  /** Optional overrides so embedded FAQs do not share identical section copy. */
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
 }
 
 const {
@@ -27,6 +31,9 @@ const {
   variant = 'contextual',
   filterTopics: filterTopicsProp,
   headingLevel = variant === 'full' ? 'h1' : 'h2',
+  eyebrow,
+  title,
+  subtitle,
 } = Astro.props;
 
 const copy = variant === 'full' ? SITE_FAQ_SECTION_COPY : CONTEXTUAL_FAQ_SECTION_COPY;
@@ -38,9 +45,9 @@ const showFilters = filterTopics.length > 1;
 <FaqSection
   id={id}
   items={items}
-  eyebrow={copy.eyebrow}
-  title={copy.title}
-  subtitle={copy.subtitle}
+  eyebrow={eyebrow ?? copy.eyebrow}
+  title={title ?? copy.title}
+  subtitle={subtitle ?? copy.subtitle}
   titleId={titleId}
   showFilters={showFilters}
   filterTopics={filterTopics}

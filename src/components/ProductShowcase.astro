@@ -142,8 +142,7 @@ const featureAlts: Record<string, string> = {
                     alt={featureAlts[feature.title] ?? `${feature.title} product preview`}
                     width={640}
                     height={360}
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                    fetchPriority={index === 0 ? 'high' : undefined}
+                    loading="lazy"
                     blurUp={false}
                     widths={CARD_IMAGE_WIDTHS}
                     sizes={CARD_IMAGE_SIZES}

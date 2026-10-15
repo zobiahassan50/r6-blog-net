@@ -1,6 +1,6 @@
 import { getImage } from 'astro:assets';
 import { resolveLocalImage } from './imageAssets';
-import { IMAGE_QUALITY } from './optimizedImage';
+import { HERO_BG_QUALITY, IMAGE_QUALITY } from './optimizedImage';
 import {
   avifSrc,
   defaultWebpSrc,
@@ -32,11 +32,12 @@ export async function buildImagePreload(
   if (asset) {
     const entries = await Promise.all(
       widths.map(async (w) => {
+        const isHeroBg = /herobackground|bloghero/i.test(publicSrc);
         const img = await getImage({
           src: asset,
           width: w,
           format: 'avif',
-          quality: IMAGE_QUALITY,
+          quality: isHeroBg ? HERO_BG_QUALITY : IMAGE_QUALITY,
         });
         return { w, src: img.src };
       }),

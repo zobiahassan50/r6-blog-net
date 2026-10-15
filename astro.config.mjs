@@ -68,8 +68,8 @@ export default defineConfig({
     },
   },
   build: {
-    // Inline small page CSS to cut render-blocking round-trips (Speed Index).
-    inlineStylesheets: 'auto',
-    assetsInlineLimit: 8192,
+    // Inline stylesheets into HTML to remove render-blocking CSS round-trips (LCP/FCP).
+    inlineStylesheets: 'always',
+    assetsInlineLimit: 12288,
   },
 });

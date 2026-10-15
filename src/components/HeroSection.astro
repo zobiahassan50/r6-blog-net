@@ -5,7 +5,7 @@ import { R6_BUY_URL } from '../config/checkout';
 import { ROUTES } from '../utils/path';
 import { compatibilityIcons, heroStatIcons, heroStatusPills } from '../data/sectionIcons';
 import { HERO_BG_SIZES, HERO_BG_WIDTHS } from '../utils/responsiveImage';
-import { IMAGE_QUALITY } from '../utils/optimizedImage';
+import { HERO_BG_QUALITY } from '../utils/optimizedImage';
 import heroBg from '../assets/images/herobackground.png';
 import Icon from './icons/Icon.astro';
 import { Button } from '@/components/starwind/button';
@@ -34,16 +34,17 @@ const heroMarqueePills = [
     <Picture
       src={heroBg}
       formats={['avif', 'webp']}
+      fallbackFormat="webp"
       widths={[...HERO_BG_WIDTHS]}
       sizes={HERO_BG_SIZES}
-      width={1920}
-      height={1080}
+      width={1280}
+      height={720}
       alt="Rainbow Six Siege cheats hero background"
       class="h-full w-full object-cover brightness-[0.9] dark:brightness-[0.45]"
       loading="eager"
       decoding="async"
       fetchpriority="high"
-      quality={IMAGE_QUALITY}
+      quality={HERO_BG_QUALITY}
     />
   </div>
   <div class="pointer-events-none absolute inset-0 bg-white/85 dark:bg-black/55" aria-hidden="true" />
@@ -101,11 +102,14 @@ const heroMarqueePills = [
             loop
             playsinline
             preload="none"
-            poster="/images/posters/hero-poster.webp"
-            data-deferred-video="/videos/hero.mp4"
+            poster="/images/posters/hero-poster-sm.webp"
+            data-deferred-video="/videos/hero.webm"
+            data-deferred-fallback="/videos/hero.mp4"
             data-deferred-min-width="1024"
             aria-label="Rainbow Six Siege product preview"
-          ></video>
+          >
+            <track kind="captions" srclang="en" label="English" src="/videos/hero-captions.vtt" />
+          </video>
         </div>
         <div class="grid w-full grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4 lg:grid-cols-2">
           {h.metrics.map((m, i) => (

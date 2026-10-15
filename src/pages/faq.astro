@@ -22,7 +22,7 @@ const faqs = getAllFaqs();
     webPageSchema({
       name: 'Rainbow Six Siege FAQ',
       description:
-        'What this independent publication covers, how we source facts, and how fair-play topics are handled.',
+        'R6Cheats Answers for Rainbow Six Siege on Windows PC: how we source facts, what listings cover, and how fair-play topics are handled.',
       url: '/faq/',
     }),
     faqPageSchema(faqs.map((f, i) => ({ num: String(i + 1).padStart(2, '0'), q: f.q, a: f.a.replace(/<[^>]+>/g, '') }))),
