@@ -13,6 +13,7 @@ interface Props {
 
 const { heading = 'h2', titleId } = Astro.props;
 const s = t.products;
+const FeatureHeading = heading === 'h1' ? 'h2' : 'h3';
 
 const main = siegeCatalogCards.find((card) => card.title === 'RAINBOW SIX SIEGE') ?? siegeCatalogCards[0];
 const features = siegeCatalogCards.filter((card) => card.label === 'Included with Siege');
@@ -27,6 +28,12 @@ const featureImages: Record<string, string> = {
   'Player ESP': '/images/playerproduct.jpg',
   'Gadget ESP': '/images/gadegtespproduct.jpeg',
   Misc: '/images/misc.jpeg',
+};
+const featureAlts: Record<string, string> = {
+  Aimbot: 'Rainbow Six Siege aimbot module preview',
+  'Player ESP': 'Rainbow Six Siege player ESP overlay preview',
+  'Gadget ESP': 'Rainbow Six Siege gadget ESP overlay preview',
+  Misc: 'Rainbow Six Siege misc cheat options preview',
 };
 ---
 
@@ -58,10 +65,10 @@ const featureImages: Record<string, string> = {
         main && (
           <div class="flex shrink-0 flex-wrap gap-3">
             <Button as="a" href={main.buyUrl} variant="primary" class="rounded-xl" target="_self">
-              Buy now
+              Buy Rainbow Six Siege Cheats
             </Button>
             <Button as="a" href={main.href} variant="outline" class="rounded-xl">
-              View details
+              View Rainbow Six Siege details
             </Button>
           </div>
         )
@@ -119,7 +126,7 @@ const featureImages: Record<string, string> = {
               >
                 <div class="p-6 md:py-8 md:pr-[24rem] md:pl-8">
                   <p class="text-xs font-medium uppercase tracking-wider text-primary">Included with Siege</p>
-                  <h3 class="mt-2 text-2xl font-semibold tracking-tight">{feature.title}</h3>
+                  <FeatureHeading class="mt-2 text-2xl font-semibold tracking-tight">{feature.title}</FeatureHeading>
                   <ul class="mt-5 grid gap-2.5 sm:grid-cols-2">
                     {feature.features.map((item) => (
                       <li class="flex items-start gap-2 text-sm leading-snug text-muted-foreground">
@@ -132,7 +139,7 @@ const featureImages: Record<string, string> = {
                 <div class="flex items-center justify-center px-6 pb-6 md:absolute md:inset-y-0 md:right-0 md:w-[22rem] md:justify-end md:px-6 md:pb-0">
                   <ResponsiveImage
                     src={featureImages[feature.title] ?? '/images/aimbotproduct.jpeg'}
-                    alt={feature.title}
+                    alt={featureAlts[feature.title] ?? `${feature.title} product preview`}
                     width={640}
                     height={360}
                     loading={index === 0 ? 'eager' : 'lazy'}
@@ -165,7 +172,7 @@ const featureImages: Record<string, string> = {
           </div>
         </div>
         <Button as="a" href={item.buyUrl} variant="outline" class="rounded-xl" target="_self">
-          Buy now
+          {`Buy ${item.title}`}
         </Button>
       </div>
     ))

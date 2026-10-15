@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { blogPosts, getBlogTags } from '../../data/blog';
 import { t } from '../../i18n';
@@ -16,11 +17,10 @@ import {
   CARD_IMAGE_WIDTHS,
   HERO_BG_SIZES,
   HERO_BG_WIDTHS,
-  avifSrc,
-  defaultWebpSrc,
-  responsiveAvifSrcSet,
-  responsiveSrcSet,
 } from '../../utils/responsiveImage';
+import { IMAGE_QUALITY } from '../../utils/optimizedImage';
+import { buildImagePreload } from '../../utils/preloadImage';
+import blogHero from '../../assets/images/bloghero.jpeg';
 
 const seo = resolvePageSeo('/blog/');
 const breadcrumbs = [
@@ -31,25 +31,21 @@ const breadcrumbs = [
 const tags = getBlogTags();
 const tagIcon = (tag: string): IconName => blogTagIcons[tag] ?? 'tag';
 const firstPost = blogPosts[0];
-const firstAvifSet = firstPost ? responsiveAvifSrcSet(firstPost.image, CARD_IMAGE_WIDTHS) : undefined;
 const firstImagePreload = firstPost
-  ? firstAvifSet
-    ? avifSrc(firstPost.image, CARD_IMAGE_WIDTHS[0])
-    : defaultWebpSrc(firstPost.image, CARD_IMAGE_WIDTHS)
+  ? await buildImagePreload(
+      firstPost.image,
+      CARD_IMAGE_WIDTHS,
+      '(min-width: 1024px) 352px, (min-width: 640px) 50vw, 100vw',
+      CARD_IMAGE_WIDTHS[0],
+    )
   : null;
-const firstImageSrcSet = firstPost
-  ? (firstAvifSet ?? responsiveSrcSet(firstPost.image, CARD_IMAGE_WIDTHS, 'webp'))
-  : null;
-const firstImageType = firstAvifSet ? 'image/avif' : 'image/webp';
 
-const blogHeroSrc = '/images/bloghero.jpeg';
-const blogHeroAvif = responsiveAvifSrcSet(blogHeroSrc, HERO_BG_WIDTHS);
-const blogHeroWebp = responsiveSrcSet(blogHeroSrc, HERO_BG_WIDTHS, 'webp');
-const blogHeroDefault = defaultWebpSrc(blogHeroSrc, HERO_BG_WIDTHS);
-const blogHeroPreload = blogHeroAvif
-  ? avifSrc(blogHeroSrc, 1280)
-  : blogHeroDefault;
-const blogHeroPreloadType = blogHeroAvif ? 'image/avif' : 'image/webp';
+const blogHeroPreload = await buildImagePreload(
+  '/images/bloghero.jpeg',
+  HERO_BG_WIDTHS,
+  HERO_BG_SIZES,
+  1280,
+);
 
 const searchSuggestions = blogPosts.map((post) => ({
   title: post.title,
@@ -72,50 +68,53 @@ const searchSuggestions = blogPosts.map((post) => ({
     breadcrumbSchema(breadcrumbs),
   ]}
 >
-  <link
-    slot="head"
-    rel="preload"
-    as="image"
-    type={blogHeroPreloadType}
-    href={blogHeroPreload}
-    imagesrcset={blogHeroAvif ?? blogHeroWebp ?? undefined}
-    imagesizes={HERO_BG_SIZES}
-    fetchpriority="high"
-  />
+  {
+    blogHeroPreload && (
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        type={blogHeroPreload.type}
+        href={blogHeroPreload.href}
+        imagesrcset={blogHeroPreload.imagesrcset}
+        imagesizes={blogHeroPreload.imagesizes}
+        fetchpriority="high"
+      />
+    )
+  }
   {
     firstImagePreload && (
       <link
         slot="head"
         rel="preload"
         as="image"
-        type={firstImageType}
-        href={firstImagePreload}
-        imagesrcset={firstImageSrcSet ?? undefined}
-        imagesizes="(min-width: 1024px) 352px, (min-width: 640px) 50vw, 100vw"
+        type={firstImagePreload.type}
+        href={firstImagePreload.href}
+        imagesrcset={firstImagePreload.imagesrcset}
+        imagesizes={firstImagePreload.imagesizes}
       />
     )
   }
   <section class="relative border-b border-border bg-background dark:bg-neutral-950" aria-labelledby="blog-hero-title">
-    <picture class="pointer-events-none absolute inset-0" aria-hidden="true">
-      {blogHeroAvif && (
-        <source type="image/avif" srcset={blogHeroAvif} sizes={HERO_BG_SIZES} />
-      )}
-      {blogHeroWebp && (
-        <source type="image/webp" srcset={blogHeroWebp} sizes={HERO_BG_SIZES} />
-      )}
-      <img
-        src={blogHeroDefault}
-        srcset={blogHeroWebp}
+    <div
+      class="pointer-events-none absolute inset-0 [&>picture]:contents"
+      aria-hidden="true"
+    >
+      <Picture
+        src={blogHero}
+        formats={['avif', 'webp']}
+        widths={[...HERO_BG_WIDTHS]}
         sizes={HERO_BG_SIZES}
-        alt=""
+        width={1920}
+        height={1080}
+        alt="R6Cheats blog guides and patch notes background"
         class="h-full w-full object-cover brightness-[0.95] dark:brightness-[0.78]"
-        width="1920"
-        height="1080"
-        decoding="async"
         loading="eager"
+        decoding="async"
         fetchpriority="high"
+        quality={IMAGE_QUALITY}
       />
-    </picture>
+    </div>
     <div class="absolute inset-0 bg-white/85 dark:bg-black/25" aria-hidden="true"></div>
 
     <div class="relative z-10 mx-auto flex min-h-[28rem] max-w-6xl flex-col justify-center px-5 py-16 md:min-h-[34rem] md:py-20">

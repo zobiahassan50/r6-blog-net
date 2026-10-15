@@ -3,6 +3,7 @@ import '../../styles/forum.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Icon from '../../components/icons/Icon.astro';
+import SiteLogo from '../../components/SiteLogo.astro';
 import { forumCategories, forumPosts } from '../../data/forum';
 import { blogPosts, getBlogPostTimestamp } from '../../data/blog';
 import { resolvePageSeo } from '../../config/seo';
@@ -28,7 +29,7 @@ const sourceTimestamp = (path?: string) => {
       <header class="forum-hero">
         <div>
           <p class="section-header__eyebrow">Rainbow Six Siege community forum</p>
-          <h1>Rainbow Six Siege  Forum</h1>
+          <h1>Rainbow Six Siege Forum</h1>
           <p class="forum-hero__copy">Product questions, Windows PC setup, status notes, and fair play. Separate from blogs and guides.</p>
         </div>
         <a class="forum-create" href="/blog/"><Icon name="messageCircle" size={17} /> Explore the guides</a>
@@ -62,7 +63,7 @@ const sourceTimestamp = (path?: string) => {
               <article class="forum-post-card" data-forum-card data-post-slug={post.slug} data-upvotes={post.upvotes} data-category={categoryKey(post.category)} data-comments={post.commentsCount} data-published={sourceTimestamp(post.sourcePath)} data-order={index}>
                 <div class="forum-vote" aria-label="Discussion voting">
                   <button class="forum-vote__up" type="button" data-vote-up aria-label="Upvote this discussion"><Icon name="chevronDown" size={16} /></button>
-                  <strong data-vote-count>{post.upvotes}</strong>
+                  <span data-vote-count>{post.upvotes}</span>
                   <button type="button" disabled aria-label="Downvoting is unavailable"><Icon name="chevronDown" size={16} /></button>
                 </div>
                 <div class="forum-post-card__body">
@@ -76,8 +77,8 @@ const sourceTimestamp = (path?: string) => {
                   {post.sourceTitle && <p class="forum-source">From the guide: <a href={post.sourcePath}>{post.sourceTitle}</a></p>}
                   <div class="forum-post-actions">
                     {post.flair && <span class={`forum-flair tone-${post.categoryTone}`}>{post.flair}</span>}
-                    <a href={`/forum/${post.slug}/`}><Icon name="messageCircle" size={15} /> {post.commentsCount} comments</a>
-                    <a href={`/forum/${post.slug}/`}><Icon name="arrowRight" size={15} /> Read discussion</a>
+                    <a href={`/forum/${post.slug}/`}><Icon name="messageCircle" size={15} /> {post.commentsCount} comments on {post.title}</a>
+                    <a href={`/forum/${post.slug}/`}><Icon name="arrowRight" size={15} /> Read discussion: {post.title}</a>
                   </div>
                 </div>
               </article>
@@ -96,9 +97,9 @@ const sourceTimestamp = (path?: string) => {
           <section class="forum-side-card forum-about" id="community-guidelines">
             <div class="forum-side-card__banner"></div>
             <div class="forum-about__content">
-              <div class="forum-about__title"><span class="forum-community-avatar forum-community-avatar--brand"><img src="/logo.png" alt="" width="34" height="34" /></span><h2>R6Cheats Community</h2></div>
+              <div class="forum-about__title"><span class="forum-community-avatar forum-community-avatar--brand"><SiteLogo width={34} height={34} loading="lazy" /></span><h2>R6Cheats Community</h2></div>
               <p>A home for R6 players to trade ideas, learn together, and celebrate the game.</p>
-              <div class="forum-stats"><span><b>{forumPosts.length}</b> guide discussions</span><span><b>{forumCategories.length}</b> topics</span></div>
+              <div class="forum-stats"><span><span>{forumPosts.length}</span> guide discussions</span><span><span>{forumCategories.length}</span> topics</span></div>
               <a class="forum-join" href="/blog/">Explore all guides</a>
             </div>
           </section>
@@ -106,7 +107,7 @@ const sourceTimestamp = (path?: string) => {
             <h2 class="forum-side-heading">Communities</h2>
             <ul class="forum-community-list">
               {forumCategories.map((category, index) => (
-                <li><a href={`/forum/?category=${categoryKey(category.name)}`}><span class={`forum-community-avatar tone-${category.tone}`} aria-hidden="true"><Icon name={category.icon} size={15} /></span><span><b>{category.name}</b><small>Browse related Q&amp;A</small></span><Icon name="chevronRight" size={15} /></a></li>
+                <li><a href={`/forum/?category=${categoryKey(category.name)}`}><span class={`forum-community-avatar tone-${category.tone}`} aria-hidden="true"><Icon name={category.icon} size={15} /></span><span><span>{category.name}</span><small>Browse {category.name} Q&amp;A</small></span><Icon name="chevronRight" size={15} /></a></li>
               ))}
             </ul>
             <a class="forum-text-link" href="#communities">Browse all communities <Icon name="arrowRight" size={14} /></a>

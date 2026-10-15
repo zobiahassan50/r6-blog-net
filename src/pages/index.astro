@@ -8,19 +8,17 @@ import ContentSections from '../components/ContentSections.astro';
 import { resolvePageSeo } from '../config/seo';
 import { faqPageSchema, organizationSchema, websiteSchema } from '../utils/schema';
 import { getLandingFaqs } from '../data/faq';
-import {
-  HERO_BG_SIZES,
-  heroBgPreloadHref,
-  heroBgPreloadSrcSet,
-  heroBgPreloadType,
-} from '../utils/responsiveImage';
+import { HERO_BG_PRELOAD_WIDTHS, HERO_BG_SIZES } from '../utils/responsiveImage';
+import { buildImagePreload } from '../utils/preloadImage';
 
 const seo = resolvePageSeo('/');
 const homeFaqs = getLandingFaqs();
-const heroBg = '/images/herobackground.png';
-const heroPreloadHref = heroBgPreloadHref(heroBg);
-const heroPreloadSrcSet = heroBgPreloadSrcSet(heroBg);
-const heroPreloadMime = heroBgPreloadType(heroBg);
+const heroPreload = await buildImagePreload(
+  '/images/herobackground.png',
+  HERO_BG_PRELOAD_WIDTHS,
+  HERO_BG_SIZES,
+  960,
+);
 ---
 
 <BaseLayout
@@ -28,16 +26,20 @@ const heroPreloadMime = heroBgPreloadType(heroBg);
   description={seo.description}
   jsonLd={[websiteSchema(), organizationSchema(), faqPageSchema(homeFaqs.map((f, i) => ({ num: String(i + 1).padStart(2, '0'), q: f.q, a: f.a.replace(/<[^>]+>/g, '') })))]}
 >
-  <link
-    slot="head"
-    rel="preload"
-    as="image"
-    type={heroPreloadMime}
-    href={heroPreloadHref}
-    imagesrcset={heroPreloadSrcSet}
-    imagesizes={HERO_BG_SIZES}
-    fetchpriority="high"
-  />
+  {
+    heroPreload && (
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        type={heroPreload.type}
+        href={heroPreload.href}
+        imagesrcset={heroPreload.imagesrcset}
+        imagesizes={heroPreload.imagesizes}
+        fetchpriority="high"
+      />
+    )
+  }
   <HeroSection />
   <FeaturesSection />
   <ProductsSection />

@@ -28,8 +28,8 @@ export const en: Translations = {
     titleLine2: 'R6 Cheats — Aimbot, ESP & Hacks',
     subtitle:
       'Premium R6 Siege cheats for Windows PC, featuring customizable aimbot, ESP, and wallhacks. Check the product page for live module status and pricing before checking out, or explore our blogs for detailed setup guides.',
-    ctaPrimary: 'View Product',
-    ctaDiscord: 'Buy Now',
+    ctaPrimary: 'View Rainbow Six Siege products',
+    ctaDiscord: 'Buy Rainbow Six Siege Cheats',
     modesLabel: 'Playlists',
     modes: ['Ranked', 'Quick Match', 'Unranked', 'Standard'],
     metrics: [
@@ -41,7 +41,7 @@ export const en: Translations = {
   },
   features: {
     eyebrow: 'Modules',
-    title: 'What the listing covers',
+    title: 'What You Get',
     subtitle: 'ESP, wallhack, aim helpers, radar, and recoil tools for Rainbow Six Siege on Windows PC. Exact modules stay on the product page.',
     items: [
       {
@@ -193,11 +193,11 @@ export const en: Translations = {
   setup: {
     eyebrow: 'Getting started',
     titleLead: 'Checkout to game in',
-    titleHighlight: '3 steps',
+    titleHighlight: 'Three steps',
     intro:
       'A short checklist: you are on Windows, you have read the live product notes, and you know delivery is digital after payment.',
-    ctaPrimary: 'View Product',
-    ctaSecondary: 'Read the FAQ',
+    ctaPrimary: 'View R6 Siege product page',
+    ctaSecondary: 'Read the Rainbow Six Siege FAQ',
     ctaPrimaryHref: productBase,
     ctaSecondaryHref: '/faq/',
     steps: [
@@ -384,12 +384,12 @@ export const en: Translations = {
   workflow: {
     eyebrow: 'How it works',
     badge: '4 easy steps',
-    titleBefore: 'From product notes to',
-    titleHighlight: 'Windows PC.',
+    titleBefore: 'From Buy To',
+    titleHighlight: 'Saved Config.',
     subtitle: 'The same path the R6 Siege Cheats page describes: confirm the platform, read the notes, pay, then re-check status after patches.',
-    ctaLabel: 'View Product',
+    ctaLabel: 'Open Rainbow Six Siege products',
     ctaHref: productBase,
-    ctaSecondary: 'Read the FAQ',
+    ctaSecondary: 'Browse the Siege FAQ',
     ctaSecondaryHref: '/faq/',
     items: [
       {

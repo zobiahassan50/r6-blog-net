@@ -1,4 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
+import { resolveLocalImage } from '../utils/imageAssets';
+import { IMAGE_QUALITY } from '../utils/optimizedImage';
 import {
   DEFAULT_IMAGE_WIDTHS,
   defaultWebpSrc,
@@ -37,29 +40,47 @@ const {
   blurUp = loading === 'lazy',
 } = Astro.props;
 
+const asset = !desktopOnly ? resolveLocalImage(src) : undefined;
 const isRaster = /\.(png|jpe?g|webp|avif)$/i.test(src);
 const webpSrcSet = responsiveSrcSet(src, widths, 'webp');
 const avifSrcSet = responsiveAvifSrcSet(src, widths);
 const lqip = placeholderSrc(src);
-const hasLqip = blurUp && !desktopOnly && publicAssetExists(lqip);
+const hasLqip = !asset && blurUp && !desktopOnly && publicAssetExists(lqip);
 const imgSrc = desktopOnly
   ? 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
   : defaultWebpSrc(src, widths);
 const pictureSizes = desktopOnly ? '(min-width: 1024px) 490px, 1px' : sizes;
 const pictureMedia = desktopOnly ? '(min-width: 1024px)' : undefined;
+const decoding = loading === 'eager' ? 'sync' : 'async';
 ---
 
 {
-  isRaster ? (
+  asset ? (
+    <Picture
+      src={asset}
+      formats={['avif', 'webp']}
+      widths={[...widths]}
+      sizes={pictureSizes}
+      width={width}
+      height={height}
+      alt={alt}
+      loading={loading}
+      decoding={decoding}
+      fetchpriority={fetchPriority}
+      quality={IMAGE_QUALITY}
+      class={className}
+    />
+  ) : isRaster ? (
     <span class:list={['ri', hasLqip && 'ri--blur', hasLqip && className]} data-ri={hasLqip ? '' : undefined}>
       {
         hasLqip && (
           <img
             src={lqip}
-            alt=""
+            alt={alt || 'Loading image preview'}
             width={width}
             height={height}
             decoding="async"
+            loading="lazy"
             aria-hidden="true"
             class="ri__lqip"
           />
@@ -79,7 +100,7 @@ const pictureMedia = desktopOnly ? '(min-width: 1024px)' : undefined;
           width={width}
           height={height}
           loading={loading}
-          decoding={loading === 'eager' ? 'sync' : 'async'}
+          decoding={decoding}
           fetchpriority={fetchPriority}
           sizes={pictureSizes}
           class:list={['ri__img', className]}
@@ -94,7 +115,7 @@ const pictureMedia = desktopOnly ? '(min-width: 1024px)' : undefined;
       width={width}
       height={height}
       loading={loading}
-      decoding={loading === 'eager' ? 'sync' : 'async'}
+      decoding={decoding}
       fetchpriority={fetchPriority}
       class={className}
     />

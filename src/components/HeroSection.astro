@@ -1,26 +1,17 @@
 ---
+import { Picture } from 'astro:assets';
 import { t } from '../i18n';
 import { R6_BUY_URL } from '../config/checkout';
 import { ROUTES } from '../utils/path';
 import { compatibilityIcons, heroStatIcons, heroStatusPills } from '../data/sectionIcons';
-import {
-  HERO_BG_SIZES,
-  HERO_BG_WIDTHS,
-  defaultWebpSrc,
-  responsiveAvifSrcSet,
-  responsiveSrcSet,
-} from '../utils/responsiveImage';
+import { HERO_BG_SIZES, HERO_BG_WIDTHS } from '../utils/responsiveImage';
+import { IMAGE_QUALITY } from '../utils/optimizedImage';
+import heroBg from '../assets/images/herobackground.png';
 import Icon from './icons/Icon.astro';
 import { Button } from '@/components/starwind/button';
 import { Badge } from '@/components/starwind/badge';
 
 const h = t.hero;
-/** Absolute public path — case-sensitive on Cloudflare. */
-const heroBgSrc = '/images/herobackground.png';
-const heroBgWebpSrcSet = responsiveSrcSet(heroBgSrc, HERO_BG_WIDTHS, 'webp');
-const heroBgAvifSrcSet = responsiveAvifSrcSet(heroBgSrc, HERO_BG_WIDTHS);
-const heroBgDefault = defaultWebpSrc(heroBgSrc, HERO_BG_WIDTHS);
-
 
 const heroMarqueePills = [
   ...heroStatusPills,
@@ -36,26 +27,25 @@ const heroMarqueePills = [
   class="relative overflow-hidden border-b border-border bg-background dark:bg-neutral-950"
   aria-labelledby="hero-title"
 >
-  <picture class="pointer-events-none absolute inset-0" aria-hidden="true">
-    {heroBgAvifSrcSet && (
-      <source type="image/avif" srcset={heroBgAvifSrcSet} sizes={HERO_BG_SIZES} />
-    )}
-    {heroBgWebpSrcSet && (
-      <source type="image/webp" srcset={heroBgWebpSrcSet} sizes={HERO_BG_SIZES} />
-    )}
-    <img
-      src={heroBgDefault}
-      srcset={heroBgWebpSrcSet}
+  <div
+    class="pointer-events-none absolute inset-0 [&>picture]:contents"
+    aria-hidden="true"
+  >
+    <Picture
+      src={heroBg}
+      formats={['avif', 'webp']}
+      widths={[...HERO_BG_WIDTHS]}
       sizes={HERO_BG_SIZES}
-      alt=""
+      width={1920}
+      height={1080}
+      alt="Rainbow Six Siege cheats hero background"
       class="h-full w-full object-cover brightness-[0.9] dark:brightness-[0.45]"
-      width="1920"
-      height="1080"
+      loading="eager"
       decoding="async"
       fetchpriority="high"
-      loading="eager"
+      quality={IMAGE_QUALITY}
     />
-  </picture>
+  </div>
   <div class="pointer-events-none absolute inset-0 bg-white/85 dark:bg-black/55" aria-hidden="true" />
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--primary)_0%,transparent_55%)] opacity-10 dark:opacity-20" aria-hidden="true" />
 
@@ -105,6 +95,8 @@ const heroMarqueePills = [
         >
           <video
             class="aspect-[16/10] w-full rounded-lg bg-muted/30 object-cover"
+            width="1280"
+            height="800"
             muted
             loop
             playsinline

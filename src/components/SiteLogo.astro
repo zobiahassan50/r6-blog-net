@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import { IMAGE_QUALITY } from '../utils/optimizedImage';
+
+interface Props {
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  alt?: string;
+}
+
+const {
+  width = 32,
+  height = 32,
+  class: className,
+  loading = 'lazy',
+  alt = 'R6Cheats logo',
+} = Astro.props;
+---
+
+<Image
+  src={logo}
+  alt={alt}
+  width={width}
+  height={height}
+  densities={[1, 2]}
+  format="webp"
+  quality={IMAGE_QUALITY}
+  loading={loading}
+  decoding="async"
+  class={className}
+/>

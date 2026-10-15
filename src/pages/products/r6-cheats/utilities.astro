@@ -97,7 +97,7 @@ const utilityUseCases: Record<string, string> = {
               <CardContent class="space-y-2 text-sm text-muted-foreground">
                 <p>{product.desc}</p>
                 <p>
-                  <strong class="text-foreground">Includes:</strong>{' '}
+                  <span class="font-semibold text-foreground">Includes:</span>{' '}
                   {product.features.slice(0, 4).join(' · ')}
                   {product.more > 0 ? ` · +${product.more} more` : ''}
                 </p>

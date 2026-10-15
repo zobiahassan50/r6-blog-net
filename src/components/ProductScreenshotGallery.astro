@@ -6,11 +6,8 @@ import {
   GALLERY_IMAGE_WIDTHS,
   THUMB_IMAGE_SIZES,
   THUMB_IMAGE_WIDTHS,
-  defaultWebpSrc,
-  publicAssetExists,
-  responsiveAvifSrcSet,
-  responsiveSrcSet,
 } from '../utils/responsiveImage';
+import { buildOptimizedSources } from '../utils/optimizedImage';
 
 interface Props {
   images: ProductSlide[];
@@ -19,12 +16,16 @@ interface Props {
 
 const { images, id = 'product-screenshots' } = Astro.props;
 const hasThumbs = images.length > 1;
-const first = images[0];
 
-const mainSrc = (src: string) => {
-  const webp = defaultWebpSrc(src, GALLERY_IMAGE_WIDTHS);
-  return publicAssetExists(webp) ? webp : src;
-};
+const slides = await Promise.all(
+  images.map(async (img) => {
+    const main = await buildOptimizedSources(img.src, GALLERY_IMAGE_WIDTHS);
+    const thumb = await buildOptimizedSources(img.src, THUMB_IMAGE_WIDTHS);
+    return { ...img, main, thumb };
+  }),
+);
+
+const first = slides[0];
 ---
 
 <div
@@ -37,33 +38,33 @@ const mainSrc = (src: string) => {
       {
         first && (
           <picture>
-            {responsiveAvifSrcSet(first.src, GALLERY_IMAGE_WIDTHS) && (
+            {first.main.avifSrcSet && (
               <source
                 type="image/avif"
-                srcset={responsiveAvifSrcSet(first.src, GALLERY_IMAGE_WIDTHS)}
+                srcset={first.main.avifSrcSet}
                 sizes={GALLERY_IMAGE_SIZES}
                 data-gallery-avif
               />
             )}
-            {responsiveSrcSet(first.src, GALLERY_IMAGE_WIDTHS, 'webp') && (
+            {first.main.webpSrcSet && (
               <source
                 type="image/webp"
-                srcset={responsiveSrcSet(first.src, GALLERY_IMAGE_WIDTHS, 'webp')}
+                srcset={first.main.webpSrcSet}
                 sizes={GALLERY_IMAGE_SIZES}
                 data-gallery-webp
               />
             )}
             <img
-              src={mainSrc(first.src)}
+              src={first.main.imgSrc}
               alt={first.alt}
               width={1280}
               height={720}
               loading="eager"
               fetchpriority="high"
-              decoding="sync"
+              decoding="async"
               sizes={GALLERY_IMAGE_SIZES}
               class="product-gallery__image"
-              data-fallback={first.src}
+              data-fallback={first.main.fallbackSrc}
             />
           </picture>
         )
@@ -82,7 +83,7 @@ const mainSrc = (src: string) => {
   {
     hasThumbs && (
       <div class="product-gallery__thumbs" role="tablist" aria-label="Product images">
-        {images.map((img, i) => (
+        {slides.map((img, i) => (
           <button
             type="button"
             class:list={['product-gallery__thumb', i === 0 && 'is-active']}
@@ -93,28 +94,28 @@ const mainSrc = (src: string) => {
             data-index={i}
             data-src={img.src}
             data-alt={img.alt}
-            data-webp={responsiveSrcSet(img.src, GALLERY_IMAGE_WIDTHS, 'webp')}
-            data-avif={responsiveAvifSrcSet(img.src, GALLERY_IMAGE_WIDTHS) ?? ''}
-            data-main={mainSrc(img.src)}
+            data-webp={img.main.webpSrcSet ?? ''}
+            data-avif={img.main.avifSrcSet ?? ''}
+            data-main={img.main.imgSrc}
           >
             <picture>
-              {responsiveAvifSrcSet(img.src, THUMB_IMAGE_WIDTHS) && (
+              {img.thumb.avifSrcSet && (
                 <source
                   type="image/avif"
-                  srcset={responsiveAvifSrcSet(img.src, THUMB_IMAGE_WIDTHS)}
+                  srcset={img.thumb.avifSrcSet}
                   sizes={THUMB_IMAGE_SIZES}
                 />
               )}
-              {responsiveSrcSet(img.src, THUMB_IMAGE_WIDTHS, 'webp') && (
+              {img.thumb.webpSrcSet && (
                 <source
                   type="image/webp"
-                  srcset={responsiveSrcSet(img.src, THUMB_IMAGE_WIDTHS, 'webp')}
+                  srcset={img.thumb.webpSrcSet}
                   sizes={THUMB_IMAGE_SIZES}
                 />
               )}
               <img
-                src={mainSrc(img.src)}
-                alt=""
+                src={img.thumb.imgSrc}
+                alt={img.alt}
                 width={320}
                 height={180}
                 loading={i === 0 ? 'eager' : 'lazy'}

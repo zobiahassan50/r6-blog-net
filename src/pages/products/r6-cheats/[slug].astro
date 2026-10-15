@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getAllProductSlugs, getProductPage, productHub } from '../../../data/products';
+import { getPageSeoEntry } from '../../../config/pageSeo';
 import { pageTitle } from '../../../config/seo';
 import { breadcrumbSchema, productSchema } from '../../../utils/schema';
 import ProductDetail from '../../../components/ProductDetail.astro';
@@ -24,6 +25,7 @@ if (!product) {
 }
 
 const pagePath = `${productHub.path}${product.slug}/`;
+const seoEntry = getPageSeoEntry(pagePath);
 const breadcrumbs = [
   { name: 'Home', path: '/' },
   { name: 'Products', path: productHub.path },
@@ -41,8 +43,8 @@ const galleryPreloadType = firstAvifSet ? 'image/avif' : 'image/webp';
 ---
 
 <BaseLayout
-  title={pageTitle(product.title)}
-  description={product.desc}
+  title={seoEntry?.title ?? pageTitle(product.title)}
+  description={seoEntry?.description ?? product.desc}
   ogImage={firstImage}
   jsonLd={[
     productSchema({

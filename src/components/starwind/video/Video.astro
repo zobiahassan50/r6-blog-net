@@ -23,6 +23,10 @@ const {
   poster,
   srcdoc,
   class: className,
+  preload = "none",
+  width = 1280,
+  height = 720,
+  playsinline = true,
   ...rest
 } = Astro.props;
 
@@ -75,6 +79,10 @@ const iframeSrc = srcdoc ? undefined : (embedUrl ?? undefined);
       loop={loop}
       controls={controls}
       poster={poster}
+      playsinline={playsinline}
+      preload={preload}
+      width={width}
+      height={height}
       {...rest}
       data-slot="video"
     >

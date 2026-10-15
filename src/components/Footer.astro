@@ -1,6 +1,7 @@
 ---
 import { t } from '../i18n';
 import { Separator } from '@/components/starwind/separator';
+import SiteLogo from './SiteLogo.astro';
 
 const resourceLinks = [
   { href: '/blog/', label: 'Blog archive', ariaLabel: 'Blog' },
@@ -22,7 +23,7 @@ const legalLinks = [
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div class="space-y-4">
         <a href="/" class="inline-flex items-center gap-2.5 font-[family-name:var(--font-heading)] text-lg font-bold text-neutral-950 dark:text-foreground" aria-label={t.ui.homeAria}>
-          <img src="/logo.png" alt="" width="32" height="32" class="rounded-md" />
+          <SiteLogo width={32} height={32} class="rounded-md" loading="lazy" />
           <span aria-hidden="true">R6<span class="text-primary">Cheats</span></span>
         </a>
         <p class="text-sm text-neutral-700 dark:text-muted-foreground">{t.footer.tagline}</p>

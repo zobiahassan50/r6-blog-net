@@ -32,7 +32,7 @@ const relatedPosts = [
         <main class="forum-main">
           <article class="forum-detail-card" data-forum-vote data-post-slug={post.slug} data-upvotes={post.upvotes}>
             <div class="forum-vote forum-vote--detail" aria-label="Discussion voting">
-              <button class="forum-vote__up" type="button" data-vote-up aria-label="Upvote this discussion"><Icon name="chevronDown" size={17} /></button><strong data-vote-count>{post.upvotes}</strong><button type="button" disabled aria-label="Downvoting is unavailable"><Icon name="chevronDown" size={17} /></button>
+              <button class="forum-vote__up" type="button" data-vote-up aria-label="Upvote this discussion"><Icon name="chevronDown" size={17} /></button><span data-vote-count>{post.upvotes}</span><button type="button" disabled aria-label="Downvoting is unavailable"><Icon name="chevronDown" size={17} /></button>
             </div>
             <div class="forum-detail-content">
               <div class="forum-post-meta"><span class={`forum-community-avatar tone-${post.categoryTone}`}><Icon name="users" size={15} /></span><a href="/forum/" class="forum-community-name">d/{post.category.toLowerCase().replaceAll(' ', '')}</a><span>·</span><span><Icon name="userRound" size={13} /> R6Cheats guide team</span><span>Guide-based Q&amp;A</span></div>
@@ -47,8 +47,8 @@ const relatedPosts = [
                 {post.comments.map((comment) => (
                   <article class="forum-comment">
                     <div class="forum-comment__rail"><span class="forum-comment__avatar"><Icon name="userRound" size={14} /></span><span class="forum-comment__line"></span></div>
-                    <div class="forum-comment__body"><div class="forum-comment__meta"><b>Guide answer</b></div><p>{comment.body}</p>
-                    {comment.replies?.map((reply) => <div class="forum-comment forum-comment--reply"><div class="forum-comment__rail"><span class="forum-comment__avatar">{reply.author.slice(0, 1).toUpperCase()}</span></div><div class="forum-comment__body"><div class="forum-comment__meta"><b>u/{reply.author}</b><span>·</span><span>{reply.age}</span></div><p>{reply.body}</p></div></div>)}
+                    <div class="forum-comment__body"><div class="forum-comment__meta"><span>Guide answer</span></div><p>{comment.body}</p>
+                    {comment.replies?.map((reply) => <div class="forum-comment forum-comment--reply"><div class="forum-comment__rail"><span class="forum-comment__avatar">{reply.author.slice(0, 1).toUpperCase()}</span></div><div class="forum-comment__body"><div class="forum-comment__meta"><span>u/{reply.author}</span><span>·</span><span>{reply.age}</span></div><p>{reply.body}</p></div></div>)}
                     </div>
                   </article>
                 ))}
@@ -57,7 +57,7 @@ const relatedPosts = [
           </article>
         </main>
         <aside class="forum-sidebar">
-          <section class="forum-side-card forum-about"><div class="forum-side-card__banner"></div><div class="forum-about__content"><div class="forum-about__title"><span class={`forum-community-avatar tone-${post.categoryTone}`}>d</span><h2>d/{post.category.toLowerCase().replaceAll(' ', '')}</h2></div><p>Browse answers summarized from R6Cheats guides.</p><div class="forum-stats"><span><b>{forumPosts.length}</b> guide discussions</span><span><b>{forumPosts.filter((item) => item.category === post.category).length}</b> in this topic</span></div><a class="forum-join" href="/forum/">Browse discussions</a></div></section>
+          <section class="forum-side-card forum-about"><div class="forum-side-card__banner"></div><div class="forum-about__content"><div class="forum-about__title"><span class={`forum-community-avatar tone-${post.categoryTone}`}>d</span><h2>d/{post.category.toLowerCase().replaceAll(' ', '')}</h2></div><p>Browse answers summarized from R6Cheats guides.</p><div class="forum-stats"><span><span>{forumPosts.length}</span> guide discussions</span><span><span>{forumPosts.filter((item) => item.category === post.category).length}</span> in this topic</span></div><a class="forum-join" href="/forum/">Browse forum discussions</a></div></section>
           <section class="forum-side-card forum-related-card" aria-labelledby="forum-related-title">
             <h2 class="forum-side-heading" id="forum-related-title">More discussions</h2>
             <ul class="forum-related-list">
@@ -65,7 +65,7 @@ const relatedPosts = [
                 <li>
                   <a href={`/forum/${item.slug}/`}>
                     <span class="forum-related-list__category">{item.category}</span>
-                    <b>{item.title}</b>
+                    <span>{item.title}</span>
                     <span class="forum-related-list__meta">{item.commentsCount} guide answers <Icon name="arrowRight" size={14} /></span>
                   </a>
                 </li>

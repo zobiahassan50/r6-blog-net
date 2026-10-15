@@ -14,6 +14,8 @@ interface Props {
   centered?: boolean;
   /** FAQ column alignment (product pages use left) */
   contentAlign?: 'left' | 'center';
+  /** Page-level FAQ uses h1; section embeds keep h2. */
+  headingLevel?: 'h1' | 'h2';
   id?: string;
   class?: string;
 }
@@ -28,6 +30,7 @@ const {
   filterTopics,
   centered = false,
   contentAlign = 'center',
+  headingLevel = 'h2',
   id: sectionId,
   class: className,
 } = Astro.props;
@@ -60,6 +63,7 @@ const filters = filterTopics ?? (['all', 'scripts', 'safety', 'products'] as Faq
       desc={subtitle}
       titleId={titleId}
       centered={centered}
+      headingLevel={headingLevel}
     />
 
     {
