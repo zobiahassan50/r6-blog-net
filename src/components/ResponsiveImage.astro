@@ -20,6 +20,8 @@ interface Props {
   fetchPriority?: 'high' | 'low' | 'auto';
   sizes?: string;
   widths?: readonly number[];
+  /** Astro Picture encode quality (default IMAGE_QUALITY). */
+  quality?: number;
   class?: string;
   desktopOnly?: boolean;
   /** Instant blurred preview for lazy images (skipped for LCP/eager). */
@@ -35,6 +37,7 @@ const {
   fetchPriority,
   sizes = '(min-width: 1024px) 640px, 100vw',
   widths = DEFAULT_IMAGE_WIDTHS,
+  quality = IMAGE_QUALITY,
   class: className,
   desktopOnly = false,
   blurUp = loading === 'lazy',
@@ -68,7 +71,7 @@ const decoding = loading === 'eager' ? 'sync' : 'async';
       loading={loading}
       decoding={decoding}
       fetchpriority={fetchPriority}
-      quality={IMAGE_QUALITY}
+      quality={quality}
       class={className}
     />
   ) : isRaster ? (

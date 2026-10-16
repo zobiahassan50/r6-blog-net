@@ -307,9 +307,11 @@ export const en: Translations = {
     eyebrow: 'Blog',
     title: 'Latest Releases',
     heroTitle: 'R6 Siege Cheats Blogs',
-    subtitle: 'R6 cheats Updates',
-    heroLead: '',
-    heroExtra: '',
+    subtitle: 'Rainbow Six Siege cheats guides and patch notes for Windows PC.',
+    heroLead:
+      'This archive collects Rainbow Six Siege cheats guides and patch notes—ESP, wallhack wording, aimbot settings, BattlEye checklists, and fair-play context. Articles explain terminology; the product page remains the live feature list.',
+    heroExtra:
+      'Filter by topic or sort by read time to find ESP, wallhack, aimbot, and status deep-dives. Re-check the listing after every Siege or BattlEye update before you treat a guide as current.',
     searchPlaceholder: 'Search blogs',
     latestTitle: 'Latest releases',
     latestSubtitle: 'Filter by topic or sort to find ESP, wallhack, aimbot, and cheat deep-dives.',

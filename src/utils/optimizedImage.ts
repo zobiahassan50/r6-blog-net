@@ -11,6 +11,8 @@ import {
 
 /** Default stills (cards, gallery). */
 export const IMAGE_QUALITY = 72;
+/** Blog article heroes — sharper encode; srcset keeps mobile light. */
+export const BLOG_HERO_QUALITY = 85;
 /** Full-bleed LCP backgrounds — stronger compression for Speed Index. */
 export const HERO_BG_QUALITY = 48;
 /** Small UI logos. */

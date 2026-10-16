@@ -12,6 +12,7 @@ import {
 import { R6_BUY_URL, resolveCheckoutHref } from '../../config/checkout';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import { BLOG_HERO_QUALITY } from '../../utils/optimizedImage';
 import BlogSidebar from '../../components/BlogSidebar.astro';
 import BlogPostTopBar from '../../components/BlogPostTopBar.astro';
 import { getBlogFaqs } from '../../data/faq';
@@ -100,9 +101,10 @@ const published = parseBlogDate(post.date);
             <ResponsiveImage
               src={post.image}
               alt={post.title}
-              width={960}
-              height={540}
-              widths={[640, 960, 1280]}
+              width={1376}
+              height={768}
+              widths={[400, 640, 960, 1280]}
+              quality={BLOG_HERO_QUALITY}
               loading="eager"
               fetchPriority="high"
               sizes="(min-width: 768px) 720px, 100vw"
