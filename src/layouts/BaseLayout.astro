@@ -94,6 +94,16 @@ const robotsContent = noindex
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    {/* Async font faces — keeps woff2 off the HTML→CSS→font critical chain */}
+    <link
+      rel="stylesheet"
+      href="/fonts/faces.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="/fonts/faces.css" />
+    </noscript>
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

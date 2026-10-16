@@ -12,7 +12,7 @@ import {
 /** Default stills (cards, gallery). */
 export const IMAGE_QUALITY = 72;
 /** Full-bleed LCP backgrounds — stronger compression for Speed Index. */
-export const HERO_BG_QUALITY = 55;
+export const HERO_BG_QUALITY = 48;
 /** Small UI logos. */
 export const LOGO_QUALITY = 80;
 

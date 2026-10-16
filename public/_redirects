@@ -1,7 +1,8 @@
-# Cloudflare Pages redirects — path rules only (trailingSlash: always).
-# Do NOT add HTTP→HTTPS, www↔apex, or host-based rules here.
-# Cloudflare handles TLS; attach r6cheat.net in the Pages dashboard when ready.
-# Path redirects work on both *.pages.dev and the custom domain.
+# Cloudflare Pages redirects (trailingSlash: always).
+# Host rule: www → apex (requires www.r6cheat.net attached in the Pages dashboard).
+# TLS/HTTPS is handled by Cloudflare; path redirects also work on *.pages.dev.
+
+https://www.r6cheat.net/*  https://r6cheat.net/:splat  301
 
 # Checkout (external)
 /go/r6                 https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302

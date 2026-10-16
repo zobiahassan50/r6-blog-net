@@ -4,10 +4,10 @@ import { Separator } from '@/components/starwind/separator';
 import SiteLogo from './SiteLogo.astro';
 
 const resourceLinks = [
-  { href: '/blog/', label: 'Blog archive', ariaLabel: 'Blog' },
-  { href: '/forum/', label: 'Forum', ariaLabel: 'Forum' },
-  { href: '/products/r6-cheats/elite/', label: 'Elite cheats', ariaLabel: 'Elite cheats' },
-  { href: '/products/r6-cheats/', label: 'Products & utilities', ariaLabel: 'Products' },
+  { href: '/blog/', label: 'Blog archive' },
+  { href: '/forum/', label: 'Forum' },
+  { href: '/products/r6-cheats/elite/', label: 'Elite cheats' },
+  { href: '/products/r6-cheats/', label: 'Products & utilities' },
   { href: '/support/', label: t.footer.support },
 ];
 
@@ -37,7 +37,6 @@ const legalLinks = [
               <a
                 href={link.href}
                 class="text-sm text-neutral-700 transition-colors hover:text-primary dark:text-muted-foreground"
-                aria-label={link.ariaLabel}
                 {...(link.scrollTarget ? { 'data-scroll-target': link.scrollTarget } : {})}
               >
                 {link.label}
@@ -52,7 +51,7 @@ const legalLinks = [
         <ul class="mt-3 space-y-2">
           {resourceLinks.map((link) => (
             <li>
-              <a href={link.href} class="text-sm text-neutral-700 transition-colors hover:text-primary dark:text-muted-foreground" aria-label={link.ariaLabel}>
+              <a href={link.href} class="text-sm text-neutral-700 transition-colors hover:text-primary dark:text-muted-foreground">
                 {link.label}
               </a>
             </li>

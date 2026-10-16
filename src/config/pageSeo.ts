@@ -26,12 +26,12 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'Player ESP, aimbot, gadget ESP, and config save/load. Monthly $35 for 31 days, or lifetime access for $150.',
   },
   '/products/r6-cheats/ugc/': {
-    title: 'UGC Account Recovery | Rainbow Six Siege',
+    title: 'UGC Account Recovery Utility | Rainbow Six Siege PC',
     description:
       'Appeal workflows for Ubisoft Connect restrictions and BattlEye holds—case tracking and dispute templates.',
   },
   '/products/r6-cheats/unlock-all/': {
-    title: 'Skin Changer Utility | Rainbow Six Siege',
+    title: 'Skin Changer Utility | Rainbow Six Siege PC Cheats',
     description:
       'Local cosmetic preview for operator uniforms and weapon skins without Ubisoft Connect store purchases.',
   },
@@ -55,12 +55,12 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
       'R6Cheats Answers for Rainbow Six Siege on Windows PC: how we source facts, what listings cover, and how fair-play topics are handled.',
   },
   '/terms/': {
-    title: 'Terms & Conditions | R6Cheats',
+    title: 'Terms & Conditions | R6Cheats Rainbow Six Siege',
     description:
       'Purchase terms, license use, and refund policy for R6Cheats products sold through r6cheat.net.',
   },
   '/privacy/': {
-    title: 'Privacy Policy | R6Cheats',
+    title: 'Privacy Policy | R6Cheats Rainbow Six Siege',
     description:
       'How r6cheat.net uses analytics, cookies, and contact data when you browse or request support.',
   },

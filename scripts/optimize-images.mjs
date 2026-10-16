@@ -35,8 +35,8 @@ async function writeVariants(input, baseDir, baseName) {
     const webpOut = path.join(baseDir, `${baseName}-${width}.webp`);
     // Hero/full-bleed backgrounds can use slightly stronger compression (LCP-critical).
     const isHeroBg = /herobackground|bloghero/i.test(baseName);
-    const webpQuality = isHeroBg ? 68 : 82;
-    const avifQuality = isHeroBg ? 50 : 68;
+    const webpQuality = isHeroBg ? 62 : 82;
+    const avifQuality = isHeroBg ? 45 : 68;
 
     await pipeline()
       .webp({

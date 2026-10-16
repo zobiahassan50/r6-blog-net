@@ -51,7 +51,11 @@ function guideDiscussion(input: {
     commentsCount: 1,
     upvotes: 14,
     flair: 'Guide Q&A',
-    body: [answer, detail],
+    body: [
+      answer,
+      detail,
+      `For the full walkthrough, open “${input.sourceTitle}” on the blog after every Siege or BattlEye patch. This forum summary is a short Q&A only—it is not a substitute for the live product note or the source guide checklist.`,
+    ],
     comments: [{ author: 'guide_team', age: 'From the guide', score: 0, body: tip }],
   };
 }

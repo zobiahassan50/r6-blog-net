@@ -23,11 +23,9 @@ const lastRowIndex = why.rows.length - 1;
       <p class="section-header__subtitle">{why.subtitle}</p>
     </header>
 
-    {/* Desktop comparison — centered, reference-style columns (no fake table roles). */}
-    <div
-      class="mt-14 hidden justify-center lg:flex"
-      aria-label="R6Cheats compared with typical providers"
-    >
+    {/* Desktop comparison — centered, reference-style columns (sr-only names; no prohibited aria-label on generic divs). */}
+    <div class="mt-14 hidden justify-center lg:flex" role="region" aria-labelledby="why-compare-label">
+      <span id="why-compare-label" class="sr-only">R6Cheats compared with typical providers</span>
       <div
         class="why-compare-layout grid w-full max-w-4xl grid-cols-[minmax(0,1fr)_9.25rem_9.25rem] items-stretch gap-x-10 xl:max-w-5xl xl:gap-x-14"
       >
@@ -65,9 +63,9 @@ const lastRowIndex = why.rows.length - 1;
                     "why-compare-card-row",
                     i === lastRowIndex && "why-compare-card-row--last",
                   ]}
-                  aria-label={`${why.usLabel}: included — ${row.title}`}
                 >
-                  <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 ring-1 ring-primary/40">
+                  <span class="sr-only">{`${why.usLabel}: included — ${row.title}`}</span>
+                  <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 ring-1 ring-primary/40" aria-hidden="true">
                     <Icon name="circleCheck" size={20} />
                   </span>
                 </div>
@@ -94,9 +92,9 @@ const lastRowIndex = why.rows.length - 1;
                     "why-compare-card-row",
                     i === lastRowIndex && "why-compare-card-row--last",
                   ]}
-                  aria-label={`${why.otherLabel}: not included — ${row.title}`}
                 >
-                  <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-muted/80 ring-1 ring-border">
+                  <span class="sr-only">{`${why.otherLabel}: not included — ${row.title}`}</span>
+                  <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-muted/80 ring-1 ring-border" aria-hidden="true">
                     <Icon name="x" size={18} class="text-muted-foreground" />
                   </span>
                 </div>
@@ -145,6 +143,7 @@ const lastRowIndex = why.rows.length - 1;
 
     <div
       class="mt-16 grid max-w-5xl gap-10 border-t border-border pt-12 text-left sm:grid-cols-3 sm:gap-8 lg:mx-auto lg:text-center"
+      role="region"
       aria-label="Platform metrics"
     >
       {

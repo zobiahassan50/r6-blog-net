@@ -28,8 +28,8 @@ export const en: Translations = {
     titleLine2: 'R6 Cheats — Aimbot, ESP & Hacks',
     subtitle:
       'Premium R6 Siege cheats for Windows PC, featuring customizable aimbot, ESP, and wallhacks. Check the product page for live module status and pricing before checking out, or explore our blogs for detailed setup guides.',
-    ctaPrimary: 'View Rainbow Six Siege products',
-    ctaDiscord: 'Buy Rainbow Six Siege Cheats',
+    ctaPrimary: 'View Product',
+    ctaDiscord: 'Buy Now',
     modesLabel: 'Playlists',
     modes: ['Ranked', 'Quick Match', 'Unranked', 'Standard'],
     metrics: [
@@ -196,8 +196,8 @@ export const en: Translations = {
     titleHighlight: 'Three steps',
     intro:
       'A short checklist: you are on Windows, you have read the live product notes, and you know delivery is digital after payment.',
-    ctaPrimary: 'View R6 Siege product page',
-    ctaSecondary: 'Read the Rainbow Six Siege FAQ',
+    ctaPrimary: 'View Product',
+    ctaSecondary: 'Read the FAQ',
     ctaPrimaryHref: productBase,
     ctaSecondaryHref: '/faq/',
     steps: [
@@ -391,9 +391,9 @@ export const en: Translations = {
     titleBefore: 'From Buy To',
     titleHighlight: 'Saved Config.',
     subtitle: 'The same path the R6 Siege Cheats page describes: confirm the platform, read the notes, pay, then re-check status after patches.',
-    ctaLabel: 'Open Rainbow Six Siege products',
+    ctaLabel: 'View Product',
     ctaHref: productBase,
-    ctaSecondary: 'Browse the Siege FAQ',
+    ctaSecondary: 'Read the FAQ',
     ctaSecondaryHref: '/faq/',
     items: [
       {
@@ -527,12 +527,12 @@ export const en: Translations = {
     tagline: 'Rainbow Six Siege cheats — scripts, operator ESP and tools for PC. r6cheat.net',
     explore: 'Explore',
     exploreLinks: [
-      { href: '/#features', label: 'Feature overview', ariaLabel: 'Features', scrollTarget: 'features' },
-      { href: '/products/r6-cheats/elite/', label: 'Elite R6 cheats', ariaLabel: 'Elite cheats' },
-      { href: '/products/r6-cheats/', label: 'All products & utilities', ariaLabel: 'Products' },
-      { href: '/blog/', label: 'Read patch guides', ariaLabel: 'Blog' },
-      { href: '/forum/', label: 'Community forum', ariaLabel: 'Forum' },
-      { href: '/faq/', label: 'Pre-purchase FAQ', ariaLabel: 'FAQ' },
+      { href: '/#features', label: 'Feature overview', scrollTarget: 'features' },
+      { href: '/products/r6-cheats/elite/', label: 'Elite R6 cheats' },
+      { href: '/products/r6-cheats/', label: 'All products & utilities' },
+      { href: '/blog/', label: 'Read patch guides' },
+      { href: '/forum/', label: 'Community forum' },
+      { href: '/faq/', label: 'Pre-purchase FAQ' },
     ],
     support: 'Support',
     legal: 'Legal',

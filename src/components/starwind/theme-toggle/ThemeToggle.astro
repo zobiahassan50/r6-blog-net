@@ -115,13 +115,24 @@ const initialPressed = pressed ?? defaultPressed ?? false;
 </style>
 
 <script>
-  import { initThemeController } from "@starwind-ui/astro/theme";
-
+  // Idle-load theme JS so it stays off the critical request chain / LCP path
+  // and does not force early layout reads during first paint.
   const setupThemeController = () => {
-    initThemeController();
+    void import("@starwind-ui/astro/theme").then(({ initThemeController }) => {
+      initThemeController();
+    });
   };
 
-  setupThemeController();
+  const scheduleBoot = () => {
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(setupThemeController, { timeout: 2500 });
+    } else {
+      window.setTimeout(setupThemeController, 1);
+    }
+  };
+
+  if (document.readyState === "complete") scheduleBoot();
+  else window.addEventListener("load", scheduleBoot, { once: true });
   document.addEventListener("astro:after-swap", setupThemeController);
   document.addEventListener("starwind:init", setupThemeController);
 </script>

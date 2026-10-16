@@ -45,56 +45,6 @@ const supportPage = link('Support page', ROUTES.support);
 const elitePage = link('Elite R6 Siege Cheats listing', `${ROUTES.products}elite/`);
 const utilitiesPage = link('Rainbow Six Siege utilities page', `${ROUTES.products}utilities/`);
 
-/** Homepage-only FAQ — wording stays off the /faq/ page answers. */
-const landingFaqs: SiteFaqItem[] = [
-  {
-    id: 'home-cost',
-    topic: 'products',
-    icon: 'faqAfterBuy',
-    q: 'What does access cost on the homepage listing?',
-    a: a(
-      'The homepage points at Rainbow Six Siege PC access that starts around $35 for a monthly window, with longer options priced higher on checkout. Always confirm the live figure before paying—home copy is a summary, not a receipt.',
-    ),
-  },
-  {
-    id: 'home-consoles',
-    topic: 'setup',
-    icon: 'faqPlatforms',
-    q: 'Can I use these modules on PlayStation or Xbox?',
-    a: a(
-      'No. Everything described on this landing page targets the Windows PC Rainbow Six Siege client through Ubisoft Connect. Console builds are outside the listing.',
-    ),
-  },
-  {
-    id: 'home-stream',
-    topic: 'safety',
-    icon: 'faqStreamProof',
-    q: 'Will overlays show up if I stream from the home PC build?',
-    a: a(
-      'Stream-proof modes are designed so ESP and radar layers stay off OBS and common capture paths when enabled. Still verify with a local recording before you go live after a patch.',
-    ),
-  },
-  {
-    id: 'home-aimbot',
-    topic: 'scripts',
-    icon: 'faqWhichTierScripts',
-    q: 'How much can I tune aim helpers from the marketing overview?',
-    a: a(
-      'The landing overview highlights FOV, smoothness, and bone selection as the usual controls. Exact sliders live on the product notes—treat the homepage as orientation, then open the listing for the live module list.',
-    ),
-  },
-  {
-    id: 'home-windows',
-    topic: 'setup',
-    icon: 'faqPlatforms',
-    q: 'Which Windows versions does the homepage assume?',
-    a: a(
-      'Marketing copy assumes current Windows 10 or Windows 11 on Intel or AMD with the usual security toggles enabled. Re-read the product requirements if your PC is locked down or older than those builds.',
-    ),
-  },
-];
-
-/** Canonical /faq/ answers — longer, unique to that route. */
 export const siteFaqs: SiteFaqItem[] = [
   {
     id: 'cost',
@@ -102,7 +52,7 @@ export const siteFaqs: SiteFaqItem[] = [
     icon: 'faqAfterBuy',
     q: 'How much does it cost?',
     a: a(
-      'On the Rainbow Six Siege FAQ answers page we treat pricing as live: monthly access is commonly listed around $35 for 31 days, and lifetime options sit higher. Longer tiers can cost more. Confirm the external checkout total before you pay—this FAQ never stores card data.',
+      'Licenses start from $35. Longer access tiers may cost more. Confirm the live price on the external checkout page before paying.',
     ),
   },
   {
@@ -111,7 +61,7 @@ export const siteFaqs: SiteFaqItem[] = [
     icon: 'faqProductsPage',
     q: 'Where does checkout happen?',
     a: a(
-      'Checkout for R6Cheats Answers topics completes on an external Buy Now provider. r6cheat.net does not process cards or keep payment credentials. Keep your order email handy for loader and Support follow-ups.',
+      'Purchases are completed through an external Buy Now checkout. This site does not process cards or store payment details.',
     ),
   },
   {
@@ -119,9 +69,7 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'setup',
     icon: 'faqPlatforms',
     q: 'Is it available for consoles?',
-    a: a(
-      'Console Rainbow Six Siege is not covered. This Rainbow Six Siege FAQ is scoped to Windows PC via Ubisoft Connect only. If you play exclusively on console, the modules described here do not apply.',
-    ),
+    a: a('No. This product is scoped to Windows PC. Console versions are not supported.'),
   },
   {
     id: 'stream-proof',
@@ -129,7 +77,7 @@ export const siteFaqs: SiteFaqItem[] = [
     icon: 'faqStreamProof',
     q: 'Can I stream or record my gameplay while using the ESP?',
     a: a(
-      'When stream-proof options are enabled, ESP and radar overlays are intended to stay out of OBS, Discord screen share, and standard recorders. After every BattlEye or client update, capture a private clip to confirm the hide still holds before a public stream.',
+      'Yes, our visual features are completely stream-proof. The ESP and radar overlays will not show up on OBS, Discord screen share, or standard recording software, keeping your gameplay footage looking entirely legitimate.',
     ),
   },
   {
@@ -138,7 +86,7 @@ export const siteFaqs: SiteFaqItem[] = [
     icon: 'faqWhichTierScripts',
     q: 'How customizable are the aimbot settings?',
     a: a(
-      'Aim helpers typically expose field of view, smoothing, and target bone selection so you can keep assists subtle or more aggressive. The live product page lists which of those controls ship in the current build—use this FAQ as vocabulary, not as the inventory.',
+      'You have full control over the configuration. You can adjust the field of view (FOV), smoothing, and target bone selection, allowing you to fine-tune the assistance from a subtle, natural-looking aim assist to a more aggressive playstyle.',
     ),
   },
   {
@@ -147,7 +95,7 @@ export const siteFaqs: SiteFaqItem[] = [
     icon: 'faqPlatforms',
     q: 'Does this work on all modern Windows setups?',
     a: a(
-      'Most current Windows 10 and Windows 11 installs on Intel or AMD are in scope. Secure Boot, HVCI, and Core Isolation expectations are called out on the listing. Check those notes before checkout if you run unusual security software.',
+      'Our R6 modules support most current Windows 10 and Windows 11 builds for both Intel and AMD processors. We recommend checking the specific OS version requirements listed directly on the product page before completing your checkout.',
     ),
   },
   {
@@ -155,26 +103,28 @@ export const siteFaqs: SiteFaqItem[] = [
     topic: 'setup',
     icon: 'faqStatus',
     q: 'How do I confirm current status before buying?',
-    a: `Read the status note on the ${productPage} immediately before checkout, and review our ${antiCheatArticle} plus ${settingsArticle} before you buy. Status can flip after a Siege or BattlEye patch within hours.`,
+    a: `Read the status note on the ${productPage} immediately before checkout, and review our ${antiCheatArticle} plus ${settingsArticle} before you buy.`,
   },
   {
     id: 'read-more',
     topic: 'blog',
     icon: 'faqBlogVsCheats',
     q: 'Where can I read more before purchasing?',
-    a: `Browse the ${articlesHub} for ${featuresOverview}, ${espAimbotArticle}, ${antiCheatContext}, ${settingsCoverage}, and ${hacksCoverage}. Guides explain wording; the product notes remain the feature list that matters at payment time.`,
+    a: `Browse the ${articlesHub} for ${featuresOverview}, ${espAimbotArticle}, ${antiCheatContext}, ${settingsCoverage}, and ${hacksCoverage}.`,
   },
   {
     id: 'contact',
     topic: 'setup',
     icon: 'faqDiscordHelp',
     q: 'How do I get in touch?',
-    a: `Use the ${supportPage} for article or site questions, including loader and checkout help routing. Payment disputes stay with the external checkout provider—include your order email when you write in.`,
+    a: `Use the ${supportPage} for questions about our articles or this site. Checkout and payment issues are handled on the external checkout provider's side.`,
   },
 ];
 
+const landingFaqIds = ['cost', 'consoles', 'stream-proof', 'aimbot-settings', 'windows-setups'];
+
 export function getLandingFaqs(): SiteFaqItem[] {
-  return landingFaqs;
+  return siteFaqs.filter((f) => landingFaqIds.includes(f.id));
 }
 
 export function getAllFaqs(): SiteFaqItem[] {
@@ -185,8 +135,7 @@ export function getAllFaqs(): SiteFaqItem[] {
 export const SITE_FAQ_SECTION_COPY = {
   eyebrow: 'FAQ',
   title: 'Rainbow Six Siege FAQ',
-  subtitle:
-    'R6Cheats Answers for Rainbow Six Siege on Windows PC: how we source notes, what the listing covers, and how fair-play risk is framed before you buy.',
+  subtitle: 'What this independent publication covers, how we source facts, and how fair-play topics are handled.',
 } as const;
 
 export const SITE_FAQ_FILTER_TOPICS: FaqTopic[] = [
