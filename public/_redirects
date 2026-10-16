@@ -2,7 +2,9 @@
 # Host rule: www → apex (requires www.r6cheat.net attached in the Pages dashboard).
 # TLS/HTTPS is handled by Cloudflare; path redirects also work on *.pages.dev.
 
+http://www.r6cheat.net/*   https://r6cheat.net/:splat  301
 https://www.r6cheat.net/*  https://r6cheat.net/:splat  301
+http://r6cheat.net/*       https://r6cheat.net/:splat  301
 
 # Checkout (external)
 /go/r6                 https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302

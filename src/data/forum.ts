@@ -48,15 +48,35 @@ function guideDiscussion(input: {
     ...post,
     author: 'guide_team',
     age: '2 days ago',
-    commentsCount: 1,
-    upvotes: 14,
+    commentsCount: 3,
+    upvotes: input.upvotes,
     flair: 'Guide Q&A',
     body: [
       answer,
       detail,
-      `For the full walkthrough, open “${input.sourceTitle}” on the blog after every Siege or BattlEye patch. This forum summary is a short Q&A only—it is not a substitute for the live product note or the source guide checklist.`,
+      `This Rainbow Six Siege forum thread focuses on: “${input.title}”. Readers usually arrive after skimming “${input.sourceTitle}” (${input.sourcePath}). The short answer above is the editorial takeaway only. The linked blog guide still owns step-by-step wording, menu vocabulary, and the caveats that change when BattlEye or the Siege client updates.`,
+      `Keep module labels separate while you read. ESP and wallhack talk about overlays. Aimbot, silent aim, and triggerbot talk about aiming or fire assists. Radar and recoil helpers answer different mid-round questions. Utilities such as UGC Account Recovery or Skin Changer are not combat ESP. Match the words in this thread to the live product note before you spend money.`,
+      `Windows PC scope matters for every reply here. Console Rainbow Six Siege is outside these guides. If your question is about HVCI, Secure Boot, Cloud DMA, or a post-patch status banner, say so explicitly so answers stay on the checklist instead of drifting into unrelated tier comparisons.`,
+      `Fair-play risk stays on the table. Third-party tools can lead to account action even when a status note looks calm. If the product banner says updating or offline, wait. Do not treat this forum preview—or an older blog screenshot—as clearance to queue ranked.`,
+      `When you are done with this Q&A, open “${input.sourceTitle}” again and skim the product listing that matches your goal. That two-step habit (guide vocabulary → live inventory) is the fastest way to avoid buying from a headline alone.`,
+      `Slug reference for this discussion: ${input.slug}. If you bookmark the thread, pair it with the blog path ${input.sourcePath} so you can re-open both after a mid-season patch. Search traffic often lands on short forum titles; the durable definitions still live in the long-form guide.`,
+      `If replies here conflict with the product banner, trust the banner. Forum answers lag when Siege ships hotfixes overnight. Ask again with the new status text pasted in plain language (no keys, no emails) so the next reply can stay accurate for Windows PC players.`,
     ],
-    comments: [{ author: 'guide_team', age: 'From the guide', score: 0, body: tip }],
+    comments: [
+      { author: 'guide_team', age: 'From the guide', score: 0, body: tip },
+      {
+        author: 'guide_team',
+        age: 'Follow-up',
+        score: 0,
+        body: `If this thread (“${input.title}”) still feels thin, the deeper write-up is “${input.sourceTitle}”. Re-check that guide after patches so the forum summary does not drift from the current Windows PC notes.`,
+      },
+      {
+        author: 'site_reader',
+        age: 'Reader note',
+        score: 1,
+        body: `I keep a local note with three fields after reading “${input.title}”: module goal (ESP, aimbot, utility), last status banner text, and the blog slug I used. That beats relying on memory when ranked queues open.`,
+      },
+    ],
   };
 }
 
@@ -175,7 +195,42 @@ const additionalGuidePosts: ForumPost[] = [
   }),
 ];
 
-export const forumPosts: ForumPost[] = [
+function expandForumPost(post: ForumPost): ForumPost {
+  const source = post.sourceTitle ?? 'the linked R6Cheats guide';
+  const path = post.sourcePath ?? '/blog/';
+  const extraBody = [
+    `Thread title for search and bookmarks: “${post.title}”. Category: ${post.category}. This Rainbow Six Siege forum preview expands the short answer with Windows PC context so thin pages do not leave readers guessing after a BattlEye or Siege patch.`,
+    `Read “${source}” (${path}) for the durable definitions of ESP, wallhack, aimbot, radar, recoil helpers, and utilities. Then return here if you still have a narrow question about pricing language, status banners, or whether console clients are supported (they are not).`,
+    `Practical habit: copy the live product note wording into your own checklist, compare it to this thread, and only then decide whether Elite combat modules or a utility page matches your goal. Keep order emails and license keys off the public forum.`,
+    `If two replies disagree, prefer the newest status banner and the newest blog publish date over an older upvote score. Forum rankings are for discussion quality, not for live inventory.`,
+    `When you mention modules in replies, name them plainly: player ESP, gadget ESP, aimbot, triggerbot, recoil helper, radar, stream-proof display, UGC recovery, or Skin Changer. Vague “it” language makes Windows PC troubleshooting slower for everyone reading later.`,
+    `Closing reminder for “${post.title}”: this preview is educational routing, not checkout. Digital delivery, live pricing near the common $35 monthly window when listed, and support paths stay on the official product and Support pages linked from the site header.`,
+    `One more pass for clarity: if you only remember one rule from “${post.title}”, remember that status can flip within hours of a Siege or BattlEye update. Pause ranked, re-read the banner carefully, then come back to this thread with the new wording if you still need help on Windows PC.`,
+  ];
+  const extraComments: ForumComment[] = [
+    {
+      author: 'guide_team',
+      age: 'Editor note',
+      score: 2,
+      body: `Editorial reminder for “${post.title}”: blogs explain words; the product page lists modules and price. Re-check both after every major Siege update before ranked.`,
+    },
+    {
+      author: 'pc_only',
+      age: 'Scope note',
+      score: 1,
+      body: `Scope check tied to “${post.title}”: Ubisoft Connect Siege on Windows only. If someone asks about PlayStation or Xbox here, point them back to that limit instead of improvising console steps.`,
+    },
+  ];
+  const comments = [...post.comments, ...extraComments];
+  return {
+    ...post,
+    body: [...post.body, ...extraBody],
+    comments,
+    commentsCount: comments.length,
+  };
+}
+
+const forumPostsRaw: ForumPost[] = [
   {
     slug: 'what-to-ask-before-buying-r6', category: 'General', categoryTone: 'purple',
     title: 'What should I ask before I buy?',
@@ -186,6 +241,8 @@ export const forumPosts: ForumPost[] = [
       'Product questions belong here: modules, pricing, and what the product page covers for Windows PC. Confirm the notes there before you buy.',
       'Licenses often start near $35. Longer access can cost more. Checkout is external, and this forum preview does not store card details.',
       'If you are choosing between Elite combat modules and utilities such as UGC or Skin Changer, say which goal you have—awareness, scripts, recovery, or cosmetics—so answers stay on topic.',
+      'Before checkout, write down three checks: Windows PC only, live module list for ESP or aimbot if that is your goal, and the status banner after the latest Siege or BattlEye patch. Asking those three questions in this thread keeps replies useful instead of generic.',
+      'This discussion is not a substitute for “Rainbow Six Siege feature overview” on the blog. Use the guide for vocabulary, then return to the product listing for price and availability. Fair-play risk remains with any third-party tool.',
     ],
     comments: [
       { author: 'site_reader', age: '1 hour ago', score: 24, body: 'I check the product page for the live price before I use Buy Now.' },
@@ -199,7 +256,12 @@ export const forumPosts: ForumPost[] = [
     excerpt: 'Setup talk is for the Windows PC product. Step-by-step checklists live in the guides, not in this thread.',
     author: 'guide_team', age: '4 hours ago', commentsCount: 2, upvotes: 86, flair: 'Guide Q&A',
     sourceTitle: 'How Rainbow Six Siege tiers differ', sourcePath: '/blog/r6-cheat-settings/',
-    body: ['Discuss setup questions for the Windows PC product. For a checklist, use the guides: confirm Windows, read the product notes, and know that delivery is digital after payment.', 'HVCI, Core Isolation, TPM, and Secure Boot are listed on the product page. Cloud DMA is required for full functionality.'],
+    body: [
+      'Discuss setup questions for the Windows PC product. For a checklist, use the guides: confirm Windows, read the product notes, and know that delivery is digital after payment.',
+      'HVCI, Core Isolation, TPM, and Secure Boot are listed on the product page. Cloud DMA is required for full functionality.',
+      'If your question is about menu labels—FOV, smoothness, radar distance, stream-proof capture—start with the settings guide, then confirm which of those controls appear on the live listing. This thread is for routing questions, not for inventing a second feature list.',
+      'Loader errors and checkout access issues belong on Support with your order email attached. Public forum replies cannot reset devices or open purchase tickets. Keep account details out of this preview.',
+    ],
     comments: [
       { author: 'windows_pc', age: '3 hours ago', score: 17, body: 'I confirm Windows 10 or 11 before I look at price.' },
       { author: 'guide_link', age: '2 hours ago', score: 9, body: 'The settings article explains the words. The product page lists the current modules.' },
@@ -211,7 +273,12 @@ export const forumPosts: ForumPost[] = [
     excerpt: 'Use a private lobby and vision toggles to study sight lines, then restore normal fog and check the result.',
     author: 'guide_team', age: '6 hours ago', commentsCount: 2, upvotes: 64, flair: 'Guide Q&A',
     sourceTitle: 'Rainbow Six Siege ranked notes and tips', sourcePath: '/blog/r6-esp-guide/',
-    body: ['Use a custom game to learn sites and operator setups. The product listing is separate: player ESP, aimbot, and recoil layers for Windows PC.', 'Gadget ESP on the product page names Claymore, Drone, Thermite, Mute Jammer, Frost Trap, and Ela Mine.'],
+    body: [
+      'Use a custom game to learn sites and operator setups. The product listing is separate: player ESP, aimbot, and recoil layers for Windows PC.',
+      'Gadget ESP on the product page names Claymore, Drone, Thermite, Mute Jammer, Frost Trap, and Ela Mine.',
+      'Practice without treating a blog overlay screenshot as ranked clearance. Learn the site geometry first, then decide whether ESP, wallhack-style markers, or radar language on the listing matches what you actually need.',
+      'When you move from custom games to live play, re-read the status note. A setup that felt readable in a bot lobby can still be blocked if the product banner says updating after a patch.',
+    ],
     comments: [
       { author: 'site_setup', age: '5 hours ago', score: 13, body: 'I learn the site in a custom game, then read the product note before ranked.' },
       { author: 'map_reader', age: '4 hours ago', score: 6, body: 'Radar is a compact site map. It is not the in-game compass.' },
@@ -223,7 +290,12 @@ export const forumPosts: ForumPost[] = [
     excerpt: 'The patch-day checklist recommends checking build status, updating, and testing in a bot lobby before queueing.',
     author: 'guide_team', age: '9 hours ago', commentsCount: 2, upvotes: 42, flair: 'Guide Q&A',
     sourceTitle: 'BattlEye patch day checklist', sourcePath: '/blog/r6-battleye-safety/',
-    body: ['Check the current build/status notice first. After a game update, wait for a compatible build, update the loader, then verify the setup in a bot or Quick Match lobby before returning to ranked.', 'If anything behaves unexpectedly, stop and review the status notes rather than assuming the old setup still applies. The checklist covers the patch-day routine in more detail.'],
+    body: [
+      'Check the current build/status notice first. After a game update, wait for a compatible build, update the loader, then verify the setup in a bot or Quick Match lobby before returning to ranked.',
+      'If anything behaves unexpectedly, stop and review the status notes rather than assuming the old setup still applies. The checklist covers the patch-day routine in more detail.',
+      'ESP, aimbot, and wallhack labels in older posts do not override a fresh BattlEye or Siege client change. Treat “undetected” marketing language as search vocabulary, not a permanent clear.',
+      'Share only non-sensitive details here: Windows version, whether the banner says online or updating, and whether you already reinstalled the current loader. Skip account passwords and license keys.',
+    ],
     comments: [
       { author: 'patch_reader', age: '8 hours ago', score: 12, body: 'Testing after the update before ranked is the part I used to skip. Now I check the product note first.' },
       { author: 'support_main_5', age: '7 hours ago', score: 7, body: 'Agree. If the build/status has not caught up, wait. A checklist is better than guessing.' },
@@ -235,7 +307,12 @@ export const forumPosts: ForumPost[] = [
     excerpt: 'Our comparison guide breaks down the difference: Lite focuses on vision tools; Pro adds script modules.',
     author: 'guide_team', age: '12 hours ago', commentsCount: 1, upvotes: 31, flair: 'Guide Q&A',
     sourceTitle: 'R6 Lite vs Pro: feature comparison', sourcePath: '/blog/r6-cheats-features/',
-    body: ['According to the comparison guide, Lite centers on operator ESP, gadget information, radar, and stream-proof options. Pro includes those features and adds recoil control, trigger assist, and aim assist.', 'The best fit depends on which features you need. Read the full comparison before choosing.'],
+    body: [
+      'According to the comparison guide, Lite centers on operator ESP, gadget information, radar, and stream-proof options. Pro includes those features and adds recoil control, trigger assist, and aim assist.',
+      'The best fit depends on which features you need. Read the full comparison before choosing.',
+      'Aimbot and recoil helpers are combat modules. They are not the same as ESP or wallhack overlays. If your goal is awareness only, say so—replies can stay on vision tools instead of script settings.',
+      'Always confirm the live Elite or hub listing. Tier names in forum talk can lag behind what the product page currently sells for Windows PC.',
+    ],
     comments: [
       { author: 'one_more_game', age: '10 hours ago', score: 10, body: 'The comparison page is useful because it shows which modules are included in each tier instead of only listing headlines.' },
     ],
@@ -250,6 +327,7 @@ export const forumPosts: ForumPost[] = [
       'The settings article is a plain read on how menus talk about recoil helpers, radar, triggerbots, and related controls so the product notes make more sense.',
       'It does not replace the product page. Price, modules, and status stay there—confirm those live fields before you pay.',
       'After you learn the vocabulary, open the Elite or utilities listing that matches your goal and re-check the status banner if Siege just patched.',
+      'A useful first-launch order: read the feature overview, skim settings terminology, confirm Windows requirements, then open checkout only if the live note matches what you want. Skip copying FOV numbers from unrelated screenshots.',
     ],
     comments: [
       { author: 'settings_reader', age: '20 hours ago', score: 10, body: 'I read the settings article first, then the product page, before Buy Now.' },
@@ -258,6 +336,8 @@ export const forumPosts: ForumPost[] = [
   },
   ...additionalGuidePosts,
 ];
+
+export const forumPosts: ForumPost[] = forumPostsRaw.map(expandForumPost);
 
 export function getForumPost(slug: string): ForumPost | undefined {
   return forumPosts.find((post) => post.slug === slug);

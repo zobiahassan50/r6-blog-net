@@ -1,8 +1,9 @@
 import type { BlogPostFull } from './types';
+import { expandBlogPost } from './seoExpand';
 
 const product = '/products/r6-cheats/';
 
-export const blogPosts: BlogPostFull[] = [
+const blogPostsRaw: BlogPostFull[] = [
   {
     featured: true,
     tag: 'R6 Cheats',
@@ -465,3 +466,5 @@ export const blogPosts: BlogPostFull[] = [
     ],
   },
 ];
+
+export const blogPosts: BlogPostFull[] = blogPostsRaw.map(expandBlogPost);

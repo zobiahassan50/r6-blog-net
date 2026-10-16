@@ -10,69 +10,70 @@ export interface PageSeoEntry {
 
 export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/': {
-    // gscNote: Keep primary keyword "Rainbow Six Siege cheats" near front; trim if title truncates in SERP.
-    title: 'R6 Siege Cheats | Rainbow Six Siege PC',
+    // Meta only — does not change homepage UI. Primary keyword near front for SERP.
+    title: 'Rainbow Six Siege Cheats | R6 ESP, Aimbot & PC Hacks',
     description:
-      'R6 Siege Cheats for Windows PC. ESP, wallhack, radar, and aim helpers, with product notes to read before you buy.',
+      'Rainbow Six Siege cheats for Windows PC: ESP, wallhack, aimbot, radar, and recoil helpers. Read live product notes and status before checkout on r6cheat.net.',
   },
   '/products/r6-cheats/': {
-    title: 'R6 Siege Products Hub | ESP, Aimbot & Recoil',
+    title: 'R6 Siege Cheats Products | ESP, Aimbot & Recoil',
     description:
-      'Player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150.',
+      'Compare Rainbow Six Siege cheats on Windows PC: player ESP, aimbot, recoil layers, UGC, and Skin Changer. Monthly from $35 — confirm the live listing.',
   },
   '/products/r6-cheats/elite/': {
-    title: 'Elite R6 Siege Cheats | Player ESP & Aimbot',
+    title: 'Elite R6 Siege Cheats | ESP, Aimbot & Gadget ESP',
     description:
-      'Player ESP, aimbot, gadget ESP, and config save/load. Monthly $35 for 31 days, or lifetime access for $150.',
+      'Elite Rainbow Six Siege cheats for Windows PC with player ESP, aimbot, gadget ESP, and config save/load. Monthly $35 or lifetime — check live status first.',
   },
   '/products/r6-cheats/ugc/': {
-    title: 'UGC Account Recovery Utility | Rainbow Six Siege PC',
+    title: 'UGC Account Recovery | Rainbow Six Siege PC',
     description:
-      'Appeal workflows for Ubisoft Connect restrictions and BattlEye holds—case tracking and dispute templates.',
+      'UGC Account Recovery for Rainbow Six Siege on PC: Ubisoft Connect and BattlEye appeal workflows, case tracking, and dispute templates.',
   },
   '/products/r6-cheats/unlock-all/': {
-    title: 'Skin Changer Utility | Rainbow Six Siege PC Cheats',
+    title: 'R6 Skin Changer Utility | Rainbow Six Siege PC',
     description:
-      'Local cosmetic preview for operator uniforms and weapon skins without Ubisoft Connect store purchases.',
+      'Rainbow Six Siege Skin Changer utility for Windows PC: local cosmetic preview for operators and weapons without Ubisoft store purchases.',
   },
   '/products/r6-cheats/utilities/': {
-    title: 'Rainbow Six Siege Utilities | UGC & Skin Changer',
+    title: 'R6 Siege Utilities | UGC & Skin Changer',
     description:
-      'Choose UGC or Skin Changer—when each utility fits and links to full product pages.',
+      'Compare Rainbow Six Siege utilities: UGC Account Recovery vs Skin Changer. Pick the tool that fits, then open the full product page.',
   },
   '/blog/': {
-    title: 'Rainbow Six Siege Cheats Guides & Patch Notes',
+    title: 'R6 Siege Cheats Blog | ESP, Aimbot & Patch Guides',
     description:
-      'Setup guides, Lite vs Pro comparisons, BattlEye patch checklists, and ranked config tips for R6 cheats.',
+      'Rainbow Six Siege cheats guides for Windows PC: ESP, wallhack, aimbot setup, BattlEye patch checklists, and ranked config tips.',
   },
   '/forum/': {
-    title: 'Rainbow Six Siege Community Forum | R6Cheats',
-    description: 'Join R6 players to discuss operators, setups, patch changes, guides, and community moments.',
+    title: 'R6 Siege Cheats Forum | Guides, Patches & Q&A',
+    description:
+      'Rainbow Six Siege cheats forum for Windows PC: setup Q&A, patch-day checks, ESP and aimbot vocabulary, and links to live product notes.',
   },
   '/faq/': {
     title: 'Rainbow Six Siege FAQ | R6Cheats Answers',
     description:
-      'R6Cheats Answers for Rainbow Six Siege on Windows PC: how we source facts, what listings cover, and how fair-play topics are handled.',
+      'FAQ for Rainbow Six Siege cheats on Windows PC: pricing, consoles, stream-proof ESP, aimbot settings, and how we source status notes.',
   },
   '/terms/': {
-    title: 'Terms & Conditions | R6Cheats Rainbow Six Siege',
+    title: 'Terms & Conditions | R6Cheats Siege Cheats',
     description:
-      'Purchase terms, license use, and refund policy for R6Cheats products sold through r6cheat.net.',
+      'Terms for R6Cheats Rainbow Six Siege products: licenses, checkout, refunds, fair-play risk, and Windows PC use on r6cheat.net.',
   },
   '/privacy/': {
-    title: 'Privacy Policy | R6Cheats Rainbow Six Siege',
+    title: 'Privacy Policy | R6Cheats Siege Site Data',
     description:
-      'How r6cheat.net uses analytics, cookies, and contact data when you browse or request support.',
+      'Privacy Policy for r6cheat.net: analytics, cookies, Support contact data, and how R6Cheats handles Rainbow Six Siege site visitors.',
   },
   '/about/': {
     title: 'About R6Cheats | Rainbow Six Siege Guides',
     description:
-      'What R6Cheats publishes: Rainbow Six Siege cheat tiers, utilities, guides, and status notes at r6cheat.net.',
+      'About R6Cheats: Rainbow Six Siege cheat guides, Elite modules, utilities, patch notes, and how we publish status for Windows PC players.',
   },
   '/support/': {
-    title: 'R6Cheats Support | Loader & Checkout Help',
+    title: 'R6Cheats Support | Siege Loader & Checkout',
     description:
-      'Get help with loader setup and checkout for Rainbow Six Siege cheat tiers and utilities.',
+      'Support for Rainbow Six Siege cheats on Windows PC: loader setup, portal access, checkout help, and status questions after BattlEye patches.',
   },
 };
 

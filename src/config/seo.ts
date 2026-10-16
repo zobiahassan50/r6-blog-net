@@ -49,7 +49,10 @@ export function pageTitle(keyword: string, brand = t.site.name): string {
   const suffix = ` | ${brand}`;
   const max = 60;
   if (`${keyword}${suffix}`.length <= max) return `${keyword}${suffix}`;
-  const trimmed = keyword.slice(0, Math.max(20, max - suffix.length - 1)).trim();
+  const budget = Math.max(20, max - suffix.length - 1);
+  let trimmed = keyword.slice(0, budget).trim();
+  const lastSpace = trimmed.lastIndexOf(' ');
+  if (lastSpace > 20) trimmed = trimmed.slice(0, lastSpace).trim();
   return `${trimmed}${suffix}`;
 }
 

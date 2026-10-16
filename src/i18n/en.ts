@@ -5,12 +5,12 @@ import { PRODUCT_BASE } from '../config/site';
 const productBase = PRODUCT_BASE;
 
 export const en: Translations = {
-  site: {
+    site: {
     name: 'R6Cheats',
     domain: 'r6cheat.net',
-    title: 'R6 Cheats & Hacks | Rainbow Six Siege ESP, Recoil & Radar',
+    title: 'Rainbow Six Siege Cheats | R6 ESP, Aimbot & PC Hacks',
     description:
-      'Rainbow Six Siege cheats with scripts, operator ESP, radar and skin changer for PC ranked—updated every patch at r6cheat.net.',
+      'Rainbow Six Siege cheats for Windows PC: ESP, wallhack, aimbot, radar, and recoil helpers—updated every patch at r6cheat.net.',
     discord: R6_BUY_URL,
   },
   nav: [
@@ -191,30 +191,30 @@ export const en: Translations = {
     ],
   },
   setup: {
-    eyebrow: 'Getting started',
-    titleLead: 'Checkout to game in',
-    titleHighlight: 'Three steps',
+    eyebrow: 'Setup',
+    titleLead: 'Checkout to in-game in',
+    titleHighlight: 'three steps',
     intro:
-      'A short checklist: you are on Windows, you have read the live product notes, and you know delivery is digital after payment.',
-    ctaPrimary: 'View Product',
-    ctaSecondary: 'Read the FAQ',
+      'Buy access, download the loader from the portal, load a preset, then open Rainbow Six Siege. Discord help is there if you get stuck.',
+    ctaPrimary: 'View products',
+    ctaSecondary: 'Setup FAQ',
     ctaPrimaryHref: productBase,
     ctaSecondaryHref: '/faq/',
     steps: [
       {
         step: 'Step 1',
-        title: 'Confirm Windows PC',
-        desc: 'This listing is the Rainbow Six Siege PC client. Console is out.',
+        title: 'Buy and download the loader',
+        desc: 'Buy access, then download the loader from the portal.',
       },
       {
         step: 'Step 2',
-        title: 'Read the product notes',
-        desc: 'Check modules and the live price. Licenses start at $35. Longer access can cost more.',
+        title: 'Load presets',
+        desc: 'Load a preset before you launch Rainbow Six Siege.',
       },
       {
         step: 'Step 3',
-        title: 'Re-check status after patches',
-        desc: 'If the note says updating or offline, wait. Account action is possible with any third-party tool.',
+        title: 'Check status and play',
+        desc: 'Confirm the live status note, then play.',
       },
     ],
   },
@@ -276,7 +276,7 @@ export const en: Translations = {
     eyebrow: 'Products',
     title: 'RAINBOW SIX SIEGE',
     subtitle:
-      'R6 Siege Products Hub for player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150. Windows 10/11 on Intel or AMD, with HVCI, Core Isolation, TPM, and Secure Boot on. Cloud DMA is required for full functionality.',
+      'R6 Siege Products Hub for player ESP, aimbot, and separate recoil layers. Monthly is 31 days for $35. Lifetime is unlimited access for $150. ',
     viewAll: 'View all products',
     get: 'Get',
     explore: 'Explore',
@@ -307,11 +307,9 @@ export const en: Translations = {
     eyebrow: 'Blog',
     title: 'Latest Releases',
     heroTitle: 'R6 Siege Cheats Blogs',
-    subtitle: 'Rainbow Six Siege cheats guides and patch notes for Windows PC.',
-    heroLead:
-      'This archive collects Rainbow Six Siege cheats guides and patch notes—ESP, wallhack wording, aimbot settings, BattlEye checklists, and fair-play context. Articles explain terminology; the product page remains the live feature list.',
-    heroExtra:
-      'Filter by topic or sort by read time to find ESP, wallhack, aimbot, and status deep-dives. Re-check the listing after every Siege or BattlEye update before you treat a guide as current.',
+    subtitle: 'R6 cheats Updates',
+    heroLead: '',
+    heroExtra: '',
     searchPlaceholder: 'Search blogs',
     latestTitle: 'Latest releases',
     latestSubtitle: 'Filter by topic or sort to find ESP, wallhack, aimbot, and cheat deep-dives.',
@@ -387,38 +385,38 @@ export const en: Translations = {
   },
   workflow: {
     eyebrow: 'How it works',
-    badge: '4 easy steps',
-    titleBefore: 'From Buy To',
-    titleHighlight: 'Saved Config.',
-    subtitle: 'The same path the R6 Siege Cheats page describes: confirm the platform, read the notes, pay, then re-check status after patches.',
-    ctaLabel: 'View Product',
+    badge: '4 steps',
+    titleBefore: 'From buy to',
+    titleHighlight: 'saved config.',
+    subtitle: 'Buy, download the loader, set modules, save your Rainbow Six Siege config for next time.',
+    ctaLabel: 'View products',
     ctaHref: productBase,
-    ctaSecondary: 'Read the FAQ',
+    ctaSecondary: 'Setup FAQ',
     ctaSecondaryHref: '/faq/',
     items: [
       {
         num: '01',
         phase: 'Before purchase',
-        title: 'Confirm Siege on PC',
-        desc: 'Windows only. If you are on console, this product does not apply.',
+        title: 'Check status',
+        desc: 'Read the live banner on r6cheat.net before you buy or launch.',
       },
       {
         num: '02',
         phase: 'Product page',
-        title: 'Read modules and price',
-        desc: 'ESP, wallhack, radar, and aim helpers are categories. The product page says what is included now.',
+        title: 'Pick a tier',
+        desc: 'Choose Lite, Pro or Elite based on which modules you need.',
       },
       {
         num: '03',
         phase: 'Checkout',
-        title: 'Pay for digital access',
-        desc: 'Licenses start at $35. Confirm the live price on the checkout page before you pay.',
+        title: 'Launch and set up',
+        desc: 'Download from the portal, turn on modules, and test in a bot lobby or Quick Match.',
       },
       {
         num: '04',
         phase: 'After a patch',
-        title: 'Read the status note',
-        desc: 'BattlEye and Siege both update. Do not treat an older blog post as a current status.',
+        title: 'Save your config',
+        desc: 'When the settings feel right, save ranked and casual presets to the cloud.',
       },
     ],
   },
@@ -440,6 +438,7 @@ export const en: Translations = {
       'R6Cheats Support covers loader setup, portal access, and checkout questions for Elite modules, UGC Account Recovery, and the Skin Changer Utility. This page is the right place when a guide is not enough.',
       'Payment card issues stay with the external checkout provider. For everything else—install errors, status confusion after a BattlEye patch, or missing order email—start here with the details listed below.',
       'Operators answer from Discord and email. Include Windows version, Ubisoft Connect build, and the exact loader text so loader and checkout help can move faster without back-and-forth screenshots.',
+      'Siege loader and checkout help on this Support page is for Windows PC only. Console Rainbow Six Siege is out of scope. Re-read the product status banner after patches before opening a ticket about modules that may be updating.',
     ],
     channels: [
       {
@@ -564,12 +563,14 @@ export const en: Translations = {
           heading: 'How we source notes',
           paragraphs: [
             'Status language comes from the operator portal and Discord #status. Feature lists come from the product pages that ship with each build. Guides paraphrase those sources so newcomers can follow vocabulary without treating blogs as inventory.',
+            'Rainbow Six Siege guides on this site are written for Windows PC via Ubisoft Connect. When a BattlEye or client patch lands, we prioritize updating status language over rewriting every older article the same day.',
           ],
         },
         {
           heading: 'Support',
           paragraphs: [
             'Questions about compatibility, loader errors, or checkout are handled through Discord and email support. Include your order email, Ubisoft Connect account, and Windows version when opening a ticket on the Support page.',
+            'About R6Cheats editorial scope stops at published guides and product notes. For live module availability, always open the listing you intend to buy rather than relying on this About page alone.',
           ],
         },
       ],
@@ -604,6 +605,7 @@ export const en: Translations = {
           heading: 'Support',
           paragraphs: [
             'For privacy questions about r6cheat.net, use the options on the Support page. Purchase and refund rules are in our Terms & Conditions, which are separate from this Privacy Policy.',
+            'This Privacy Policy covers browsing R6Cheats and Rainbow Six Siege guide pages on r6cheat.net. It does not replace the privacy terms of external checkout providers used when you purchase access.',
           ],
         },
       ],
@@ -617,6 +619,7 @@ export const en: Translations = {
           heading: 'Agreement',
           paragraphs: [
             'Last updated: September 2026. By using r6cheat.net or completing checkout for any product listed here, you agree to these Terms & Conditions and our Privacy Policy.',
+            'These Terms & Conditions apply to R6Cheats Rainbow Six Siege cheat products and related utilities sold for Windows PC use. If you do not agree, do not complete checkout.',
           ],
         },
         {
