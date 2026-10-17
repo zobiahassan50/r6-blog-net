@@ -140,14 +140,71 @@ function offerUrl(path: string): string {
   return canonicalUrl(path);
 }
 
+/** Digital delivery — zero shipping for Merchant listings. */
+function digitalShippingDetails() {
+  return {
+    '@type': 'OfferShippingDetails',
+    shippingRate: {
+      '@type': 'MonetaryAmount',
+      value: '0',
+      currency: 'USD',
+    },
+    shippingDestination: {
+      '@type': 'DefinedRegion',
+      addressCountry: 'US',
+    },
+    deliveryTime: {
+      '@type': 'ShippingDeliveryTime',
+      handlingTime: {
+        '@type': 'QuantitativeValue',
+        minValue: 0,
+        maxValue: 0,
+        unitCode: 'DAY',
+      },
+      transitTime: {
+        '@type': 'QuantitativeValue',
+        minValue: 0,
+        maxValue: 0,
+        unitCode: 'DAY',
+      },
+    },
+  };
+}
+
+/** Matches Terms: sales final after checkout (digital licenses). */
+function merchantReturnPolicy() {
+  return {
+    '@type': 'MerchantReturnPolicy',
+    applicableCountry: 'US',
+    returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+    url: canonicalUrl('/terms/'),
+  };
+}
+
+function formatOfferPrice(usd: number): string {
+  return usd.toFixed(2);
+}
+
+function priceValidUntilIso(daysAhead = 365): string {
+  const date = new Date();
+  date.setUTCDate(date.getUTCDate() + daysAhead);
+  return date.toISOString().slice(0, 10);
+}
+
 export function productSchema(input: {
   name: string;
   description: string;
   url: string;
   offerUrl: string;
+  /** Starting / lowest USD price shown on the product page. */
+  price: number;
   image?: string;
   sku?: string;
+  /** Optional when a genuine aggregate rating is shown on-page. */
+  aggregateRating?: { ratingValue: number; reviewCount: number; bestRating?: number };
 }) {
+  const price = formatOfferPrice(input.price);
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -159,15 +216,31 @@ export function productSchema(input: {
       name: 'R6Cheats',
     },
     ...(input.image ? { image: absoluteAssetUrl(input.image) } : {}),
+    ...(input.aggregateRating
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: String(input.aggregateRating.ratingValue),
+            reviewCount: String(input.aggregateRating.reviewCount),
+            bestRating: String(input.aggregateRating.bestRating ?? 5),
+            worstRating: '1',
+          },
+        }
+      : {}),
     offers: {
       '@type': 'Offer',
       url: offerUrl(input.offerUrl),
+      price,
       priceCurrency: 'USD',
+      priceValidUntil: priceValidUntilIso(),
       availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
       seller: {
         '@type': 'Organization',
         name: 'R6Cheats',
       },
+      shippingDetails: digitalShippingDetails(),
+      hasMerchantReturnPolicy: merchantReturnPolicy(),
     },
   };
 }
@@ -179,6 +252,7 @@ export function softwareApplicationSchema(input: {
   url: string;
   image?: string;
   offerUrl?: string;
+  price?: number;
 }) {
   return productSchema({
     name: input.name,
@@ -186,6 +260,7 @@ export function softwareApplicationSchema(input: {
     url: input.url,
     offerUrl: input.offerUrl ?? input.url,
     image: input.image,
+    price: input.price ?? 35,
   });
 }
 

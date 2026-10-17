@@ -4,6 +4,7 @@ import { getAllProductSlugs, getProductPage, productHub } from '../../../data/pr
 import { getPageSeoEntry } from '../../../config/pageSeo';
 import { pageTitle } from '../../../config/seo';
 import { breadcrumbSchema, productSchema } from '../../../utils/schema';
+import { getProductPlans } from '../../../data/productPricing';
 import ProductDetail from '../../../components/ProductDetail.astro';
 import {
   GALLERY_IMAGE_WIDTHS,
@@ -31,6 +32,8 @@ const breadcrumbs = [
   { name: 'Products', path: productHub.path },
   { name: product.title, path: pagePath },
 ];
+const plans = getProductPlans(product.slug);
+const offerPrice = Math.min(...plans.map((plan) => plan.priceUsd));
 
 const firstImage = product.images[0]?.src;
 const firstAvifSet = firstImage ? responsiveAvifSrcSet(firstImage, GALLERY_IMAGE_WIDTHS) : undefined;
@@ -54,6 +57,7 @@ const galleryPreloadType = firstAvifSet ? 'image/avif' : 'image/webp';
       offerUrl: product.buyUrl,
       image: product.images[0]?.src,
       sku: product.slug,
+      price: offerPrice,
     }),
     breadcrumbSchema(breadcrumbs),
   ]}

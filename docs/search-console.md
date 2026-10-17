@@ -4,7 +4,7 @@
 
 1. Deploy as usual. The `*.pages.dev` preview URL works with **relative** links — do not add host redirects in `_redirects`.
 2. When ready, add `r6cheat.net` (and optionally `www`) in **Pages → Custom domains**. Let Cloudflare manage TLS.
-3. Prefer apex `r6cheat.net`. If you use `www`, set a single redirect **www → apex** (or the reverse) in Cloudflare — never both directions.
+3. Prefer apex `r6cheat.net`. Set a single **www → apex** 301 (never both directions). See `npm run cf:www-redirect` or [Cloudflare’s www redirect guide](https://developers.cloudflare.com/pages/how-to/www-redirect/).
 4. Leave build env unset for production so canonicals/sitemap use `https://r6cheat.net`. Optional: set `PUBLIC_SITE_URL` only on preview builds if you want preview-specific tags.
 5. After DNS is live, submit `https://r6cheat.net/sitemap.xml` in Search Console.
 
