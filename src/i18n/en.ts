@@ -305,13 +305,15 @@ export const en: Translations = {
   },
   blog: {
     eyebrow: 'Blog',
+    // Homepage section heading — do not change
     title: 'Latest Releases',
-    heroTitle: 'R6 Siege Cheats Blogs',
+    heroTitle: 'R6 Siege Cheats Guides 2026',
+    // Also used under homepage “Latest Releases” — keep wording stable
     subtitle: 'Rainbow Six Siege cheats guides and patch notes for Windows PC.',
     heroLead:
-      'This archive collects Rainbow Six Siege cheats guides and patch notes—ESP, wallhack wording, aimbot settings, BattlEye checklists, and fair-play context. Articles explain terminology; the product page remains the live feature list.',
+      'This archive ranks around the searches players actually type—Rainbow Six Siege cheats, R6 ESP, wallhack, aimbot FOV, radar hacks, recoil scripts, and undetected status notes. Articles explain terminology; the product page remains the live feature list.',
     heroExtra:
-      'Filter by topic or sort by read time to find ESP, wallhack, aimbot, and status deep-dives. Re-check the listing after every Siege or BattlEye update before you treat a guide as current.',
+      'Filter by topic or sort by read time to find ESP, wallhack, aimbot, and BattlEye deep-dives. Re-check the listing after every Siege, BattlEye, or ShieldGuard update before you treat a guide as current.',
     searchPlaceholder: 'Search blogs',
     latestTitle: 'Latest releases',
     latestSubtitle: 'Filter by topic or sort to find ESP, wallhack, aimbot, and cheat deep-dives.',

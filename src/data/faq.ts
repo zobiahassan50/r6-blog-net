@@ -286,18 +286,18 @@ export function getBlogFaqs(tag: string, slug: string): SiteFaqItem[] {
       id: `blog-${slug}-scope`,
       topic: 'blog',
       icon: 'faqBlogVsCheats',
-      q: `What is this “${readable}” guide for?`,
+      q: `Does this “${readable}” guide cover Rainbow Six Siege cheats on PC?`,
       a: a(
-        `This article under the ${tag} tag explains terminology and habits around “${readable}”. It is not a substitute for the live product notes—use it to understand wording before you open ${ROUTES.products}.`,
+        `Yes — this ${tag} article explains ESP, wallhack, aimbot, and related wording for Rainbow Six Siege on Windows PC. It is not a substitute for live product notes—use it to understand search terms before you open ${ROUTES.products}.`,
       ),
     },
     {
       id: `blog-${slug}-buy`,
       topic: 'products',
       icon: 'faqProductsPage',
-      q: `Should I buy after reading “${readable}”?`,
+      q: `Is “${readable}” enough to buy undetected R6 cheats?`,
       a: a(
-        `Only after you re-check modules, price, and status on the product page. Guides like “${readable}” stay educational; checkout still depends on the listing that is live the day you pay.`,
+        `No. “Undetected” language in blogs goes stale after BattlEye or ShieldGuard patches. Re-check modules, price, and status on the product page the day you pay. Guides like “${readable}” stay educational.`,
       ),
     },
     {
@@ -305,7 +305,7 @@ export function getBlogFaqs(tag: string, slug: string): SiteFaqItem[] {
       topic: 'setup',
       icon: 'faqStatus',
       q: `What should I read next after “${readable}”?`,
-      a: `Compare nearby posts in the ${articlesHub}, then skim the ${elitePage} or ${utilitiesPage} if you are choosing between combat modules and utilities. Return here if you need the vocabulary from “${readable}” again.`,
+      a: `Compare nearby ESP, wallhack, and aimbot posts in the ${articlesHub}, then skim the ${elitePage} or ${utilitiesPage} if you are choosing between combat modules and utilities. Return here if you need the vocabulary from “${readable}” again.`,
     },
   ];
 }

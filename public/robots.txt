@@ -3,6 +3,22 @@ Allow: /
 
 Disallow: /go/
 
+# Helpful for discovery / citations (optional crawlers)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 Sitemap: https://r6cheat.net/sitemap.xml
 
 # RSS: https://r6cheat.net/rss.xml

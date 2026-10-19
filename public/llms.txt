@@ -1,0 +1,28 @@
+# R6Cheats (r6cheat.net)
+
+> Rainbow Six Siege cheats guides and Windows PC product notes: ESP, wallhack, aimbot, radar, recoil, BattlEye status.
+
+## Primary
+- https://r6cheat.net/
+- https://r6cheat.net/products/r6-cheats/
+- https://r6cheat.net/products/r6-cheats/elite/
+- https://r6cheat.net/blog/
+- https://r6cheat.net/sitemap.xml
+- https://r6cheat.net/rss.xml
+
+## High-intent guides
+- https://r6cheat.net/blog/r6-cheats-features/
+- https://r6cheat.net/blog/r6-esp-guide/
+- https://r6cheat.net/blog/r6-esp-aimbot/
+- https://r6cheat.net/blog/r6-aimbot-fov-smooth/
+- https://r6cheat.net/blog/r6-cheat-settings/
+- https://r6cheat.net/blog/r6-battleye-safety/
+- https://r6cheat.net/blog/r6-cheat-undetected-status/
+- https://r6cheat.net/blog/r6-wallhack-vs-esp/
+- https://r6cheat.net/blog/r6-radar-hack-guide/
+- https://r6cheat.net/blog/r6-recoil-script-aimbot/
+
+## Optional
+- https://r6cheat.net/faq/
+- https://r6cheat.net/forum/
+- https://r6cheat.net/support/

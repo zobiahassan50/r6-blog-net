@@ -56,9 +56,25 @@ Allow: /
 
 Disallow: /go/
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 Sitemap: ${siteUrl}/sitemap.xml
 
 # RSS: ${siteUrl}/rss.xml
+# llms.txt: ${siteUrl}/llms.txt
 `;
 fs.writeFileSync(path.join(dist, 'robots.txt'), robots, 'utf8');
 

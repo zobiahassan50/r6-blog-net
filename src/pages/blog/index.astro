@@ -63,7 +63,7 @@ const searchSuggestions = blogPosts.map((post) => ({
   jsonLd={[
     collectionPageSchema({
       name: t.blog.heroTitle,
-      description: t.blog.subtitle,
+      description: seo.description,
       url: '/blog/',
     }),
     breadcrumbSchema(breadcrumbs),
