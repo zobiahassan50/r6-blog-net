@@ -27,7 +27,7 @@ export function expandBlogPost(post: BlogPostFull): BlogPostFull {
         `Open the product page and match ESP, wallhack, aimbot, radar, recoil, or utility labels to the live module list.`,
         `Read the status banner after every Siege, BattlEye, or ShieldGuard update before ranked.`,
         `Treat “undetected” search language as temporary marketing — not a permanent clear.`,
-        `Treat fair-play risk as real: third-party tools can lead to account action even when a blog note looks calm.`,
+        `Acknowledge account safety considerations: third-party game modifications carry enforcement possibilities regardless of how recent an update note appears.`,
         `Save your order email if you continue to checkout so Support can find the purchase later.`,
       ],
     },

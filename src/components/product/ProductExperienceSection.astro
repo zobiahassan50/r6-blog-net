@@ -7,11 +7,15 @@ interface Props {
   images: ProductSlide[];
   acquisition: ProductAcquisition;
   productName: string;
+  subtitle?: string;
 }
 
-const { images, acquisition, productName } = Astro.props;
+const { images, acquisition, productName, subtitle } = Astro.props;
 
 const calloutLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+const effectiveSubtitle =
+  subtitle ??
+  `Review the in-game layers above for ${productName}—detailed below is how each module behaves alongside direct post-checkout setup.`;
 ---
 
 <section
@@ -26,8 +30,7 @@ const calloutLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
         In the client · After you buy
       </h2>
       <p class="product-experience__subtitle">
-        Use the screenshots above for {productName}—below is what each layer means and how access works
-        after checkout.
+        {effectiveSubtitle}
       </p>
     </header>
 

@@ -86,6 +86,7 @@ export interface WorkflowItem {
 export interface WhyCompareRow {
   title: string;
   desc: string;
+  mobileDesc?: string;
 }
 
 export interface WhyMetric {

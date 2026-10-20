@@ -11,8 +11,19 @@ import {
   CardTitle,
 } from "@/components/starwind/card";
 
+interface Props {
+  productName?: string;
+}
+
+const { productName } = Astro.props;
 const why = t.whyUs;
 const lastRowIndex = why.rows.length - 1;
+
+const getRowDesc = (row: (typeof why.rows)[number], isMobile = false) => {
+  const text = isMobile && row.mobileDesc ? row.mobileDesc : row.desc;
+  if (!productName) return text;
+  return text.replace(/Rainbow Six Siege|Siege/g, productName);
+};
 ---
 
 <section id="why-us" class="py-16 md:py-24" aria-labelledby="why-title">
@@ -38,7 +49,7 @@ const lastRowIndex = why.rows.length - 1;
                   {row.title}
                 </div>
                 <div class="text-sm leading-relaxed text-muted-foreground">
-                  {row.desc}
+                  {getRowDesc(row, false)}
                 </div>
               </div>
             ))
@@ -118,7 +129,7 @@ const lastRowIndex = why.rows.length - 1;
               </CardHeader>
               <CardContent class="pb-4 pt-4">
                 <div class="text-sm leading-relaxed text-muted-foreground">
-                  {row.desc}
+                  {getRowDesc(row, true)}
                 </div>
               </CardContent>
               <CardFooter class="flex flex-wrap items-center justify-between gap-3">

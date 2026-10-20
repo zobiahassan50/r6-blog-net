@@ -86,32 +86,165 @@ export const productRelatedBlogSlugs: Record<string, string[]> = {
 
 const productBase = '/products/r6-cheats/';
 
-function acquisitionFor(productName: string): ProductAcquisition {
-  return {
-    title: `How to get ${productName}`,
-    steps: [
-      {
-        num: '01',
-        title: 'Review current status',
-        desc: `Before buying ${productName}, check the live banner on r6cheat.net and Discord #status—especially after a Rainbow Six Siege or BattlEye update.`,
-      },
-      {
-        num: '02',
-        title: 'Confirm this listing',
-        desc: `Read the ${productName} feature list and price on this page. Utilities and combat modules solve different jobs—do not assume another product’s notes apply.`,
-      },
-      {
-        num: '03',
-        title: 'Complete checkout',
-        desc: `Pay through the secure checkout linked from ${productName}. Keep the order email ready for portal access and Support follow-ups.`,
-      },
-      {
-        num: '04',
-        title: 'Follow guided setup',
-        desc: `Use only the operator portal, patch loader, and setup guide matched to ${productName}. Test in a lobby before ranked or Quick Match.`,
-      },
-    ],
-  };
+function acquisitionFor(slug: string, productName: string): ProductAcquisition {
+  switch (slug) {
+    case 'lite':
+      return {
+        title: `How to get ${productName}`,
+        steps: [
+          {
+            num: '01',
+            title: 'Verify overlay status',
+            desc: `Prior to acquiring ${productName}, inspect the live status monitor on r6cheat.net and Discord #status to ensure the visual overlay is operational following recent Siege client patches.`,
+          },
+          {
+            num: '02',
+            title: 'Review visual features',
+            desc: `Examine the Lite feature breakdown to confirm ESP distance caps, radar feeds, and stream-proof settings match your tactical awareness needs.`,
+          },
+          {
+            num: '03',
+            title: 'Authorize instant delivery',
+            desc: `Complete payment via our secure checkout gateway. Your unique ${productName} license key and loader access credentials dispatch immediately to your inbox.`,
+          },
+          {
+            num: '04',
+            title: 'Launch streamer-safe overlay',
+            desc: `Open the dedicated Lite loader, calibrate your operator ESP colors in a custom match, and verify clean HUD rendering before queuing competitive matches.`,
+          },
+        ],
+      };
+    case 'pro':
+      return {
+        title: `How to get ${productName}`,
+        steps: [
+          {
+            num: '01',
+            title: 'Check combat script status',
+            desc: `Before picking up ${productName}, verify the operational status of our recoil tables and aim assist modules following any BattlEye anti-cheat updates.`,
+          },
+          {
+            num: '02',
+            title: 'Confirm weapon profiles',
+            desc: `Ensure the Pro tier features meet your requirements—including custom weapon recoil smoothing, trigger assist thresholds, and per-operator presets.`,
+          },
+          {
+            num: '03',
+            title: 'Process your activation',
+            desc: `Finalize purchase via the verified payment terminal for ${productName}. Save your order confirmation receipt to register your client portal account.`,
+          },
+          {
+            num: '04',
+            title: 'Calibrate firing presets',
+            desc: `Load the verified Pro injector, test recoil patterns and FOV targets in the firing range, and dial in humanized smoothing before competitive queues.`,
+          },
+        ],
+      };
+    case 'elite':
+      return {
+        title: `How to get ${productName}`,
+        steps: [
+          {
+            num: '01',
+            title: 'Confirm full suite status',
+            desc: `Review the live indicator for ${productName} on r6cheat.net to guarantee player ESP, aimbot hitboxes, and gadget radars are active following the latest game update.`,
+          },
+          {
+            num: '02',
+            title: 'Check DMA & system specs',
+            desc: `Double-check Elite system prerequisites—including Windows 10/11 build support, Secure Boot, and Cloud DMA compatibility for maximum security.`,
+          },
+          {
+            num: '03',
+            title: 'Secure Elite licensing',
+            desc: `Order through the secure checkout terminal. Instant license credentials, private builds, and priority Discord role access dispatch immediately upon payment.`,
+          },
+          {
+            num: '04',
+            title: 'Configure private overlay',
+            desc: `Follow the step-by-step Elite setup guide in your user dashboard, configure 3D skeleton visual styles, and verify aimbot offsets in a private lobby.`,
+          },
+        ],
+      };
+    case 'unlock-all':
+      return {
+        title: `How to get ${productName}`,
+        steps: [
+          {
+            num: '01',
+            title: 'Review cosmetic engine status',
+            desc: `Verify that the Skin Changer utility is marked operational on the live status hub after any major season or cosmetic inventory patch.`,
+          },
+          {
+            num: '02',
+            title: 'Confirm preview terms',
+            desc: `Note that ${productName} renders skins, headgears, and elite animations locally on your PC client for content creation without altering server-side balances.`,
+          },
+          {
+            num: '03',
+            title: 'Unlock instant utility key',
+            desc: `Check out via the secure portal to receive your Skin Changer standalone license code and quick-start injection instructions via email.`,
+          },
+          {
+            num: '04',
+            title: 'Equip custom loadout sets',
+            desc: `Launch the skin changer companion, browse the searchable cosmetics library, and save your favorite operator loadout presets with one click.`,
+          },
+        ],
+      };
+    case 'ugc':
+      return {
+        title: `How to get ${productName}`,
+        steps: [
+          {
+            num: '01',
+            title: 'Review appeal intake status',
+            desc: `Check current UGC dashboard intake status and review our latest case processing turnaround times before initiating your dispute submission.`,
+          },
+          {
+            num: '02',
+            title: 'Assemble case documentation',
+            desc: `Review the UGC workflow requirements, gathering your Ubisoft Connect account ID, ban notice timestamps, and any relevant restriction notices.`,
+          },
+          {
+            num: '03',
+            title: 'Enroll in dispute workflow',
+            desc: `Submit checkout through the secure recovery portal. Keep your order confirmation email handy to immediately activate your tracking ticket.`,
+          },
+          {
+            num: '04',
+            title: 'Submit structured dispute',
+            desc: `Access your dedicated recovery workspace, follow the step-by-step evidence template, and coordinate with specialized case agents via Discord.`,
+          },
+        ],
+      };
+    default:
+      return {
+        title: `How to get ${productName}`,
+        steps: [
+          {
+            num: '01',
+            title: 'Inspect live status',
+            desc: `Check the real-time operational status on r6cheat.net before ordering ${productName} to verify compatibility with the active game build.`,
+          },
+          {
+            num: '02',
+            title: 'Review product specifications',
+            desc: `Verify the module inclusions and system requirements for ${productName} to ensure full alignment with your Windows PC hardware.`,
+          },
+          {
+            num: '03',
+            title: 'Complete encrypted checkout',
+            desc: `Submit order payment through our verified billing gateway. Retain your invoice receipt and order email for direct portal provisioning.`,
+          },
+          {
+            num: '04',
+            title: 'Deploy through user dashboard',
+            desc: `Access your client portal using your registered credentials and follow the product guide to initialize your setup safely.`,
+          },
+        ],
+      };
+  }
 }
 
 const eliteGoodToKnow =
@@ -524,7 +657,7 @@ function buildTierPages(): ProductPage[] {
       buyUrl: checkoutForSlug(slug),
       images: content.images,
       overview: content.overview,
-      acquisition: acquisitionFor(displayName),
+      acquisition: acquisitionFor(slug, displayName),
       goodToKnow: content.goodToKnow,
       limitations: content.limitations,
       fullFeatures: content.fullFeatures,
@@ -556,7 +689,7 @@ function buildUtilityPages(): ProductPage[] {
         buyUrl: checkoutForSlug(slug),
         images: content.images,
         overview: content.overview,
-        acquisition: acquisitionFor(product.title),
+        acquisition: acquisitionFor(slug, product.title),
         goodToKnow: content.goodToKnow,
         limitations: content.limitations,
         fullFeatures: content.fullFeatures,

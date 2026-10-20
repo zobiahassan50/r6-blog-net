@@ -149,27 +149,33 @@ export const en: Translations = {
     rows: [
       {
         title: 'Windows PC only',
-        desc: 'This product is for the Siege PC client. Console versions are not supported.',
+        desc: 'Engineered specifically for Rainbow Six Siege on Windows 10 and 11. Console editions (PlayStation, Xbox) are not supported.',
+        mobileDesc: 'Built exclusively for Windows PC Siege players; console platforms are not compatible.',
       },
       {
         title: 'Status notes after patches',
-        desc: 'BattlEye and the game both update. Re-read the product note before you launch. An old article is not clearance.',
+        desc: 'BattlEye and client builds receive ongoing patches. Check the live status indicator before every play session; archived guides do not confer clearance.',
+        mobileDesc: 'Both the game client and BattlEye update regularly. Always check real-time operational status before queuing matches rather than relying on older posts.',
       },
       {
         title: 'Blogs are not the feature list',
-        desc: 'Posts define the words. The product page says what the current build includes and what it costs.',
+        desc: 'Articles explain tactical concepts and definitions. Active loader modules, available tiers, and current rates are always maintained on the official product listing.',
+        mobileDesc: 'Blog posts break down terminology and mechanics. The specific product page confirms live build features, pricing tiers, and compatibility.',
       },
       {
         title: 'Fair play is part of the page',
-        desc: 'Third-party tools can lead to account action. A status note is not a promise that nothing will change.',
+        desc: 'Third-party game enhancements carry inherent account risks. We publish transparent real-time alerts rather than making false claims of permanent immunity.',
+        mobileDesc: 'Running third-party utilities carries account enforcement consequences. Our live dashboard provides honest status indicators instead of empty promises.',
       },
       {
         title: 'Digital delivery',
-        desc: 'Access is delivered after payment. Confirm the live price on checkout before you pay. Licenses start at $35.',
+        desc: 'Instant access credentials and loader access are delivered directly upon completed payment. Review active rates at checkout; entry licenses begin at $35.',
+        mobileDesc: 'Automated key delivery is generated immediately post-payment. Verify live pricing on the checkout screen; starting licenses start at $35.',
       },
       {
         title: 'Support if delivery looks wrong',
-        desc: 'Questions about access after purchase go to Support, with the order email you used at checkout.',
+        desc: 'Order fulfillment or key activation questions are resolved through our direct Support desk using your checkout billing email.',
+        mobileDesc: 'Need assistance with order access? Contact the support team with the primary email address submitted during checkout.',
       },
     ],
     metrics: [
