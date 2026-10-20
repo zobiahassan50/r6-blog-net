@@ -307,9 +307,8 @@ export const en: Translations = {
     eyebrow: 'Blog',
     // Homepage section heading — do not change
     title: 'Latest Releases',
-    heroTitle: 'R6 Siege Cheats Guides 2026',
+    heroTitle: 'R6 Siege Cheats Guides',
     // Also used under homepage “Latest Releases” — keep wording stable
-    subtitle: 'Rainbow Six Siege cheats guides and patch notes for Windows PC.',
     heroLead:
       'This archive ranks around the searches players actually type—Rainbow Six Siege cheats, R6 ESP, wallhack, aimbot FOV, radar hacks, recoil scripts, and undetected status notes. Articles explain terminology; the product page remains the live feature list.',
     heroExtra:

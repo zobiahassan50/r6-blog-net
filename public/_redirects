@@ -9,6 +9,7 @@
 /go/skin-changer/      https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
 /go/ugc                https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
 /go/ugc/               https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
+/manifest.json         /site.webmanifest 301
 
 # Product hub shortcuts + retired tiers
 /products              /products/r6-cheats/ 301

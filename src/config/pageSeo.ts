@@ -11,70 +11,70 @@ export interface PageSeoEntry {
 
 export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/': {
-    // Meta only — does not change homepage UI headings. Leave as-is unless asked.
-    title: 'Rainbow Six Siege Cheats | R6 ESP, Aimbot & PC Hacks',
+    // Meta only — does not change homepage UI headings.
+    title: 'R6 Cheats | Rainbow Six Siege ESP & Aimbot – r6cheat.net',
     description:
-      'Rainbow Six Siege cheats for Windows PC: ESP, wallhack, aimbot, radar, and recoil helpers. Read live product notes and status before checkout on r6cheat.net.',
+      'Best R6 cheats for Rainbow Six Siege: undetected ESP, aimbot, wallhack & radar for PC. Plans from $35/mo. Check live BattlEye status & buy on r6cheat.net.',
   },
   '/products/r6-cheats/': {
-    title: 'Rainbow Six Siege Cheats | ESP Aimbot Recoil PC',
+    title: 'R6 Cheats & Hacks | Rainbow Six Siege ESP, Aimbot, Wallhack',
     description:
-      'Buy Rainbow Six Siege cheats for Windows PC: player ESP, wallhack overlays, aimbot, recoil layers, UGC, and Skin Changer. From $35 — confirm live status first.',
+      'Buy premium R6 cheats and hacks for Rainbow Six Siege. Get reliable ESP, aimbot, wallhack, radar, and recoil scripts for PC. Instant access from $35/mo.',
   },
   '/products/r6-cheats/elite/': {
-    title: 'Elite R6 Cheats 2026 | ESP Aimbot Gadget ESP',
+    title: 'R6 ESP Aimbot Elite | Rainbow Six Siege Cheats',
     description:
-      'Elite Rainbow Six Siege cheats for PC: player ESP, wallhack-style overlays, aimbot, gadget ESP, and cloud configs. Monthly $35 or lifetime — check BattlEye status.',
+      'Elite R6 cheats featuring advanced player ESP, wallhack overlays, aimbot FOV, gadget ESP, and radar. $35/mo or $150 lifetime access.',
   },
   '/products/r6-cheats/ugc/': {
-    title: 'UGC R6 Account Recovery | BattlEye Appeal PC',
+    title: 'R6 UGC Account Recovery | Rainbow Six Siege BattlEye',
     description:
-      'UGC Account Recovery for Rainbow Six Siege on PC: Ubisoft Connect and BattlEye appeal workflows, case tracking, and dispute templates — not a guaranteed unban.',
+      'Rainbow Six Siege UGC Account Recovery for PC: Ubisoft Connect & BattlEye appeal workflows, case tracking & dispute templates. Not a guaranteed unban — $50 one-time.',
   },
   '/products/r6-cheats/unlock-all/': {
-    title: 'R6 Skin Changer 2026 | Local Unlock All PC',
+    title: 'R6 Skin Changer | Rainbow Six Siege Unlock All PC',
     description:
-      'Rainbow Six Siege Skin Changer for Windows PC: local operator and weapon cosmetic preview without Ubisoft store purchases. Confirm inclusion on the listing.',
+      'Rainbow Six Siege Skin Changer for PC: local operator & weapon cosmetic preview without Ubisoft store purchases. Unlock All locally — confirm inclusion on the listing.',
   },
   '/products/r6-cheats/utilities/': {
-    title: 'R6 Siege Utilities | UGC vs Skin Changer',
+    title: 'R6 Siege Utilities | Skin Changer vs UGC Recovery',
     description:
-      'Compare Rainbow Six Siege utilities: UGC Account Recovery vs Skin Changer Unlock All. Pick the tool that fits, then open the full product page.',
+      'Compare Rainbow Six Siege utilities: Skin Changer Unlock All vs UGC Account Recovery. Side-by-side feature breakdown — pick the right tool and open the full product page.',
   },
   '/blog/': {
-    title: 'R6 Cheats Blog 2026 | ESP Wallhack Aimbot Guides',
+    title: 'R6 Cheats Blog | ESP, Aimbot & Wallhack Guides 2026',
     description:
-      'Rainbow Six Siege cheats guides for PC: ESP, wallhack, aimbot FOV, BattlEye status, radar hacks, recoil scripts, and undetected-note checklists for 2026.',
+      'Rainbow Six Siege cheats guides: ESP wallhack setup, aimbot FOV tuning, BattlEye status checks, radar hacks & recoil scripts. Updated undetected-note checklists for 2026.',
   },
   '/forum/': {
-    title: 'R6 Cheats Forum | ESP Aimbot Patch Q&A',
+    title: 'R6 Cheats Forum | ESP Aimbot & Wallhack Q&A',
     description:
-      'Rainbow Six Siege cheats forum: setup Q&A, patch-day checks, ESP and aimbot vocabulary, BattlEye notes, and links to live product status on r6cheat.net.',
+      'Rainbow Six Siege cheats forum: ESP & aimbot setup Q&A, patch-day BattlEye checks, wallhack vocabulary, and links to live product status updates on r6cheat.net.',
   },
   '/faq/': {
-    title: 'R6 Cheats FAQ | Price ESP Aimbot BattlEye',
+    title: 'R6 Cheats FAQ | ESP, Aimbot & Pricing 2026',
     description:
-      'FAQ for Rainbow Six Siege cheats on Windows PC: pricing from $35, consoles, stream-proof ESP, aimbot settings, and how we source BattlEye status notes.',
+      'Frequently asked questions for R6 cheats and hacks. Learn about our ESP features, aimbot pricing, stream-proof wallhack overlays, and setup requirements.',
   },
   '/terms/': {
-    title: 'Terms & Conditions | R6Cheats Siege Cheats',
+    title: 'Terms & Conditions | R6Cheats Rainbow Six Siege',
     description:
-      'Terms for R6Cheats Rainbow Six Siege products: licenses, checkout, refunds, fair-play risk, and Windows PC use on r6cheat.net.',
+      'Terms for R6Cheats: digital license rules, checkout process, no-refund policy for ESP & aimbot products, fair-play risk disclosure, and Windows PC use on r6cheat.net.',
   },
   '/privacy/': {
-    title: 'Privacy Policy | R6Cheats Siege Site Data',
+    title: 'Privacy Policy | R6Cheats – r6cheat.net',
     description:
-      'Privacy Policy for r6cheat.net: analytics, cookies, Support contact data, and how R6Cheats handles Rainbow Six Siege site visitors.',
+      'Privacy Policy for r6cheat.net: what analytics & cookie data is collected, how Support contact info is handled, and your rights as a Rainbow Six Siege site visitor.',
   },
   '/about/': {
-    title: 'About R6Cheats | Rainbow Six Siege Guides',
+    title: 'About R6Cheats | Rainbow Six Siege ESP & Cheat Guides',
     description:
-      'About R6Cheats: Rainbow Six Siege cheat guides, Elite ESP and aimbot modules, utilities, patch notes, and how we publish status for Windows PC players.',
+      'About R6Cheats: who we are, how we publish Rainbow Six Siege ESP & aimbot guides, Elite cheat module notes, BattlEye status updates & undetected tips for PC players.',
   },
   '/support/': {
-    title: 'R6Cheats Support | Loader Checkout BattlEye',
+    title: 'R6Cheats Support | Loader, Checkout & BattlEye Help',
     description:
-      'Support for Rainbow Six Siege cheats on Windows PC: loader setup, portal access, checkout help, and status questions after BattlEye or ShieldGuard patches.',
+      'Get help with R6 cheats: loader setup, portal access, checkout issues, ESP & aimbot config questions, and BattlEye or ShieldGuard patch status — contact support now.',
   },
 };
 

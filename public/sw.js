@@ -1,5 +1,5 @@
 /* R6Cheats — offline fallback + static asset cache (Cloudflare Pages) */
-const CACHE = 'r6cheat-static-v4';
+const CACHE = 'r6cheat-static-v5';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE = [
   '/',
@@ -23,10 +23,14 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches
-      .keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
-      .then(() => self.clients.claim()),
+    Promise.all([
+      // Clean up old caches from previous SW versions
+      caches
+        .keys()
+        .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))),
+      // Enable navigation preload — cuts TTFB for repeat navigations
+      self.registration.navigationPreload?.enable(),
+    ]).then(() => self.clients.claim()),
   );
 });
 
@@ -37,8 +41,10 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Never cache large media (videos / original rasters) — hurts first load.
-  if (/\.(mp4|webm|mov|png|jpe?g)$/i.test(url.pathname) || url.pathname.startsWith('/videos/')) {
+  const isPrecached = PRECACHE.includes(url.pathname);
+
+  // Never cache large videos or non-precached raw images
+  if (!isPrecached && (/\.(mp4|webm|mov)$/i.test(url.pathname) || url.pathname.startsWith('/videos/'))) {
     return;
   }
 

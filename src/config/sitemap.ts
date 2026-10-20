@@ -53,6 +53,18 @@ export function sitemapSerialize(item: SitemapItem): SitemapItem | undefined {
     return item;
   }
 
+  if (path === '/products/r6-cheats/') {
+    item.priority = 0.95;
+    item.changefreq = 'weekly';
+    return item;
+  }
+
+  if (path === '/products/r6-cheats/elite/') {
+    item.priority = 0.9;
+    item.changefreq = 'weekly';
+    return item;
+  }
+
   if (path.startsWith('/products/')) {
     item.priority = 0.8;
     item.changefreq = 'weekly';

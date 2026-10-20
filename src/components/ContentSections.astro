@@ -7,10 +7,10 @@ import BlogCard from './BlogCard.astro';
 import Icon from './icons/Icon.astro';
 import { ROUTES } from '../utils/path';
 import SiteFaqSection from './SiteFaqSection.astro';
-import { getLandingFaqs } from '../data/faq';
+import { faqData } from '../data/faqData';
 import { Button } from '@/components/starwind/button';
 
-const homeFaqs = getLandingFaqs();
+const homeFaqs = faqData;
 const featuredPosts = getFeaturedBlogPosts(3);
 ---
 

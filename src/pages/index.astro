@@ -6,13 +6,13 @@ import WhySetupSection from '../components/WhySetupSection.astro';
 import ProductsSection from '../components/ProductsSection.astro';
 import ContentSections from '../components/ContentSections.astro';
 import { resolvePageSeo } from '../config/seo';
-import { faqPageSchema, organizationSchema, websiteSchema } from '../utils/schema';
-import { getLandingFaqs } from '../data/faq';
+import { faqPageSchema, homepageProductSchema, organizationSchema, videoObjectSchema, websiteSchema } from '../utils/schema';
+import { faqData } from '../data/faqData';
 import { HERO_BG_PRELOAD_WIDTHS, HERO_BG_SIZES } from '../utils/responsiveImage';
 import { buildImagePreload } from '../utils/preloadImage';
 
 const seo = resolvePageSeo('/');
-const homeFaqs = getLandingFaqs();
+const homeFaqs = faqData;
 const heroPreload = await buildImagePreload(
   '/images/herobackground.png',
   HERO_BG_PRELOAD_WIDTHS,
@@ -24,7 +24,7 @@ const heroPreload = await buildImagePreload(
 <BaseLayout
   title={seo.title}
   description={seo.description}
-  jsonLd={[websiteSchema(), organizationSchema(), faqPageSchema(homeFaqs.map((f, i) => ({ num: String(i + 1).padStart(2, '0'), q: f.q, a: f.a.replace(/<[^>]+>/g, '') })))]}
+  jsonLd={[websiteSchema(), organizationSchema(), homepageProductSchema(), videoObjectSchema(), faqPageSchema(homeFaqs.map((f, i) => ({ num: String(i + 1).padStart(2, '0'), q: f.q, a: f.a.replace(/<[^>]+>/g, '') })))]}
 >
   {
     heroPreload && (

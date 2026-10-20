@@ -23,3 +23,17 @@ Sitemap: https://r6cheat.net/sitemap.xml
 
 # RSS: https://r6cheat.net/rss.xml
 # Overwritten at build time by scripts/finalize-sitemap.mjs from PUBLIC_SITE_URL / SITE when set.
+
+# Throttle high-frequency SEO crawlers to protect Googlebot crawl budget
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Crawl-delay: 10
+
+# Block known low-value crawlers entirely
+User-agent: MJ12bot
+Disallow: /

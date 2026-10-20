@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getAllFaqs } from '../data/faq';
+import { faqData } from '../data/faqData';
 import { resolvePageSeo } from '../config/seo';
 import { breadcrumbSchema, faqPageSchema, webPageSchema } from '../utils/schema';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
@@ -12,7 +12,7 @@ const breadcrumbs = [
   { name: 'FAQ', path: '/faq/' },
 ];
 
-const faqs = getAllFaqs();
+const faqs = faqData;
 ---
 
 <BaseLayout

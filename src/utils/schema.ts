@@ -200,8 +200,6 @@ export function productSchema(input: {
   price: number;
   image?: string;
   sku?: string;
-  /** Optional when a genuine aggregate rating is shown on-page. */
-  aggregateRating?: { ratingValue: number; reviewCount: number; bestRating?: number };
 }) {
   const price = formatOfferPrice(input.price);
 
@@ -216,17 +214,6 @@ export function productSchema(input: {
       name: 'R6Cheats',
     },
     ...(input.image ? { image: absoluteAssetUrl(input.image) } : {}),
-    ...(input.aggregateRating
-      ? {
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: String(input.aggregateRating.ratingValue),
-            reviewCount: String(input.aggregateRating.reviewCount),
-            bestRating: String(input.aggregateRating.bestRating ?? 5),
-            worstRating: '1',
-          },
-        }
-      : {}),
     offers: {
       '@type': 'Offer',
       url: offerUrl(input.offerUrl),
@@ -305,4 +292,136 @@ export function parseBlogDate(date: string): string {
   const parsed = Date.parse(date);
   if (Number.isNaN(parsed)) return new Date().toISOString().slice(0, 10);
   return new Date(parsed).toISOString().slice(0, 10);
+}
+
+/**
+ * VideoObject schema for the hero gameplay video on the homepage.
+ * Fixes Google Search Console "Video isn't on a watch page" by providing
+ * all required fields directly in JSON-LD rather than relying on page embedding.
+ */
+export function videoObjectSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'Rainbow Six Siege ESP & Aimbot — R6 Cheats Gameplay Preview',
+    description:
+      'Watch R6 cheats in action: operator ESP overlays, aimbot smoothing, radar, and wallhack-style highlights running live in Rainbow Six Siege on PC.',
+    thumbnailUrl: `${SITE_ORIGIN}/images/posters/hero-poster-sm.webp`,
+    uploadDate: '2026-10-20T00:00:00+00:00',
+    contentUrl: `${SITE_ORIGIN}/videos/hero.mp4`,
+    embedUrl: `${SITE_ORIGIN}/videos/hero.mp4`,
+    duration: 'PT10S',
+    inLanguage: 'en-US',
+    publisher: {
+      '@type': 'Organization',
+      name: 'R6Cheats',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_ORIGIN}/logo.png`,
+      },
+    },
+    isFamilyFriendly: true,
+    requiresSubscription: false,
+  };
+}
+
+/**
+ * Homepage-level Product schema for the core R6 ESP + Aimbot product listing.
+ * Fixes GSC errors: missing price, priceSpecification, and hasMerchantReturnPolicy.
+ * No aggregateRating — no rating UI exists on the page.
+ */
+export function homepageProductSchema() {
+  const priceValidUntil = priceValidUntilIso();
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Rainbow Six Siege Cheats — R6 ESP & Aimbot',
+    description:
+      'Undetected Rainbow Six Siege cheats for Windows PC: player ESP, wallhack overlays, aimbot with FOV control, radar, gadget ESP, and recoil helpers. Monthly and lifetime plans.',
+    sku: 'r6cheats-elite',
+    brand: {
+      '@type': 'Brand',
+      name: 'R6Cheats',
+    },
+    image: `${SITE_ORIGIN}/images/producthome.jpg`,
+    url: `${SITE_ORIGIN}/products/r6-cheats/`,
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'USD',
+      lowPrice: '35.00',
+      highPrice: '150.00',
+      offerCount: '2',
+      priceValidUntil,
+      availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
+      url: `${SITE_ORIGIN}/products/r6-cheats/`,
+      seller: {
+        '@type': 'Organization',
+        name: 'R6Cheats',
+        url: `${SITE_ORIGIN}/`,
+      },
+      priceSpecification: [
+        {
+          '@type': 'UnitPriceSpecification',
+          price: '35.00',
+          priceCurrency: 'USD',
+          name: 'Monthly Plan',
+          unitText: 'MON',
+          priceValidUntil,
+          eligibleQuantity: {
+            '@type': 'QuantitativeValue',
+            value: 1,
+            unitText: 'MON',
+          },
+        },
+        {
+          '@type': 'UnitPriceSpecification',
+          price: '150.00',
+          priceCurrency: 'USD',
+          name: 'Lifetime Plan',
+          unitText: 'LIFETIME',
+          priceValidUntil,
+          eligibleQuantity: {
+            '@type': 'QuantitativeValue',
+            value: 1,
+            unitText: 'LIFETIME',
+          },
+        },
+      ],
+      shippingDetails: {
+        '@type': 'OfferShippingDetails',
+        shippingRate: {
+          '@type': 'MonetaryAmount',
+          value: '0',
+          currency: 'USD',
+        },
+        shippingDestination: {
+          '@type': 'DefinedRegion',
+          addressCountry: 'US',
+        },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 0,
+            maxValue: 0,
+            unitCode: 'DAY',
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 0,
+            maxValue: 0,
+            unitCode: 'DAY',
+          },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'US',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+        url: `${SITE_ORIGIN}/terms/`,
+      },
+    },
+  };
 }

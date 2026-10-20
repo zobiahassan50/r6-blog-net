@@ -51,14 +51,25 @@ const robotsContent = noindex
 <html lang="en" class="fonts-pending">
   <head>
     <meta charset="UTF-8" />
+    <!-- Preconnect to checkout & external domains for faster navigation -->
+    <link rel="preconnect" href="https://zadeyo.com" />
+    <link rel="dns-prefetch" href="https://zadeyo.com" />
     <script is:inline>
       (function () {
         try {
-          var stored = localStorage.getItem('starwind-theme') || localStorage.getItem('colorTheme');
-          var preferDark = stored ? stored === 'dark' : true;
-          document.documentElement.classList.toggle('dark', preferDark);
-          localStorage.setItem('colorTheme', preferDark ? 'dark' : 'light');
-          localStorage.setItem('starwind-theme', preferDark ? 'dark' : 'light');
+          var themeVal = localStorage.getItem('theme');
+          var colorVal = localStorage.getItem('colorTheme');
+          var swVal = localStorage.getItem('starwind-theme');
+          var stored = themeVal || colorVal || swVal;
+          if (themeVal === 'light' || colorVal === 'light' || swVal === 'light') {
+            stored = 'light';
+          }
+          var isDark = stored ? stored === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches !== false);
+          document.documentElement.classList.toggle('dark', isDark);
+          var mode = isDark ? 'dark' : 'light';
+          localStorage.setItem('theme', mode);
+          localStorage.setItem('colorTheme', mode);
+          localStorage.setItem('starwind-theme', mode);
         } catch (e) {
           document.documentElement.classList.add('dark');
         }
