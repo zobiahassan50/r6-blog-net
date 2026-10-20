@@ -32,7 +32,7 @@ const { overviewTitle, blocks, showToggle } = Astro.props;
 
     <div class:list={['desc-wrap product-detail__narrow mt-8', showToggle && 'collapsible']} data-desc-wrap>
       <Prose class="description-content max-w-none">
-        {blocks.map((block) => (block.type === 'h2' ? <h2>{block.text}</h2> : <p>{block.text}</p>))}
+        {blocks.map((block) => (block.type === 'h2' ? <h2>{block.text}</h2> : <div class="mb-4 leading-relaxed">{block.text}</div>))}
       </Prose>
       {
         showToggle && (

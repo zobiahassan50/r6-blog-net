@@ -13,7 +13,7 @@ interface Props {
 
 const { heading = 'h2', titleId } = Astro.props;
 const s = t.products;
-const FeatureHeading = heading === 'h1' ? 'h2' : 'h3';
+const FeatureHeading = 'div';
 
 const main = siegeCatalogCards.find((card) => card.title === 'RAINBOW SIX SIEGE') ?? siegeCatalogCards[0];
 const features = siegeCatalogCards.filter((card) => card.label === 'Included with Siege');

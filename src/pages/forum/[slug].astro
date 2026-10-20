@@ -57,9 +57,9 @@ const relatedPosts = [
           </article>
         </main>
         <aside class="forum-sidebar">
-          <section class="forum-side-card forum-about"><div class="forum-side-card__banner"></div><div class="forum-about__content"><div class="forum-about__title"><span class={`forum-community-avatar tone-${post.categoryTone}`}>d</span><h2>d/{post.category.toLowerCase().replaceAll(' ', '')}</h2></div><p>Browse answers summarized from R6Cheats guides.</p><div class="forum-stats"><span><span>{forumPosts.length}</span> guide discussions</span><span><span>{forumPosts.filter((item) => item.category === post.category).length}</span> in this topic</span></div><a class="forum-join" href="/forum/">Browse forum discussions</a></div></section>
+          <section class="forum-side-card forum-about"><div class="forum-side-card__banner"></div><div class="forum-about__content"><div class="forum-about__title"><span class={`forum-community-avatar tone-${post.categoryTone}`}>d</span><div class="font-bold">d/{post.category.toLowerCase().replaceAll(' ', '')}</div></div><p>Browse answers summarized from R6Cheats guides.</p><div class="forum-stats"><span><span>{forumPosts.length}</span> guide discussions</span><span><span>{forumPosts.filter((item) => item.category === post.category).length}</span> in this topic</span></div><a class="forum-join" href="/forum/">Browse forum discussions</a></div></section>
           <section class="forum-side-card forum-related-card" aria-labelledby="forum-related-title">
-            <h2 class="forum-side-heading" id="forum-related-title">More discussions</h2>
+            <div class="forum-side-heading font-semibold" id="forum-related-title">More discussions</div>
             <ul class="forum-related-list">
               {relatedPosts.map((item) => (
                 <li>

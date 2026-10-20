@@ -11,10 +11,12 @@ import {
   DEFAULT_OG_IMAGE_WIDTH,
   GA_MEASUREMENT_ID,
   absoluteAssetUrl,
+  formatMetaDescription,
 } from '../config/seo';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
+import { organizationSchema } from '../utils/schema';
 
 interface Props {
   title?: string;
@@ -42,9 +44,24 @@ const {
 
 const canonical = canonicalUrl(Astro.url.pathname);
 const ogImageUrl = absoluteAssetUrl(ogImage);
+const metaDesc = formatMetaDescription(description);
 const robotsContent = noindex
   ? 'noindex, nofollow'
   : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+const incomingJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const hasOrgOrSite = incomingJsonLd.some((item) => {
+  if (!item || typeof item !== 'object') return false;
+  const type = (item as Record<string, unknown>)['@type'];
+  return (
+    type === 'Organization' ||
+    type === 'WebSite' ||
+    (Array.isArray(type) && (type.includes('Organization') || type.includes('WebSite')))
+  );
+});
+const resolvedJsonLd = hasOrgOrSite
+  ? incomingJsonLd
+  : [organizationSchema(), ...incomingJsonLd];
 ---
 
 <!doctype html>
@@ -78,7 +95,7 @@ const robotsContent = noindex
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDesc} />
     <meta name="author" content={t.site.name} />
     <meta name="robots" content={robotsContent} />
     <meta name="googlebot" content={robotsContent} />
@@ -117,7 +134,7 @@ const robotsContent = noindex
     </noscript>
 
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDesc} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:secure_url" content={ogImageUrl} />
     <meta property="og:image:alt" content={ogImageAlt} />
@@ -143,13 +160,14 @@ const robotsContent = noindex
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDesc} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
-    {TWITTER_SITE && <meta name="twitter:site" content={TWITTER_SITE} />}
-    {TWITTER_CREATOR && <meta name="twitter:creator" content={TWITTER_CREATOR} />}
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:site" content={TWITTER_SITE || '@r6cheats'} />
+    <meta name="twitter:creator" content={TWITTER_CREATOR || '@r6cheats'} />
 
-    {jsonLd && <JsonLd data={jsonLd} />}
+    <JsonLd data={resolvedJsonLd} />
     <slot name="head" />
 
   </head>

@@ -29,6 +29,7 @@ export function websiteSchema() {
     inLanguage: 'en-US',
     description:
       'Rainbow Six Siege cheats with scripts, operator ESP, radar, Skin Changer and ranked-safe tiers for PC.',
+    sameAs: getOrganizationSameAs(),
   };
 }
 
@@ -42,7 +43,7 @@ export function organizationSchema() {
     url: `${SITE_ORIGIN}/`,
     logo: `${SITE_ORIGIN}/logo.png`,
     email: SUPPORT_EMAIL,
-    ...(sameAs.length > 0 ? { sameAs } : {}),
+    sameAs,
     contactPoint: [
       {
         '@type': 'ContactPoint',

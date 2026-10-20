@@ -14,7 +14,7 @@ export async function onRequest(context) {
 
   // www → apex (301). Requires www to hit this Pages project (custom domain),
   // or a zone Bulk Redirect if www uses the dummy-IP DNS pattern.
-  if (url.hostname === WWW) {
+  if (url.hostname === WWW || url.hostname.startsWith('www.')) {
     url.hostname = APEX;
     url.protocol = 'https:';
     return Response.redirect(url.toString(), 301);

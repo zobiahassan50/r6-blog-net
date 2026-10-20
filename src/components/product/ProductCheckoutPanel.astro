@@ -28,9 +28,9 @@ const isSinglePlan = plans.length === 1;
       <ProductIconWell name="acqPackage" iconSize={20} class="bg-primary/15" />
       <div class="min-w-0 text-left">
         <p class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Checkout</p>
-        <h2 id={`checkout-${product.slug}`} class="text-base font-semibold leading-snug">
+        <div id={`checkout-${product.slug}`} class="text-base font-semibold leading-snug">
           {isSinglePlan ? 'Purchase option' : 'Select subscription'}
-        </h2>
+        </div>
       </div>
     </div>
 

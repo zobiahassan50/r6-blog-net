@@ -14,7 +14,7 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
     // Meta only — does not change homepage UI headings.
     title: 'R6 Cheats | Rainbow Six Siege ESP & Aimbot – r6cheat.net',
     description:
-      'Best R6 cheats for Rainbow Six Siege: undetected ESP, aimbot, wallhack & radar for PC. Plans from $35/mo. Check live BattlEye status & buy on r6cheat.net.',
+      'Best R6 cheats for Rainbow Six Siege: undetected ESP, aimbot, wallhack, radar for PC. Plans from $35/mo. Check live BattlEye status and buy on r6cheat.net.',
   },
   '/products/r6-cheats/': {
     title: 'R6 Cheats & Hacks | Rainbow Six Siege ESP, Aimbot, Wallhack',
@@ -29,27 +29,27 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/products/r6-cheats/ugc/': {
     title: 'R6 UGC Account Recovery | Rainbow Six Siege BattlEye',
     description:
-      'Rainbow Six Siege UGC Account Recovery for PC: Ubisoft Connect & BattlEye appeal workflows, case tracking & dispute templates. Not a guaranteed unban — $50 one-time.',
+      'Rainbow Six Siege UGC Account Recovery for PC: Ubisoft Connect and BattlEye appeal workflows, case tracking and dispute templates. Not a guaranteed unban — $50.',
   },
   '/products/r6-cheats/unlock-all/': {
     title: 'R6 Skin Changer | Rainbow Six Siege Unlock All PC',
     description:
-      'Rainbow Six Siege Skin Changer for PC: local operator & weapon cosmetic preview without Ubisoft store purchases. Unlock All locally — confirm inclusion on the listing.',
+      'Rainbow Six Siege Skin Changer for PC: local operator and weapon cosmetic preview without Ubisoft store purchases. Unlock All locally — check listing notes.',
   },
   '/products/r6-cheats/utilities/': {
     title: 'R6 Siege Utilities | Skin Changer vs UGC Recovery',
     description:
-      'Compare Rainbow Six Siege utilities: Skin Changer Unlock All vs UGC Account Recovery. Side-by-side feature breakdown — pick the right tool and open the full product page.',
+      'Compare Rainbow Six Siege utilities: Skin Changer Unlock All vs UGC Account Recovery. Feature breakdown — pick the right tool and open the full product page.',
   },
   '/blog/': {
     title: 'R6 Cheats Blog | ESP, Aimbot & Wallhack Guides 2026',
     description:
-      'Rainbow Six Siege cheats guides: ESP wallhack setup, aimbot FOV tuning, BattlEye status checks, radar hacks & recoil scripts. Updated undetected-note checklists for 2026.',
+      'Rainbow Six Siege cheats guides: ESP wallhack setup, aimbot FOV tuning, BattlEye status checks, radar and recoil scripts. Updated undetected-note tips for 2026.',
   },
   '/forum/': {
     title: 'R6 Cheats Forum | ESP Aimbot & Wallhack Q&A',
     description:
-      'Rainbow Six Siege cheats forum: ESP & aimbot setup Q&A, patch-day BattlEye checks, wallhack vocabulary, and links to live product status updates on r6cheat.net.',
+      'Rainbow Six Siege cheats forum: ESP and aimbot setup Q&A, patch-day BattlEye checks, wallhack vocabulary, and live product status updates on r6cheat.net.',
   },
   '/faq/': {
     title: 'R6 Cheats FAQ | ESP, Aimbot & Pricing 2026',
@@ -59,22 +59,22 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/terms/': {
     title: 'Terms & Conditions | R6Cheats Rainbow Six Siege',
     description:
-      'Terms for R6Cheats: digital license rules, checkout process, no-refund policy for ESP & aimbot products, fair-play risk disclosure, and Windows PC use on r6cheat.net.',
+      'Terms for R6Cheats: digital license rules, checkout, no refunds for ESP and aimbot products, fair-play risk disclosure, and Windows PC use on r6cheat.net.',
   },
   '/privacy/': {
     title: 'Privacy Policy | R6Cheats – r6cheat.net',
     description:
-      'Privacy Policy for r6cheat.net: what analytics & cookie data is collected, how Support contact info is handled, and your rights as a Rainbow Six Siege site visitor.',
+      'Privacy Policy for r6cheat.net: analytics and cookie data collected, how Support contact info is handled, and your rights as a Rainbow Six Siege site visitor.',
   },
   '/about/': {
     title: 'About R6Cheats | Rainbow Six Siege ESP & Cheat Guides',
     description:
-      'About R6Cheats: who we are, how we publish Rainbow Six Siege ESP & aimbot guides, Elite cheat module notes, BattlEye status updates & undetected tips for PC players.',
+      'About R6Cheats: who we are, how we publish Rainbow Six Siege ESP and aimbot guides, Elite cheat module notes, BattlEye status updates, and cheat tips for PC.',
   },
   '/support/': {
     title: 'R6Cheats Support | Loader, Checkout & BattlEye Help',
     description:
-      'Get help with R6 cheats: loader setup, portal access, checkout issues, ESP & aimbot config questions, and BattlEye or ShieldGuard patch status — contact support now.',
+      'Get help with R6 cheats: loader setup, portal access, checkout, ESP and aimbot config questions, plus BattlEye patch status — contact support now.',
   },
 };
 

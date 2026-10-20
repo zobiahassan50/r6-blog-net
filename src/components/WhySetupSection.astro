@@ -34,12 +34,12 @@ const lastRowIndex = why.rows.length - 1;
           {
             why.rows.map((row) => (
               <div class="why-compare-feature-row flex flex-col justify-center gap-2">
-                <h3 class="font-[family-name:var(--font-heading)] text-lg font-bold leading-snug text-foreground md:text-xl">
+                <div class="font-[family-name:var(--font-heading)] text-lg font-bold leading-snug text-foreground md:text-xl">
                   {row.title}
-                </h3>
-                <p class="text-sm leading-relaxed text-muted-foreground">
+                </div>
+                <div class="text-sm leading-relaxed text-muted-foreground">
                   {row.desc}
-                </p>
+                </div>
               </div>
             ))
           }
@@ -117,9 +117,9 @@ const lastRowIndex = why.rows.length - 1;
                 </CardTitle>
               </CardHeader>
               <CardContent class="pb-4 pt-4">
-                <p class="text-sm leading-relaxed text-muted-foreground">
+                <div class="text-sm leading-relaxed text-muted-foreground">
                   {row.desc}
-                </p>
+                </div>
               </CardContent>
               <CardFooter class="flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-2 text-sm">
@@ -205,9 +205,9 @@ const lastRowIndex = why.rows.length - 1;
                   class="deployment-step-marker-icon"
                 />
               </div>
-              <h3 class="deployment-step-title" style={`--step-col: ${i + 1}`}>
+              <div class="deployment-step-title" style={`--step-col: ${i + 1}`}>
                 {step.title}
-              </h3>
+              </div>
             </li>
           ))
         }
