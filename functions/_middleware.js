@@ -7,18 +7,9 @@ import { resolvePathRedirect } from '../scripts/redirects.mjs';
 import { resolveCheckoutPathRedirect } from '../src/config/checkout-redirects.mjs';
 
 const APEX = 'r6cheat.net';
-const WWW = `www.${APEX}`;
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-
-  // www → apex (301). Requires www to hit this Pages project (custom domain),
-  // or a zone Bulk Redirect if www uses the dummy-IP DNS pattern.
-  if (url.hostname === WWW || url.hostname.startsWith('www.')) {
-    url.hostname = APEX;
-    url.protocol = 'https:';
-    return Response.redirect(url.toString(), 301);
-  }
 
   const pathname = url.pathname;
   const checkout = resolveCheckoutPathRedirect(pathname);

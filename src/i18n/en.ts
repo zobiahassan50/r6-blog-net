@@ -1,4 +1,4 @@
-import type { Translations } from './types';
+﻿import type { Translations } from './types';
 import { R6_BUY_URL } from '../config/checkout';
 import { PRODUCT_BASE } from '../config/site';
 
@@ -10,7 +10,7 @@ export const en: Translations = {
     domain: 'r6cheat.net',
     title: 'Rainbow Six Siege Cheats | R6 ESP, Aimbot & PC Hacks',
     description:
-      'Rainbow Six Siege cheats for Windows PC: ESP, wallhack, aimbot, radar, and recoil helpers—updated every patch at r6cheat.net.',
+      'Rainbow Six Siege cheats for Windows PC: ESP, wallhack, aimbot, radar, and recoil helpersâ€”updated every patch at r6cheat.net.',
     discord: R6_BUY_URL,
   },
   nav: [
@@ -22,10 +22,10 @@ export const en: Translations = {
     { href: '/support/', label: 'Support' },
   ],
   hero: {
-    status: 'Rainbow Six Siege · PC',
-    eyebrow: 'Rainbow Six Siege · PC',
+    status: 'Rainbow Six Siege Â· PC',
+    eyebrow: 'Rainbow Six Siege Â· PC',
     titleLine1: 'R6 Siege',
-    titleLine2: 'R6 Cheats — Aimbot, ESP & Hacks',
+    titleLine2: 'R6 Cheats â€” Aimbot, ESP & Hacks',
     subtitle:
       'Premium R6 Siege cheats for Windows PC, featuring customizable aimbot, ESP, and wallhacks. Check the product page for live module status and pricing before checking out, or explore our blogs for detailed setup guides.',
     ctaPrimary: 'View Product',
@@ -53,7 +53,7 @@ export const en: Translations = {
           'Recoil helper for spray control',
           'Triggerbot listed as its own module',
           'Per-operator notes belong on the product page',
-          'Windows PC only — console is not supported',
+          'Windows PC only â€” console is not supported',
         ],
         tags: ['aim helper', 'recoil', 'siege pc'],
         bento: 'sm:col-span-2 lg:col-span-12 lg:col-start-1 lg:row-start-1',
@@ -93,7 +93,7 @@ export const en: Translations = {
         bullets: [
           'Local uniform and weapon preview',
           'Does not change the Ubisoft store inventory',
-          'Stream-proof is a display option — test a local recording yourself',
+          'Stream-proof is a display option â€” test a local recording yourself',
         ],
         tags: ['gadget esp', 'configs', 'stream proof'],
         bento:
@@ -132,7 +132,7 @@ export const en: Translations = {
       {
         title: 'Cloud Config & Updates',
         subtitle: 'Re-check after patches.',
-        desc: 'Siege and BattlEye both update. A status note is only current when it is posted — an older article is not clearance.',
+        desc: 'Siege and BattlEye both update. A status note is only current when it is posted â€” an older article is not clearance.',
         bullets: ['Read the product note after every patch', 'Stop if the note says updating or offline', 'Price and modules are on the product page'],
         tags: ['cloud sync', 'auto update', 'presets'],
         bento: 'sm:col-span-2 lg:col-span-4 lg:col-start-9 lg:row-start-2',
@@ -292,7 +292,7 @@ export const en: Translations = {
         category: 'Account recovery',
         title: 'UGC',
         subtitle: 'Unban & governance control',
-        desc: 'All-in-one appeal workspace for Ubisoft Connect restrictions, BattlEye bans and security holds—custom workflows and dispute automation.',
+        desc: 'All-in-one appeal workspace for Ubisoft Connect restrictions, BattlEye bans and security holdsâ€”custom workflows and dispute automation.',
         features: ['Custom appeal workflows', 'Dispute automation', 'Case documentation', 'Status tracking dashboard'],
         more: 6,
         href: `${productBase}ugc/`,
@@ -302,7 +302,7 @@ export const en: Translations = {
         category: 'Cosmetic',
         title: 'Skin Changer',
         subtitle: 'Unlock every cosmetic locally',
-        desc: 'Lightweight Skin Changer for operator uniforms, weapon skins, and rare variants—local preview without Ubisoft Connect store purchases.',
+        desc: 'Lightweight Skin Changer for operator uniforms, weapon skins, and rare variantsâ€”local preview without Ubisoft Connect store purchases.',
         features: ['Operator uniform preview', 'Weapon skin preview', 'Loadout preview', 'Loadout favorites export'],
         more: 7,
         href: `${productBase}unlock-all/`,
@@ -311,12 +311,13 @@ export const en: Translations = {
   },
   blog: {
     eyebrow: 'Blog',
-    // Homepage section heading — do not change
+    // Homepage section heading â€” do not change
     title: 'Latest Releases',
     heroTitle: 'R6 Siege Cheats Guides',
-    // Also used under homepage “Latest Releases” — keep wording stable
+    subtitle: 'Guides, patch notes, and deep-dives on ESP, aimbot, wallhack, and BattlEye detection for Rainbow Six Siege.',
+    // Also used under homepage â€œLatest Releasesâ€ â€” keep wording stable
     heroLead:
-      'This archive ranks around the searches players actually type—Rainbow Six Siege cheats, R6 ESP, wallhack, aimbot FOV, radar hacks, recoil scripts, and undetected status notes. Articles explain terminology; the product page remains the live feature list.',
+      'This archive ranks around the searches players actually typeâ€”Rainbow Six Siege cheats, R6 ESP, wallhack, aimbot FOV, radar hacks, recoil scripts, and undetected status notes. Articles explain terminology; the product page remains the live feature list.',
     heroExtra:
       'Filter by topic or sort by read time to find ESP, wallhack, aimbot, and BattlEye deep-dives. Re-check the listing after every Siege, BattlEye, or ShieldGuard update before you treat a guide as current.',
     searchPlaceholder: 'Search blogs',
@@ -337,7 +338,7 @@ export const en: Translations = {
         title: 'R6 Siege Cheats Modules: ESP, Wallhack, Aimbot & More',
         slug: 'r6-cheats-features',
         image: '/images/blog/r6-cheats-features.jpeg',
-        desc: 'How R6 Siege cheats group ESP, wallhack overlays, aimbot, and related modules — and why the live product page is the feature list that matters.',
+        desc: 'How R6 Siege cheats group ESP, wallhack overlays, aimbot, and related modules â€” and why the live product page is the feature list that matters.',
         date: 'Oct 12, 2026',
         readTime: '8 min read',
       },
@@ -346,7 +347,7 @@ export const en: Translations = {
         title: 'BattlEye, R6 Cheats & ESP: What Status Notes Really Mean',
         slug: 'r6-battleye-safety',
         image: '/images/blog/r6-battleye-safety.jpeg',
-        desc: 'How BattlEye and Siege updates relate to R6 cheats, ESP, and wallhack tools — without treating any status note as a permanent clear.',
+        desc: 'How BattlEye and Siege updates relate to R6 cheats, ESP, and wallhack tools â€” without treating any status note as a permanent clear.',
         date: 'Oct 9, 2026',
         readTime: '7 min read',
       },
@@ -355,7 +356,7 @@ export const en: Translations = {
         title: 'R6 Aimbot & ESP Setup Guide for Siege Cheats',
         slug: 'r6-esp-aimbot',
         image: '/images/blog/r6-esp-aimbot.jpeg',
-        desc: 'A clear guide to R6 aimbot, ESP, and wallhack terminology — and how those cheat modules differ from each other.',
+        desc: 'A clear guide to R6 aimbot, ESP, and wallhack terminology â€” and how those cheat modules differ from each other.',
         date: 'Oct 2, 2026',
         readTime: '7 min read',
       },
@@ -387,7 +388,7 @@ export const en: Translations = {
       { num: '01', label: 'Scripts', title: 'Profiles that follow your operator', desc: 'Recoil control, trigger assist, aim assist and delay settings in one tab.' },
       { num: '02', label: 'Vision', title: 'Operator ESP that stays readable', desc: 'Filter by distance, team color, gadget type and alert sensitivity.' },
       { num: '03', label: 'Minimap', title: 'Plant timer and rotates on lock', desc: 'Plant timers, enemy hints and radar on a compact overlay.' },
-      { num: '04', label: 'Heroes', title: 'Per-operator profiles', desc: 'Save Ash, Jäger, Ace and anchor setups and swap them with hotkeys.' },
+      { num: '04', label: 'Heroes', title: 'Per-operator profiles', desc: 'Save Ash, JÃ¤ger, Ace and anchor setups and swap them with hotkeys.' },
       { num: '05', label: 'Bots', title: 'Trigger assist', desc: 'Triggerbot with a delay slider and separate presets for ranked and Quick Match.' },
       { num: '06', label: 'Profiles', title: 'Configs for every mode', desc: 'Separate ranked, Quick Match and casual presets with cloud backup.' },
     ],
@@ -433,9 +434,9 @@ export const en: Translations = {
     eyebrow: 'Field notes',
     title: 'Built for how Rainbow Six Siege plays.',
     items: [
-      { num: '01', title: 'Patch-day ready', desc: 'Patch notes hit Discord and the portal before the official blog—check before you queue ranked.' },
-      { num: '02', title: 'Conservative defaults', desc: 'Start with safe script delays and operator ESP ranges, then tune up—not the other way around.' },
-      { num: '03', title: 'Real operator support', desc: 'Stuck on access after checkout? Support answers with the order email you used—not a copy-paste thread.' },
+      { num: '01', title: 'Patch-day ready', desc: 'Patch notes hit Discord and the portal before the official blogâ€”check before you queue ranked.' },
+      { num: '02', title: 'Conservative defaults', desc: 'Start with safe script delays and operator ESP ranges, then tune upâ€”not the other way around.' },
+      { num: '03', title: 'Real operator support', desc: 'Stuck on access after checkout? Support answers with the order email you usedâ€”not a copy-paste thread.' },
     ],
   },
   support: {
@@ -445,7 +446,7 @@ export const en: Translations = {
       'Loader and checkout help for Rainbow Six Siege cheat tiers and utilities on Windows PC. Tell us what broke and we will route you.',
     intro: [
       'R6Cheats Support covers loader setup, portal access, and checkout questions for Elite modules, UGC Account Recovery, and the Skin Changer Utility. This page is the right place when a guide is not enough.',
-      'Payment card issues stay with the external checkout provider. For everything else—install errors, status confusion after a BattlEye patch, or missing order email—start here with the details listed below.',
+      'Payment card issues stay with the external checkout provider. For everything elseâ€”install errors, status confusion after a BattlEye patch, or missing order emailâ€”start here with the details listed below.',
       'Operators answer from Discord and email. Include Windows version, Ubisoft Connect build, and the exact loader text so loader and checkout help can move faster without back-and-forth screenshots.',
       'Siege loader and checkout help on this Support page is for Windows PC only. Console Rainbow Six Siege is out of scope. Re-read the product status banner after patches before opening a ticket about modules that may be updating.',
     ],
@@ -453,7 +454,7 @@ export const en: Translations = {
       {
         icon: 'users',
         title: 'Chat before checkout',
-        desc: 'Ask about Elite, UGC, or Skin Changer access before you pay—especially after a patch-day status flip.',
+        desc: 'Ask about Elite, UGC, or Skin Changer access before you payâ€”especially after a patch-day status flip.',
       },
       {
         icon: 'headphones',
@@ -474,7 +475,7 @@ export const en: Translations = {
     ticketTitle: 'Include in your ticket',
     ticketItems: [
       { title: 'Order email', desc: 'The address used at checkout on r6cheat.net or via our secure checkout confirmation.' },
-      { title: 'Platform', desc: 'Ubisoft Connect on Windows 10 or 11—and your Rainbow Six Siege client version.' },
+      { title: 'Platform', desc: 'Ubisoft Connect on Windows 10 or 11â€”and your Rainbow Six Siege client version.' },
       { title: 'Error detail', desc: 'Screenshot or exact message from the loader or Ubisoft Connect.' },
     ],
   },
@@ -482,7 +483,7 @@ export const en: Translations = {
     eyebrow: 'FAQ',
     title: 'Rainbow Six Siege FAQ',
     subtitle:
-      'R6Cheats Answers for Rainbow Six Siege on Windows PC—how we source facts, what listings cover, and how fair-play risk is framed.',
+      'R6Cheats Answers for Rainbow Six Siege on Windows PCâ€”how we source facts, what listings cover, and how fair-play risk is framed.',
     items: [
       {
         num: '01',
@@ -532,7 +533,7 @@ export const en: Translations = {
     ],
   },
   footer: {
-    tagline: 'Rainbow Six Siege cheats — scripts, operator ESP and tools for PC. r6cheat.net',
+    tagline: 'Rainbow Six Siege cheats â€” scripts, operator ESP and tools for PC. r6cheat.net',
     explore: 'Explore',
     exploreLinks: [
       { href: '/#features', label: 'Feature overview', scrollTarget: 'features' },
@@ -558,7 +559,7 @@ export const en: Translations = {
           heading: 'Who we are',
           paragraphs: [
             'About R6Cheats: we are a PC-focused resource for Rainbow Six Siege players exploring scripts, operator ESP, radar, and Skin Changer workflows. We publish tier comparisons, setup guides, and live status notes so you can evaluate R6 cheats before checkout.',
-            'Product names appear for identification only. This About R6Cheats page explains editorial scope—it is not a substitute for the live listing or the Terms & Conditions.',
+            'Product names appear for identification only. This About R6Cheats page explains editorial scopeâ€”it is not a substitute for the live listing or the Terms & Conditions.',
           ],
         },
         {
@@ -592,7 +593,7 @@ export const en: Translations = {
         {
           heading: 'Information we collect',
           paragraphs: [
-            'We may collect standard web analytics such as page views, device type, browser, and approximate region through Google Analytics when enabled. Checkout and license delivery happen on external checkout pages—we do not store payment card data on r6cheat.net.',
+            'We may collect standard web analytics such as page views, device type, browser, and approximate region through Google Analytics when enabled. Checkout and license delivery happen on external checkout pagesâ€”we do not store payment card data on r6cheat.net.',
             'If you contact Support, we may retain the email address and message content you send until the issue is closed. Forum preview pages do not collect account passwords.',
           ],
         },
@@ -655,7 +656,7 @@ export const en: Translations = {
           heading: 'Refunds and purchases',
           paragraphs: [
             'All sales are final once checkout completes. We do not refund change-of-mind purchases, account bans, BattlEye penalties, or issues caused by ignoring setup guides or running modules while the status banner shows offline.',
-            'If the product does not work as described on a supported setup—Ubisoft Connect Rainbow Six Siege on Windows 10/11, current loader from the portal, and the live status banner showing online when you started—contact us through the Support page. Include your order email, Windows version, Rainbow Six Siege build, and screenshots or exact error text from the loader.',
+            'If the product does not work as described on a supported setupâ€”Ubisoft Connect Rainbow Six Siege on Windows 10/11, current loader from the portal, and the live status banner showing online when you startedâ€”contact us through the Support page. Include your order email, Windows version, Rainbow Six Siege build, and screenshots or exact error text from the loader.',
             'We may, at our discretion, offer a fix, replacement access, or partial/full refund when we confirm a fault on our side. We are not obligated to approve every request.',
           ],
         },
@@ -669,7 +670,7 @@ export const en: Translations = {
         {
           heading: 'Changes',
           paragraphs: [
-            'We may update these terms. The “Last updated” date at the top will change when we do. Continued use of the site after changes means you accept the revised terms.',
+            'We may update these terms. The â€œLast updatedâ€ date at the top will change when we do. Continued use of the site after changes means you accept the revised terms.',
           ],
         },
         {
