@@ -1,6 +1,6 @@
 # Cloudflare Pages path redirects (trailingSlash: always).
-# Host redirects (www → apex) are not allowed here — see functions/_middleware.js.
-# TLS/HTTPS is handled by Cloudflare Always Use HTTPS.
+# Host/scheme redirects (www → apex, HTTP → HTTPS) live in functions/_middleware.js —
+# absolute hosts are rejected here and Functions skip _redirects entirely.
 
 # Checkout (external)
 /go/r6                 https://zadeyo.com/go/ZOBIA?to=%2Fproducts%2Frainbow-six-siege 302
